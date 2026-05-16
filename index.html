@@ -327,6 +327,160 @@ footer {
 .hero-desc { animation-delay:0.55s; }
 .hero-scroll { animation-delay:0.8s; }
 
+/* ── AI TOOL OVERLAY ── */
+.cap-item.clickable { cursor:pointer; }
+.cap-item.clickable:hover { background:rgba(74,143,255,0.06); }
+.cap-item.clickable h3 { color:var(--accent2); }
+.cap-item.clickable .cap-link-hint {
+  font-size:11px; color:var(--accent); letter-spacing:1px;
+  margin-top:8px; display:flex; align-items:center; gap:4px;
+}
+.cap-item.clickable .cap-link-hint::after { content:'→'; }
+
+.tool-overlay {
+  display:none; position:fixed; inset:0; z-index:200;
+  background:rgba(4,7,16,0.96);
+  overflow-y:auto;
+  animation: overlayIn 0.35s ease;
+}
+.tool-overlay.active { display:block; }
+@keyframes overlayIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+.tool-overlay-inner {
+  min-height:100vh; padding:60px 10%;
+}
+.tool-overlay-header {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:48px;
+  border-bottom:1px solid var(--border); padding-bottom:24px;
+}
+.tool-overlay-back {
+  font-size:13px; color:var(--muted); cursor:pointer;
+  display:flex; align-items:center; gap:8px;
+  letter-spacing:1px; background:none; border:none;
+  transition:color 0.3s;
+}
+.tool-overlay-back:hover { color:var(--text); }
+.tool-overlay-back::before { content:'←'; font-size:16px; }
+.tool-overlay-title {
+  font-family:'Noto Serif SC', serif;
+  font-size:28px; font-weight:600; color:var(--text);
+}
+.tool-overlay-sub { font-size:13px; color:var(--dim); margin-top:4px; letter-spacing:1px; }
+
+/* ── CALCULATOR STYLES ── */
+.calc-wrap {
+  max-width:680px; margin:0 auto;
+}
+.calc-tabs {
+  display:flex; gap:2px; margin-bottom:32px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  border-radius:14px; padding:4px;
+}
+.calc-tab {
+  flex:1; padding:10px 16px; border:none; border-radius:10px;
+  background:transparent; color:var(--muted);
+  font-size:13px; font-family:'Noto Sans SC',sans-serif;
+  cursor:pointer; transition:0.25s; letter-spacing:0.5px;
+}
+.calc-tab.active {
+  background:rgba(74,143,255,0.18);
+  color:var(--accent2);
+  border:1px solid rgba(74,143,255,0.25);
+}
+.calc-panel { display:none; }
+.calc-panel.active { display:block; }
+
+.calc-field { margin-bottom:20px; }
+.calc-field label {
+  display:block; font-size:12px; color:var(--muted);
+  letter-spacing:1px; margin-bottom:8px;
+}
+.calc-field .hint { color:var(--dim); font-size:11px; }
+.calc-field input {
+  width:100%; background:rgba(255,255,255,0.04);
+  border:1px solid var(--border); border-radius:10px;
+  padding:12px 16px; color:var(--text);
+  font-size:15px; font-family:'Noto Sans SC',sans-serif;
+  outline:none; transition:border-color 0.25s;
+}
+.calc-field input:focus { border-color:rgba(74,143,255,0.5); }
+.calc-field input::placeholder { color:var(--dim); }
+
+.calc-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
+.calc-actions { display:flex; gap:12px; margin:28px 0; }
+.calc-btn-primary {
+  flex:1; padding:13px; border:none; border-radius:10px;
+  background:rgba(74,143,255,0.22); color:var(--accent2);
+  font-size:14px; font-family:'Noto Sans SC',sans-serif;
+  cursor:pointer; letter-spacing:1px;
+  border:1px solid rgba(74,143,255,0.3);
+  transition:0.25s;
+}
+.calc-btn-primary:hover { background:rgba(74,143,255,0.35); }
+.calc-btn-secondary {
+  padding:13px 24px; border-radius:10px;
+  background:transparent; color:var(--dim);
+  font-size:14px; font-family:'Noto Sans SC',sans-serif;
+  cursor:pointer; letter-spacing:1px;
+  border:1px solid var(--border);
+  transition:0.25s;
+}
+.calc-btn-secondary:hover { color:var(--muted); border-color:rgba(255,255,255,0.15); }
+
+.calc-result {
+  background:rgba(74,143,255,0.06);
+  border:1px solid rgba(74,143,255,0.15);
+  border-radius:14px; padding:32px;
+  margin-bottom:24px;
+}
+.calc-result-label {
+  font-size:11px; letter-spacing:3px; color:var(--accent);
+  text-transform:uppercase; margin-bottom:16px;
+}
+.calc-result-main {
+  font-family:'Noto Serif SC', serif;
+  font-size:40px; font-weight:600; color:var(--text);
+  margin-bottom:8px; letter-spacing:-1px;
+}
+.calc-result-sub { font-size:13px; color:var(--muted); line-height:1.8; }
+.calc-result-error { font-size:13px; color:#e05555; margin-top:8px; }
+
+.calc-year-hint { font-size:12px; color:var(--accent2); margin-top:-12px; margin-bottom:16px; }
+
+.calc-table-wrap {
+  overflow-x:auto; margin-top:24px;
+  border:1px solid var(--border); border-radius:14px;
+}
+.calc-table {
+  width:100%; border-collapse:collapse;
+  font-size:13px;
+}
+.calc-table th {
+  padding:12px 16px; text-align:left;
+  font-size:11px; letter-spacing:2px; color:var(--dim);
+  border-bottom:1px solid var(--border);
+  font-weight:400;
+}
+.calc-table td {
+  padding:12px 16px; color:var(--muted);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.calc-table tr:last-child td { border-bottom:none; }
+.calc-table td:last-child { color:var(--text); font-variant-numeric:tabular-nums; }
+
+.calc-footnote {
+  margin-top:40px; padding:24px; border-radius:12px;
+  background:rgba(255,255,255,0.02); border:1px solid var(--border);
+  font-size:12px; color:var(--dim); line-height:2;
+}
+.calc-footnote code {
+  background:rgba(74,143,255,0.1); color:var(--accent2);
+  padding:2px 6px; border-radius:4px; font-size:11px;
+}
+
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   nav { padding:18px 6%; }
@@ -481,10 +635,11 @@ footer {
       <h3>Data Visualization</h3>
       <p>数据可视化与仪表盘</p>
     </div>
-    <div class="cap-item">
+    <div class="cap-item clickable" id="open-calc" role="button" tabindex="0" aria-label="打开 AI 工具：复合增长计算器">
       <div class="cap-num">04</div>
       <h3>AI Workflow</h3>
       <p>AI 工具与智能化流程</p>
+      <div class="cap-link-hint">复合增长计算器</div>
     </div>
     <div class="cap-item">
       <div class="cap-num">05</div>
@@ -526,6 +681,270 @@ footer {
     </div>
   </div>
 </section>
+
+<!-- CALCULATOR OVERLAY -->
+<div class="tool-overlay" id="calc-overlay" role="dialog" aria-modal="true" aria-label="复合增长计算器">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-calc">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">复合增长计算器</div>
+        <div class="tool-overlay-sub">AI Workflow · 经营分析工具</div>
+      </div>
+    </div>
+
+    <div class="calc-wrap">
+      <div class="calc-tabs" role="tablist">
+        <button class="calc-tab active" data-calc-tab="cagr" role="tab">求复合增长率</button>
+        <button class="calc-tab" data-calc-tab="fv" role="tab">求终值</button>
+        <button class="calc-tab" data-calc-tab="periods" role="tab">求所需期数</button>
+      </div>
+
+      <!-- CAGR -->
+      <div class="calc-panel active" id="cp-cagr">
+        <div class="calc-field">
+          <label>期初值（本金 / 起点）</label>
+          <input id="c-p0" type="text" inputmode="decimal" placeholder="例如 10,000" />
+        </div>
+        <div class="calc-field">
+          <label>期末值（终点）</label>
+          <input id="c-p1" type="text" inputmode="decimal" placeholder="例如 20,000" />
+        </div>
+        <div class="calc-field">
+          <label>期数 <span class="hint">（如年数，与利率口径一致）</span></label>
+          <input id="c-n" type="text" inputmode="decimal" placeholder="例如 5" />
+        </div>
+        <div class="calc-row">
+          <div class="calc-field">
+            <label>起始年份 <span class="hint">（选填）</span></label>
+            <input id="c-y0" type="text" inputmode="numeric" placeholder="如 2020" />
+          </div>
+          <div class="calc-field">
+            <label>终止年份 <span class="hint">（选填）</span></label>
+            <input id="c-y1" type="text" inputmode="numeric" placeholder="如 2025" />
+          </div>
+        </div>
+        <p class="calc-year-hint" id="c-year-hint"></p>
+        <div class="calc-actions">
+          <button class="calc-btn-primary" id="run-cagr">计算</button>
+          <button class="calc-btn-secondary" id="rst-cagr">清空</button>
+        </div>
+        <div class="calc-result" id="res-cagr">
+          <div class="calc-result-label">复合增长率 CAGR</div>
+          <div class="calc-result-main" id="res-cagr-main">—</div>
+          <div class="calc-result-sub" id="res-cagr-sub"></div>
+          <div class="calc-result-error" id="res-cagr-err"></div>
+        </div>
+      </div>
+
+      <!-- FV -->
+      <div class="calc-panel" id="cp-fv">
+        <div class="calc-field">
+          <label>期初值</label>
+          <input id="f-p0" type="text" inputmode="decimal" placeholder="例如 10,000" />
+        </div>
+        <div class="calc-field">
+          <label>每期增长率 <span class="hint">（%，如年化 7 填 7）</span></label>
+          <input id="f-r" type="text" inputmode="decimal" placeholder="例如 7" />
+        </div>
+        <div class="calc-field">
+          <label>期数 <span class="hint">（正整数）</span></label>
+          <input id="f-n" type="text" inputmode="decimal" placeholder="例如 10" />
+        </div>
+        <div class="calc-actions">
+          <button class="calc-btn-primary" id="run-fv">计算</button>
+          <button class="calc-btn-secondary" id="rst-fv">清空</button>
+        </div>
+        <div class="calc-result" id="res-fv">
+          <div class="calc-result-label">期末值</div>
+          <div class="calc-result-main" id="res-fv-main">—</div>
+          <div class="calc-result-sub" id="res-fv-sub"></div>
+          <div class="calc-result-error" id="res-fv-err"></div>
+        </div>
+        <div class="calc-table-wrap" id="fv-table-wrap" style="display:none">
+          <table class="calc-table">
+            <thead><tr><th>时点</th><th>期末金额</th></tr></thead>
+            <tbody id="fv-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PERIODS -->
+      <div class="calc-panel" id="cp-periods">
+        <div class="calc-field">
+          <label>期初值</label>
+          <input id="per-p0" type="text" inputmode="decimal" placeholder="例如 10,000" />
+        </div>
+        <div class="calc-field">
+          <label>目标期末值</label>
+          <input id="per-p1" type="text" inputmode="decimal" placeholder="例如 20,000" />
+        </div>
+        <div class="calc-field">
+          <label>每期复合增长率 <span class="hint">（%，可正可负）</span></label>
+          <input id="per-r" type="text" inputmode="decimal" placeholder="例如 7" />
+        </div>
+        <div class="calc-actions">
+          <button class="calc-btn-primary" id="run-periods">计算</button>
+          <button class="calc-btn-secondary" id="rst-periods">清空</button>
+        </div>
+        <div class="calc-result" id="res-periods">
+          <div class="calc-result-label">所需期数</div>
+          <div class="calc-result-main" id="res-periods-main">—</div>
+          <div class="calc-result-sub" id="res-periods-sub"></div>
+          <div class="calc-result-error" id="res-periods-err"></div>
+        </div>
+      </div>
+
+      <div class="calc-footnote">
+        <strong>CAGR</strong> 公式：<code>(期末/期初)^(1/期数) − 1</code> ·
+        <strong>终值</strong>：<code>期初 × (1+r)^n</code> ·
+        <strong>反算期数</strong>：<code>n = ln(期末/期初) / ln(1+r)</code><br>
+        本工具为经营分析演算用途，不构成投资建议。
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ── helpers ── */
+  function fmt(n){ return Number.isFinite(n)?n.toLocaleString('zh-CN',{maximumFractionDigits:2}):n; }
+  function parseNum(s){ return parseFloat(String(s).replace(/,/g,'')); }
+
+  /* ── overlay open/close ── */
+  const overlay = document.getElementById('calc-overlay');
+  document.getElementById('open-calc').addEventListener('click', ()=>{ overlay.classList.add('active'); document.body.style.overflow='hidden'; });
+  document.getElementById('open-calc').addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { overlay.classList.add('active'); document.body.style.overflow='hidden'; }});
+  document.getElementById('close-calc').addEventListener('click', ()=>{ overlay.classList.remove('active'); document.body.style.overflow=''; });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ overlay.classList.remove('active'); document.body.style.overflow=''; }});
+
+  /* ── tabs ── */
+  document.querySelectorAll('.calc-tab').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.calc-tab').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.calc-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('cp-'+btn.dataset.calcTab).classList.add('active');
+    });
+  });
+
+  /* ── number formatting on input ── */
+  function numFmt(el){
+    el.addEventListener('blur',()=>{
+      const v=parseNum(el.value);
+      if(Number.isFinite(v)) el.value=v.toLocaleString('zh-CN',{maximumFractionDigits:6});
+    });
+    el.addEventListener('focus',()=>{
+      el.value=String(el.value).replace(/,/g,'');
+    });
+  }
+  ['c-p0','c-p1','c-n','f-p0','f-r','f-n','per-p0','per-p1','per-r'].forEach(id=>{
+    const el=document.getElementById(id); if(el) numFmt(el);
+  });
+
+  /* ── year hint ── */
+  function updateYearHint(){
+    const y0=parseInt(document.getElementById('c-y0').value);
+    const y1=parseInt(document.getElementById('c-y1').value);
+    const hint=document.getElementById('c-year-hint');
+    if(y0>0&&y1>0&&y1>y0){
+      const diff=y1-y0;
+      document.getElementById('c-n').value=diff;
+      hint.textContent=`已自动填入期数：${diff} 年（${y0} → ${y1}）`;
+    } else { hint.textContent=''; }
+  }
+  ['c-y0','c-y1'].forEach(id=>document.getElementById(id).addEventListener('input',updateYearHint));
+
+  /* ── CAGR ── */
+  document.getElementById('run-cagr').addEventListener('click',()=>{
+    const p0=parseNum(document.getElementById('c-p0').value);
+    const p1=parseNum(document.getElementById('c-p1').value);
+    const n =parseNum(document.getElementById('c-n').value);
+    const main=document.getElementById('res-cagr-main');
+    const sub =document.getElementById('res-cagr-sub');
+    const err =document.getElementById('res-cagr-err');
+    err.textContent=''; sub.textContent=''; main.textContent='—';
+    if(!Number.isFinite(p0)||p0<=0) return err.textContent='请输入有效的期初值（须 > 0）';
+    if(!Number.isFinite(p1)||p1<=0) return err.textContent='请输入有效的期末值（须 > 0）';
+    if(!Number.isFinite(n)||n<=0)   return err.textContent='请输入有效的期数（须 > 0）';
+    const r=Math.pow(p1/p0,1/n)-1;
+    main.textContent=(r*100).toFixed(4)+'%';
+    const growth=r>=0?'增长':'下降';
+    sub.innerHTML=`每期${growth} <strong>${Math.abs(r*100).toFixed(4)}%</strong>，从 ${fmt(p0)} 经过 ${n} 期变为 ${fmt(p1)}`;
+  });
+  document.getElementById('rst-cagr').addEventListener('click',()=>{
+    ['c-p0','c-p1','c-n','c-y0','c-y1'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('c-year-hint').textContent='';
+    document.getElementById('res-cagr-main').textContent='—';
+    document.getElementById('res-cagr-sub').textContent='';
+    document.getElementById('res-cagr-err').textContent='';
+  });
+
+  /* ── FV ── */
+  document.getElementById('run-fv').addEventListener('click',()=>{
+    const p0=parseNum(document.getElementById('f-p0').value);
+    const r =parseNum(document.getElementById('f-r').value)/100;
+    const n =Math.round(parseNum(document.getElementById('f-n').value));
+    const main=document.getElementById('res-fv-main');
+    const sub =document.getElementById('res-fv-sub');
+    const err =document.getElementById('res-fv-err');
+    const wrap=document.getElementById('fv-table-wrap');
+    err.textContent=''; sub.textContent=''; main.textContent='—'; wrap.style.display='none';
+    if(!Number.isFinite(p0)||p0<=0)       return err.textContent='请输入有效的期初值（须 > 0）';
+    if(!Number.isFinite(r+100))            return err.textContent='请输入有效的增长率';
+    if(!Number.isFinite(n)||n<1||n>1000)   return err.textContent='请输入有效期数（1-1000）';
+    const fv=p0*Math.pow(1+r,n);
+    main.textContent=fmt(fv);
+    sub.innerHTML=`${fmt(p0)} × (1 + ${(r*100).toFixed(4)}%)^${n} = <strong>${fmt(fv)}</strong>`;
+    const tbody=document.getElementById('fv-tbody'); tbody.innerHTML='';
+    for(let i=0;i<=n;i++){
+      const v=p0*Math.pow(1+r,i);
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td>第 ${i} 期</td><td>${fmt(v)}</td>`;
+      tbody.appendChild(tr);
+    }
+    wrap.style.display='block';
+  });
+  document.getElementById('rst-fv').addEventListener('click',()=>{
+    ['f-p0','f-r','f-n'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('res-fv-main').textContent='—';
+    document.getElementById('res-fv-sub').textContent='';
+    document.getElementById('res-fv-err').textContent='';
+    document.getElementById('fv-table-wrap').style.display='none';
+    document.getElementById('fv-tbody').innerHTML='';
+  });
+
+  /* ── PERIODS ── */
+  document.getElementById('run-periods').addEventListener('click',()=>{
+    const p0=parseNum(document.getElementById('per-p0').value);
+    const p1=parseNum(document.getElementById('per-p1').value);
+    const r =parseNum(document.getElementById('per-r').value)/100;
+    const main=document.getElementById('res-periods-main');
+    const sub =document.getElementById('res-periods-sub');
+    const err =document.getElementById('res-periods-err');
+    err.textContent=''; sub.textContent=''; main.textContent='—';
+    if(!Number.isFinite(p0)||p0<=0) return err.textContent='请输入有效的期初值（须 > 0）';
+    if(!Number.isFinite(p1)||p1<=0) return err.textContent='请输入有效的期末值（须 > 0）';
+    if(!Number.isFinite(r))         return err.textContent='请输入有效的增长率';
+    if(r===0) return err.textContent='增长率不能为 0（无法到达目标）';
+    const ratio=p1/p0;
+    if(r>0&&ratio<1) return err.textContent='增长率为正时，期末值须 ≥ 期初值';
+    if(r<0&&ratio>1) return err.textContent='增长率为负时，期末值须 ≤ 期初值';
+    const n=Math.log(ratio)/Math.log(1+r);
+    if(!Number.isFinite(n)||n<=0) return err.textContent='计算结果无效，请检查输入';
+    const nCeil=Math.ceil(n);
+    main.textContent=`${n.toFixed(4)} 期`;
+    sub.innerHTML=`精确解 <strong>${n.toFixed(4)} 期</strong>，向上取整需 <strong>${nCeil} 期</strong><br>
+      第 ${nCeil} 期末值约为 ${fmt(p0*Math.pow(1+r,nCeil))}`;
+  });
+  document.getElementById('rst-periods').addEventListener('click',()=>{
+    ['per-p0','per-p1','per-r'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('res-periods-main').textContent='—';
+    document.getElementById('res-periods-sub').textContent='';
+    document.getElementById('res-periods-err').textContent='';
+  });
+})();
+</script>
 
 <!-- FOOTER -->
 <footer>
