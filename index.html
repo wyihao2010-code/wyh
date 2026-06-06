@@ -154,9 +154,11 @@ section { position:relative; z-index:1; padding:120px 10%; }
 .about-card {
   background:var(--surface);
   border:1px solid var(--border);
-  border-radius:20px; padding:36px 32px;
+  border-radius:20px; padding:52px 32px 44px;
   transition: border-color 0.4s, transform 0.4s, background 0.4s;
   position:relative; overflow:hidden;
+  min-height:210px;
+  display:flex; flex-direction:column; justify-content:center;
 }
 .about-card::before {
   content:''; position:absolute; inset:0; border-radius:20px;
@@ -165,13 +167,6 @@ section { position:relative; z-index:1; padding:120px 10%; }
 }
 .about-card:hover { transform:translateY(-6px); border-color:var(--border-hover); background:rgba(255,255,255,0.06); }
 .about-card:hover::before { opacity:1; }
-.card-icon {
-  width:44px; height:44px; border-radius:12px;
-  display:flex; align-items:center; justify-content:center;
-  margin-bottom:20px; font-size:18px;
-  background:rgba(74,143,255,0.12);
-  border:1px solid rgba(74,143,255,0.2);
-}
 .about-card h3 {
   font-size:17px; font-weight:500; margin-bottom:12px;
   color:var(--text);
@@ -525,6 +520,15 @@ footer {
       line-height: 1.04;
       letter-spacing: 0;
     }
+#viz-overlay .hero-subtitle {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      background: transparent;
+    }
 #viz-overlay .lead {
       max-width: 860px;
       margin: 0;
@@ -763,7 +767,7 @@ footer {
 #viz-overlay .health-panel.green .health-status strong { color: var(--green); }
 #viz-overlay .health-panel.yellow .health-status strong { color: var(--amber); }
 #viz-overlay .health-panel.red .health-status strong { color: var(--red); }
-#viz-overlay button {
+#viz-overlay button:not(.tool-overlay-back) {
       min-height: 40px;
       border: 1px solid rgba(145, 168, 173, .24);
       border-radius: var(--radius);
@@ -1045,8 +1049,8 @@ footer {
 #viz-overlay input[type="text"] { background: rgba(255,255,255,0.04); border-color: var(--border); color: var(--text); border-radius: 10px; }
 #viz-overlay input[type="range"] { accent-color: var(--accent); }
 #viz-overlay .metric.neutral strong,
-#viz-overlay .eyebrow,
-#viz-overlay .dot { color: var(--accent2); background: var(--accent2); }
+#viz-overlay .eyebrow { color: var(--accent2); background: transparent; }
+#viz-overlay .dot { background: var(--accent2); }
 #viz-overlay .bar-value,
 #viz-overlay .bar-label { font-family: 'Noto Sans SC', sans-serif; }
 #viz-overlay .viz-dashboard h1 { font-family: 'Noto Serif SC', serif; letter-spacing: 0; }
@@ -1211,6 +1215,7 @@ footer {
     <li><a href="#experience">Experience</a></li>
     <li><a href="#capabilities">Capabilities</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
@@ -1239,22 +1244,18 @@ footer {
   <h2 class="section-title">核心领域<em>Core Focus Areas</em></h2>
   <div class="about-grid">
     <div class="about-card">
-      <div class="card-icon">📊</div>
       <h3>经营分析</h3>
       <p>聚焦营收增长、利润改善、经营效率提升，构建经营分析体系与管理闭环。</p>
     </div>
     <div class="about-card">
-      <div class="card-icon">🗺️</div>
       <h3>战略规划</h3>
       <p>深度参与集团战略规划体系建设，推动战略与经营目标协同落地。</p>
     </div>
     <div class="about-card">
-      <div class="card-icon">🛒</div>
       <h3>电商经营</h3>
       <p>关注线上增长效率、ROI 优化、项目制管理与组织协同机制。</p>
     </div>
     <div class="about-card">
-      <div class="card-icon">🤖</div>
       <h3>AI × 数据洞察</h3>
       <p>探索 AI 与经营分析融合，强化数据驱动经营决策能力。</p>
     </div>
@@ -1390,8 +1391,8 @@ footer {
 <main class="shell">
     <header>
       <section class="hero">
-        <div class="eyebrow">Single Product Business Triangle</div>
         <h1>单品经营三角模型</h1>
+        <div class="hero-subtitle">Single Product Business Triangle</div>
         <p class="lead">
           在同一产品、固定税率、厂家营收与终端纯销口径不一致的条件下，将营收增长拆成
           <strong>销量贡献</strong>、<strong>终端价格贡献</strong>、<strong>渠道价值转化贡献</strong>。
@@ -2234,7 +2235,7 @@ const state = {
 </script>
 
 <!-- FOOTER -->
-<footer>
+<footer id="contact">
 
   <div class="footer-main">
 
