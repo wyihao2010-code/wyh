@@ -98,10 +98,83 @@ nav {
 }
 .hero h1 span { color:var(--accent); }
 .hero-sub {
+  margin-bottom:40px;
+}
+.hero-focus {
+  position:relative;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:12px 18px;
+  width:fit-content;
+  max-width:min(760px, 100%);
+  padding:12px 0;
+}
+.focus-word {
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px 2px;
   font-size:clamp(15px,2vw,20px);
-  color:var(--muted); font-weight:300;
-  letter-spacing:1px; margin-bottom:40px;
-  max-width:600px; line-height:2;
+  font-weight:300;
+  letter-spacing:1.2px;
+  line-height:1.8;
+  color:rgba(232,237,248,0.92);
+  filter:blur(4px);
+  opacity:0.4;
+  transition:
+    filter 0.45s ease,
+    opacity 0.45s ease,
+    color 0.45s ease,
+    transform 0.45s ease;
+  white-space:nowrap;
+  padding-right:2px;
+}
+.focus-word.is-active {
+  filter:blur(0);
+  opacity:1;
+  color:var(--text);
+  transform:translateY(-1px);
+}
+.focus-frame {
+  position:absolute;
+  top:0; left:0;
+  width:0; height:0;
+  opacity:0;
+  pointer-events:none;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.28s ease;
+}
+.focus-frame.is-ready { opacity:1; }
+.focus-corner {
+  position:absolute;
+  width:12px;
+  height:12px;
+  border:2px solid rgba(126,200,227,0.92);
+  filter:
+    drop-shadow(0 0 6px rgba(126,200,227,0.45))
+    drop-shadow(0 0 12px rgba(74,143,255,0.18));
+  border-radius:2px;
+}
+.focus-corner.top-left {
+  top:-8px; left:-10px;
+  border-right:none; border-bottom:none;
+}
+.focus-corner.top-right {
+  top:-8px; right:-10px;
+  border-left:none; border-bottom:none;
+}
+.focus-corner.bottom-left {
+  left:-10px; bottom:-8px;
+  border-right:none; border-top:none;
+}
+.focus-corner.bottom-right {
+  right:-10px; bottom:-8px;
+  border-left:none; border-top:none;
 }
 .hero-divider {
   width:60px; height:2px;
@@ -484,7 +557,7 @@ footer {
 .hero-eyebrow { animation-delay:0.1s; }
 .hero h1 { animation-delay:0.25s; }
 .hero-divider { animation-delay:0.4s; }
-.hero-sub { animation-delay:0.4s; }
+.hero-sub { animation-delay:0.46s; }
 .hero-desc { animation-delay:0.55s; }
 .hero-scroll { animation-delay:0.8s; }
 
@@ -1272,6 +1345,7 @@ footer {
   .nav-links { gap:20px; }
   section { padding:80px 6%; }
   .hero { padding:100px 6% 60px; }
+  .hero-focus { gap:10px 14px; }
   .exp-item {
     grid-template-columns:1fr;
     padding:40px 0;
@@ -1292,6 +1366,28 @@ footer {
   .cap-grid { grid-template-columns:1fr; }
   .about-grid { grid-template-columns:1fr; }
   .nav-links { display:none; }
+  .hero-focus {
+    gap:8px 10px;
+    padding:8px 0 10px;
+    flex-wrap:nowrap;
+  }
+  .focus-word {
+    font-size:clamp(12px,3.9vw,16px);
+    letter-spacing:0.6px;
+    line-height:1.65;
+  }
+  .focus-corner {
+    width:10px;
+    height:10px;
+  }
+  .focus-corner.top-left,
+  .focus-corner.top-right { top:-7px; }
+  .focus-corner.top-left,
+  .focus-corner.bottom-left { left:-8px; }
+  .focus-corner.top-right,
+  .focus-corner.bottom-right { right:-8px; }
+  .focus-corner.bottom-left,
+  .focus-corner.bottom-right { bottom:-7px; }
 }
 </style>
 </head>
@@ -1317,9 +1413,19 @@ footer {
   <div class="hero-eyebrow">Business Intelligence</div>
   <h1>王<span>一</span>昊</h1>
   <div class="hero-divider"></div>
-  <p class="hero-sub">
-    经营分析 &nbsp;×&nbsp; 战略洞察 &nbsp;×&nbsp; AI 驱动增长
-  </p>
+  <div class="hero-sub" aria-label="核心领域">
+    <div class="hero-focus" data-focus-rotator>
+      <span class="focus-word is-active">经营分析</span>
+      <span class="focus-word">战略洞察</span>
+      <span class="focus-word">AI 驱动增长</span>
+      <div class="focus-frame" aria-hidden="true">
+        <span class="focus-corner top-left"></span>
+        <span class="focus-corner top-right"></span>
+        <span class="focus-corner bottom-left"></span>
+        <span class="focus-corner bottom-right"></span>
+      </div>
+    </div>
+  </div>
   <p class="hero-desc">
     用数据理解经营，用洞察推动增长。<br>
     长期聚焦集团经营分析、战略规划、电商运营与财经价值创造，<br>
@@ -1330,6 +1436,65 @@ footer {
     Scroll
   </div>
 </section>
+
+<script>
+(function(){
+  const container = document.querySelector('[data-focus-rotator]');
+  if (!container) return;
+
+  const words = Array.from(container.querySelectorAll('.focus-word'));
+  const frame = container.querySelector('.focus-frame');
+  if (!words.length || !frame) return;
+
+  let currentIndex = 0;
+  let timer = null;
+
+  function updateFrame(index, instant){
+    const target = words[index];
+    if (!target) return;
+
+    words.forEach((word, wordIndex) => {
+      word.classList.toggle('is-active', wordIndex === index);
+    });
+
+    const containerRect = container.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+    const x = targetRect.left - containerRect.left;
+    const y = targetRect.top - containerRect.top;
+
+    if (instant) {
+      frame.style.transition = 'none';
+    } else {
+      frame.style.removeProperty('transition');
+    }
+
+    frame.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    frame.style.width = targetRect.width + 'px';
+    frame.style.height = targetRect.height + 'px';
+    frame.classList.add('is-ready');
+
+    if (instant) {
+      requestAnimationFrame(() => frame.style.removeProperty('transition'));
+    }
+  }
+
+  function step(){
+    currentIndex = (currentIndex + 1) % words.length;
+    updateFrame(currentIndex, false);
+  }
+
+  function start(){
+    if (timer) clearInterval(timer);
+    timer = window.setInterval(step, 2600);
+  }
+
+  updateFrame(0, true);
+  start();
+
+  window.addEventListener('resize', () => updateFrame(currentIndex, true));
+  window.addEventListener('load', () => updateFrame(currentIndex, true));
+})();
+</script>
 
 <!-- ABOUT -->
 <section id="about">
