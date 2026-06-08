@@ -218,6 +218,44 @@ section { position:relative; z-index:1; padding:120px 10%; }
   margin-top:8px;
 }
 
+/* ── GRADIENT TEXT TITLES ── */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-title {
+  display: inline;
+  background-image: linear-gradient(
+    to right,
+    #7ec8e3, #4a8fff, #a78bfa, #4a8fff, #7ec8e3
+  );
+  background-size: 300% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientShift 5s ease-in-out infinite;
+}
+
+/* 各 section 标题颜色主题差异化 */
+#about       .gradient-title {
+  background-image: linear-gradient(to right, #7ec8e3, #4a8fff, #7ec8e3, #4a8fff, #7ec8e3);
+  animation-duration: 5s;
+}
+#experience  .gradient-title {
+  background-image: linear-gradient(to right, #c9a84c, #e8c96a, #c9a84c, #e8c96a, #c9a84c);
+  animation-duration: 6s;
+}
+#capabilities .gradient-title {
+  background-image: linear-gradient(to right, #a78bfa, #c084fc, #7ec8e3, #c084fc, #a78bfa);
+  animation-duration: 4.5s;
+}
+#projects    .gradient-title {
+  background-image: linear-gradient(to right, #4a8fff, #7ec8e3, #4a8fff, #7ec8e3, #4a8fff);
+  animation-duration: 5.5s;
+}
+
 /* ── ABOUT CARDS ── */
 .about-grid {
   display:grid;
@@ -1499,7 +1537,7 @@ footer {
 <!-- ABOUT -->
 <section id="about">
   <div class="section-label">About</div>
-  <h2 class="section-title">核心领域<em>Core Focus Areas</em></h2>
+  <h2 class="section-title"><span class="gradient-title">核心领域</span><em>Core Focus Areas</em></h2>
   <div class="about-grid">
     <div class="about-card" data-edge-sensitivity="30" data-glow-color="40 80 80" data-background-color="#120F17" data-border-radius="20" data-glow-radius="40" data-glow-intensity="1" data-cone-spread="25" data-animated="true" data-colors="#c084fc,#f472b6,#38bdf8" data-fill-opacity="0.5">
       <span class="edge-light" aria-hidden="true"></span>
@@ -1539,7 +1577,7 @@ footer {
 <!-- EXPERIENCE -->
 <section id="experience" class="exp-section">
   <div class="section-label">Experience</div>
-  <h2 class="section-title">工作经历<em>Professional History</em></h2>
+  <h2 class="section-title"><span class="gradient-title">工作经历</span><em>Professional History</em></h2>
   <div class="experience-grid">
 
     <div class="exp-item">
@@ -1584,7 +1622,7 @@ footer {
 <!-- CAPABILITIES -->
 <section id="capabilities">
   <div class="section-label">Capabilities</div>
-  <h2 class="section-title">核心能力<em>Core Skills</em></h2>
+  <h2 class="section-title"><span class="gradient-title">核心能力</span><em>Core Skills</em></h2>
   <div class="cap-grid">
     <div class="cap-item">
       <div class="cap-num">01</div>
@@ -1624,7 +1662,7 @@ footer {
 <!-- PROJECTS -->
 <section id="projects" class="projects-section">
   <div class="section-label">Projects</div>
-  <h2 class="section-title">代表项目<em>Selected Work</em></h2>
+  <h2 class="section-title"><span class="gradient-title">代表项目</span><em>Selected Work</em></h2>
   <div class="proj-grid">
     <div class="proj-card">
       <span class="proj-num">Project 01</span>
