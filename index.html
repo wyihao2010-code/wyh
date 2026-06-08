@@ -152,26 +152,118 @@ section { position:relative; z-index:1; padding:120px 10%; }
   gap:20px;
 }
 .about-card {
+  --edge-proximity: 0;
+  --cursor-angle: 45deg;
+  --edge-sensitivity: 30;
+  --color-sensitivity: calc(var(--edge-sensitivity) + 20);
+  --border-radius: 20px;
+  --glow-padding: 40px;
+  --cone-spread: 25;
+  --fill-opacity: 0.5;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:20px; padding:52px 32px 44px;
   transition: border-color 0.4s, transform 0.4s, background 0.4s;
   position:relative; overflow:hidden;
   min-height:210px;
-  display:flex; flex-direction:column; justify-content:center;
+  display:grid;
+  isolation:isolate;
+  transform:translate3d(0,0,0.01px);
 }
 .about-card::before {
   content:''; position:absolute; inset:0; border-radius:20px;
   background:linear-gradient(135deg,rgba(74,143,255,0.08) 0%,transparent 60%);
   opacity:0; transition:opacity 0.4s;
+  z-index:0;
 }
 .about-card:hover { transform:translateY(-6px); border-color:var(--border-hover); background:rgba(255,255,255,0.06); }
 .about-card:hover::before { opacity:1; }
+.about-card::after,
+.about-card > .edge-light {
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  transition:opacity 0.25s ease-out;
+}
+.about-card:not(:hover):not(.sweep-active)::after,
+.about-card:not(:hover):not(.sweep-active) > .edge-light {
+  opacity:0;
+  transition:opacity 0.75s ease-in-out;
+}
+.about-card::after {
+  border:1px solid transparent;
+  background:
+    var(--gradient-one, radial-gradient(at 80% 55%, rgba(192, 132, 252, 0.8) 0px, transparent 50%)) padding-box,
+    var(--gradient-two, radial-gradient(at 69% 34%, rgba(244, 114, 182, 0.75) 0px, transparent 50%)) padding-box,
+    var(--gradient-three, radial-gradient(at 8% 6%, rgba(56, 189, 248, 0.78) 0px, transparent 50%)) padding-box,
+    var(--gradient-four, radial-gradient(at 41% 38%, rgba(192, 132, 252, 0.58) 0px, transparent 50%)) padding-box,
+    var(--gradient-five, radial-gradient(at 86% 85%, rgba(244, 114, 182, 0.56) 0px, transparent 50%)) padding-box,
+    var(--gradient-six, radial-gradient(at 82% 18%, rgba(56, 189, 248, 0.54) 0px, transparent 50%)) padding-box,
+    var(--gradient-seven, radial-gradient(at 51% 4%, rgba(244, 114, 182, 0.62) 0px, transparent 50%)) padding-box,
+    var(--gradient-base, linear-gradient(#c084fc 0 100%)) padding-box;
+  mask-image:
+    linear-gradient(to bottom, black, black),
+    radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%),
+    radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%),
+    conic-gradient(from var(--cursor-angle) at center, transparent 5%, black 15%, black 85%, transparent 95%);
+  mask-composite: subtract, add, add, add, add, add;
+  opacity: calc(max(var(--edge-proximity) - var(--color-sensitivity), 0) / (100 - var(--color-sensitivity)) * var(--fill-opacity));
+  mix-blend-mode: soft-light;
+  z-index:1;
+}
+.about-card > .edge-light {
+  inset:calc(var(--glow-padding) * -1);
+  pointer-events:none;
+  z-index:2;
+  mask-image:conic-gradient(from var(--cursor-angle) at center, black 2.5%, transparent 10%, transparent 90%, black 97.5%);
+  opacity: calc(max(var(--edge-proximity) - var(--edge-sensitivity), 0) / (100 - var(--edge-sensitivity)));
+  mix-blend-mode: plus-lighter;
+}
+.about-card > .edge-light::before {
+  content:'';
+  position:absolute;
+  inset:var(--glow-padding);
+  border-radius:inherit;
+  box-shadow:
+    inset 0 0 0 1px var(--glow-color, hsl(40deg 80% 80% / 100%)),
+    inset 0 0 1px 0 var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
+    inset 0 0 3px 0 var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
+    inset 0 0 6px 0 var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
+    inset 0 0 15px 0 var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
+    inset 0 0 25px 2px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
+    inset 0 0 50px 2px var(--glow-color-10, hsl(40deg 80% 80% / 10%)),
+    0 0 1px 0 var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
+    0 0 3px 0 var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
+    0 0 6px 0 var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
+    0 0 15px 0 var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
+    0 0 25px 2px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
+    0 0 50px 2px var(--glow-color-10, hsl(40deg 80% 80% / 10%));
+}
+.about-card-inner {
+  position:relative;
+  z-index:3;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  height:100%;
+}
+.about-card-eyebrow {
+  font-size:11px;
+  letter-spacing:2.6px;
+  text-transform:uppercase;
+  color:rgba(126,200,227,0.82);
+  margin-bottom:14px;
+  font-weight:500;
+}
 .about-card h3 {
   font-size:17px; font-weight:500; margin-bottom:12px;
   color:var(--text);
 }
-.about-card:first-child h3 { margin-top:22px; }
+.about-card:first-child h3 { margin-top:0; }
 .about-card p { color:var(--muted); font-size:14px; line-height:1.9; }
 
 /* ── EXPERIENCE ── */
@@ -1244,21 +1336,37 @@ footer {
   <div class="section-label">About</div>
   <h2 class="section-title">核心领域<em>Core Focus Areas</em></h2>
   <div class="about-grid">
-    <div class="about-card">
-      <h3>经营分析</h3>
-      <p>聚焦营收增长、利润改善、经营效率提升，构建经营分析体系与管理闭环。</p>
+    <div class="about-card" data-edge-sensitivity="30" data-glow-color="40 80 80" data-background-color="#120F17" data-border-radius="20" data-glow-radius="40" data-glow-intensity="1" data-cone-spread="25" data-animated="true" data-colors="#c084fc,#f472b6,#38bdf8" data-fill-opacity="0.5">
+      <span class="edge-light" aria-hidden="true"></span>
+      <div class="about-card-inner">
+        <div class="about-card-eyebrow">Analytics</div>
+        <h3>经营分析</h3>
+        <p>聚焦营收增长、利润改善、经营效率提升，构建经营分析体系与管理闭环。</p>
+      </div>
     </div>
-    <div class="about-card">
-      <h3>战略规划</h3>
-      <p>深度参与集团战略规划体系建设，推动战略与经营目标协同落地。</p>
+    <div class="about-card" data-edge-sensitivity="30" data-glow-color="40 80 80" data-background-color="#120F17" data-border-radius="20" data-glow-radius="40" data-glow-intensity="1" data-cone-spread="25" data-animated="true" data-colors="#c084fc,#f472b6,#38bdf8" data-fill-opacity="0.5">
+      <span class="edge-light" aria-hidden="true"></span>
+      <div class="about-card-inner">
+        <div class="about-card-eyebrow">Strategy</div>
+        <h3>战略规划</h3>
+        <p>深度参与集团战略规划体系建设，推动战略与经营目标协同落地。</p>
+      </div>
     </div>
-    <div class="about-card">
-      <h3>实验室管理与质量体系建设</h3>
-      <p>统筹负责实验室信息化建设与质量管理体系搭建。</p>
+    <div class="about-card" data-edge-sensitivity="30" data-glow-color="40 80 80" data-background-color="#120F17" data-border-radius="20" data-glow-radius="40" data-glow-intensity="1" data-cone-spread="25" data-animated="true" data-colors="#c084fc,#f472b6,#38bdf8" data-fill-opacity="0.5">
+      <span class="edge-light" aria-hidden="true"></span>
+      <div class="about-card-inner">
+        <div class="about-card-eyebrow">Lab &amp; Quality</div>
+        <h3>实验室管理与质量体系建设</h3>
+        <p>统筹负责实验室信息化建设与质量管理体系搭建。</p>
+      </div>
     </div>
-    <div class="about-card">
-      <h3>AI × 数据洞察</h3>
-      <p>探索 AI 与经营分析融合，强化数据驱动经营决策能力。</p>
+    <div class="about-card" data-edge-sensitivity="30" data-glow-color="40 80 80" data-background-color="#120F17" data-border-radius="20" data-glow-radius="40" data-glow-intensity="1" data-cone-spread="25" data-animated="true" data-colors="#c084fc,#f472b6,#38bdf8" data-fill-opacity="0.5">
+      <span class="edge-light" aria-hidden="true"></span>
+      <div class="about-card-inner">
+        <div class="about-card-eyebrow">AI Insights</div>
+        <h3>AI × 数据洞察</h3>
+        <p>探索 AI 与经营分析融合，强化数据驱动经营决策能力。</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1688,6 +1796,219 @@ footer {
   </div>
 </div>
 
+
+<script>
+(function(){
+  const ABOUT_CARD_SELECTOR = '.about-card';
+  const GRADIENT_POSITIONS = ['80% 55%', '69% 34%', '8% 6%', '41% 38%', '86% 85%', '82% 18%', '51% 4%'];
+  const GRADIENT_KEYS = ['--gradient-one', '--gradient-two', '--gradient-three', '--gradient-four', '--gradient-five', '--gradient-six', '--gradient-seven'];
+  const COLOR_MAP = [0, 1, 2, 0, 1, 2, 1];
+
+  function parseHSL(hslStr) {
+    const match = String(hslStr || '').match(/([\d.]+)\s*([\d.]+)%?\s*([\d.]+)%?/);
+    if (!match) return { h: 40, s: 80, l: 80 };
+    return { h: parseFloat(match[1]), s: parseFloat(match[2]), l: parseFloat(match[3]) };
+  }
+
+  function buildGlowVars(glowColor, intensity) {
+    const { h, s, l } = parseHSL(glowColor);
+    const base = `${h}deg ${s}% ${l}%`;
+    const opacities = [100, 60, 50, 40, 30, 20, 10];
+    const keys = ['', '-60', '-50', '-40', '-30', '-20', '-10'];
+    const vars = {};
+    for (let i = 0; i < opacities.length; i++) {
+      vars[`--glow-color${keys[i]}`] = `hsl(${base} / ${Math.min(opacities[i] * intensity, 100)}%)`;
+    }
+    return vars;
+  }
+
+  function buildGradientVars(colors) {
+    const vars = {};
+    for (let i = 0; i < 7; i++) {
+      const color = colors[Math.min(COLOR_MAP[i], colors.length - 1)];
+      vars[GRADIENT_KEYS[i]] = `radial-gradient(at ${GRADIENT_POSITIONS[i]}, ${color} 0px, transparent 50%)`;
+    }
+    vars['--gradient-base'] = `linear-gradient(${colors[0]} 0 100%)`;
+    return vars;
+  }
+
+  function easeOutCubic(x) { return 1 - Math.pow(1 - x, 3); }
+  function easeInCubic(x) { return x * x * x; }
+
+  function animateValue({ start = 0, end = 100, duration = 1000, delay = 0, ease = easeOutCubic, onUpdate, onEnd }) {
+    const startTime = performance.now() + delay;
+    function tick(now) {
+      const elapsed = now - startTime;
+      const t = Math.min(Math.max(elapsed / duration, 0), 1);
+      onUpdate(start + (end - start) * ease(t));
+      if (t < 1) requestAnimationFrame(tick);
+      else if (onEnd) onEnd();
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function getCenterOfElement(el) {
+    const { width, height } = el.getBoundingClientRect();
+    return [width / 2, height / 2];
+  }
+
+  function getEdgeProximity(el, x, y) {
+    const [cx, cy] = getCenterOfElement(el);
+    const dx = x - cx;
+    const dy = y - cy;
+    let kx = Infinity;
+    let ky = Infinity;
+    if (dx !== 0) kx = cx / Math.abs(dx);
+    if (dy !== 0) ky = cy / Math.abs(dy);
+    return Math.min(Math.max(1 / Math.min(kx, ky), 0), 1);
+  }
+
+  function getCursorAngle(el, x, y) {
+    const [cx, cy] = getCenterOfElement(el);
+    const dx = x - cx;
+    const dy = y - cy;
+    if (dx === 0 && dy === 0) return 0;
+    const radians = Math.atan2(dy, dx);
+    let degrees = radians * (180 / Math.PI) + 90;
+    if (degrees < 0) degrees += 360;
+    return degrees;
+  }
+
+  function applyVars(el, vars) {
+    Object.entries(vars).forEach(([key, value]) => {
+      el.style.setProperty(key, value);
+    });
+  }
+
+  function initAboutCard(card, index) {
+    const edgeSensitivity = Number(card.dataset.edgeSensitivity || 30);
+    const glowColor = card.dataset.glowColor || '40 80 80';
+    const backgroundColor = card.dataset.backgroundColor || '#120F17';
+    const borderRadius = Number(card.dataset.borderRadius || 20);
+    const glowRadius = Number(card.dataset.glowRadius || 40);
+    const glowIntensity = Number(card.dataset.glowIntensity || 1);
+    const coneSpread = Number(card.dataset.coneSpread || 25);
+    const fillOpacity = Number(card.dataset.fillOpacity || 0.5);
+    const animated = card.dataset.animated !== 'false';
+    const colors = (card.dataset.colors || '#c084fc,#f472b6,#38bdf8')
+      .split(',')
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+    card.style.setProperty('--card-bg', backgroundColor);
+    card.style.setProperty('--edge-sensitivity', edgeSensitivity);
+    card.style.setProperty('--border-radius', `${borderRadius}px`);
+    card.style.setProperty('--glow-padding', `${glowRadius}px`);
+    card.style.setProperty('--cone-spread', coneSpread);
+    card.style.setProperty('--fill-opacity', fillOpacity);
+    applyVars(card, buildGlowVars(glowColor, glowIntensity));
+    applyVars(card, buildGradientVars(colors));
+
+    let userInteracted = false;
+
+    function setInteractionState(edge, angle) {
+      card.style.setProperty('--edge-proximity', `${(edge * 100).toFixed(3)}`);
+      card.style.setProperty('--cursor-angle', `${angle.toFixed(3)}deg`);
+    }
+
+    function handlePointerMove(event) {
+      userInteracted = true;
+      card.classList.remove('sweep-active');
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      setInteractionState(getEdgeProximity(card, x, y), getCursorAngle(card, x, y));
+    }
+
+    function handlePointerLeave() {
+      setInteractionState(0, 45);
+    }
+
+    card.addEventListener('pointermove', handlePointerMove);
+    card.addEventListener('pointerleave', handlePointerLeave);
+
+    if (!animated) return;
+
+    let hasPlayedSweep = false;
+
+    function playSweep() {
+      if (hasPlayedSweep || userInteracted) return;
+      hasPlayedSweep = true;
+
+      const angleStart = 110;
+      const angleEnd = 465;
+      const startDelay = index * 120;
+
+      card.classList.add('sweep-active');
+      card.style.setProperty('--cursor-angle', `${angleStart}deg`);
+
+      animateValue({
+        duration: 500,
+        delay: startDelay,
+        onUpdate: (value) => {
+          if (userInteracted) return;
+          card.style.setProperty('--edge-proximity', value.toFixed(3));
+        }
+      });
+
+      animateValue({
+        ease: easeInCubic,
+        duration: 1500,
+        delay: startDelay,
+        end: 50,
+        onUpdate: (value) => {
+          if (userInteracted) return;
+          card.style.setProperty('--cursor-angle', `${((angleEnd - angleStart) * (value / 100) + angleStart).toFixed(3)}deg`);
+        }
+      });
+
+      animateValue({
+        ease: easeOutCubic,
+        delay: startDelay + 1500,
+        duration: 2250,
+        start: 50,
+        end: 100,
+        onUpdate: (value) => {
+          if (userInteracted) return;
+          card.style.setProperty('--cursor-angle', `${((angleEnd - angleStart) * (value / 100) + angleStart).toFixed(3)}deg`);
+        }
+      });
+
+      animateValue({
+        ease: easeInCubic,
+        delay: startDelay + 2500,
+        duration: 1500,
+        start: 100,
+        end: 0,
+        onUpdate: (value) => {
+          if (userInteracted) return;
+          card.style.setProperty('--edge-proximity', value.toFixed(3));
+        },
+        onEnd: () => {
+          if (!userInteracted) handlePointerLeave();
+          card.classList.remove('sweep-active');
+        }
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            playSweep();
+            observer.unobserve(card);
+          }
+        });
+      }, { threshold: 0.35 });
+      observer.observe(card);
+    } else {
+      playSweep();
+    }
+  }
+
+  document.querySelectorAll(ABOUT_CARD_SELECTOR).forEach(initAboutCard);
+})();
+</script>
 
 <script>
 (function(){
