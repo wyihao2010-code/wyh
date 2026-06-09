@@ -349,12 +349,7 @@ nav {
   max-width:520px; color:var(--muted);
   font-size:15px; line-height:2.1;
 }
-.hero-scroll {
-  position:absolute; bottom:48px; left:50%;
-  transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-  color:var(--dim); font-size:11px; letter-spacing:2px;
-}
+
 .scroll-line {
   width:1px; height:40px;
   background:linear-gradient(to bottom, var(--dim), transparent);
@@ -743,7 +738,6 @@ footer {
 .hero-divider { animation-delay:0.4s; }
 .hero-sub { animation-delay:0.46s; }
 .hero-desc { animation-delay:0.55s; }
-.hero-scroll { animation-delay:0.8s; }
 
 /* ── AI TOOL OVERLAY ── */
 .cap-item.clickable { cursor:pointer; }
@@ -1636,10 +1630,6 @@ footer {
     长期聚焦集团经营分析、战略规划、电商运营与财经价值创造，<br>
     致力于推动企业数智化转型与经营效率提升。
   </p>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    Scroll
-  </div>
 </section>
 
 <script>
@@ -3274,5 +3264,6 @@ const state = {
   injectWords(document.getElementById('slogan-en-right'), enRightWords, dotDelayEn + WORD_DELAY);
 })();
 </script>
+
 </body>
 </html>
