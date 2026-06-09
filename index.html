@@ -72,6 +72,83 @@ nav {
 }
 .nav-links a:hover { color:var(--text); }
 
+/* ── SLOGAN SECTION ── */
+.slogan-section {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 10%;
+  overflow: hidden;
+}
+
+.slogan-cn {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: clamp(36px, 6vw, 80px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.05em;
+  margin-bottom: 28px;
+  color: var(--text);
+}
+
+.slogan-en {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: clamp(13px, 1.6vw, 20px);
+  font-weight: 300;
+  letter-spacing: 0.28em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* 逐字动画 */
+.split-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(32px);
+  animation: charIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  color: #ffffff;
+}
+
+/* 英文逐词动画 */
+.split-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: charIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes charIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* slogan 向下滚动指示 */
+.slogan-scroll {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--dim);
+  font-size: 11px;
+  letter-spacing: 2px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+  animation-delay: 3.2s;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
 /* ── HERO ── */
 .hero {
   min-height:100vh; position:relative; z-index:1;
@@ -1442,6 +1519,16 @@ footer {
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
+
+<!-- SLOGAN -->
+<section class="slogan-section" id="slogan-section">
+  <div class="slogan-cn" id="slogan-cn" aria-label="数据看穿经营 · 洞察驱动增长"></div>
+  <div class="slogan-en" id="slogan-en" aria-label="Think in Data · Act on Insight"></div>
+  <div class="slogan-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
 
 <!-- HERO -->
 <section class="hero" id="hero-section">
@@ -3048,5 +3135,45 @@ const state = {
 
 </footer>
 
+<script>
+/* ── SLOGAN SPLIT ANIMATION ── */
+(function () {
+  const cnEl = document.getElementById('slogan-cn');
+  const enEl = document.getElementById('slogan-en');
+
+  /* ── 中文逐字 ── */
+  const cnText = '数据看穿经营 · 洞察驱动增长';
+  const CHAR_DELAY = 110; // ms per char
+  const START_CN   = 400; // ms initial delay
+
+  [...cnText].forEach((ch, i) => {
+    const span = document.createElement('span');
+    span.className = 'split-char';
+    span.textContent = ch;
+    span.style.animationDelay = (START_CN + i * CHAR_DELAY) + 'ms';
+    cnEl.appendChild(span);
+  });
+
+  /* ── 英文逐词 ── */
+  // 英文在中文全部入场后再开始
+  const START_EN = START_CN + cnText.length * CHAR_DELAY + 500;
+  // 按 · 分成三段，保留间距
+  const enSegments = ['Think\u00a0in\u00a0Data', '\u00a0\u00b7\u00a0', 'Act\u00a0on\u00a0Insight'];
+
+  let wordIdx = 0;
+  enSegments.forEach(seg => {
+    // 以实际空格拆词（已用 \u00a0 粘合组内词，· 本身一个 segment）
+    const tokens = seg.split(' ');
+    tokens.forEach((token, ti) => {
+      const span = document.createElement('span');
+      span.className = 'split-word';
+      span.textContent = token + (ti < tokens.length - 1 ? ' ' : '');
+      span.style.animationDelay = (START_EN + wordIdx * 120) + 'ms';
+      enEl.appendChild(span);
+      wordIdx++;
+    });
+  });
+})();
+</script>
 </body>
 </html>
