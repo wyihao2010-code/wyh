@@ -78,6 +78,21 @@ nav {
   display:flex; flex-direction:column;
   justify-content:center; align-items:flex-start;
   padding: 120px 10% 80px;
+  overflow:hidden;
+}
+#lightfall-canvas {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+  pointer-events:none;
+  opacity:0.72;
+  mix-blend-mode: screen;
+}
+.hero > *:not(#lightfall-canvas) {
+  position:relative;
+  z-index:2;
 }
 .hero-eyebrow {
   font-size:12px; letter-spacing:4px; color:var(--accent2);
@@ -224,37 +239,19 @@ section { position:relative; z-index:1; padding:120px 10%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 .gradient-title {
   display: inline;
-  background-image: linear-gradient(
-    to right,
-    #7ec8e3, #4a8fff, #a78bfa, #4a8fff, #7ec8e3
-  );
+  background-image: linear-gradient(to right, #7ec8e3, #4a8fff, #a78bfa, #4a8fff, #7ec8e3);
   background-size: 300% 100%;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   animation: gradientShift 5s ease-in-out infinite;
 }
-
-/* 各 section 标题颜色主题差异化 */
-#about       .gradient-title {
-  background-image: linear-gradient(to right, #7ec8e3, #4a8fff, #7ec8e3, #4a8fff, #7ec8e3);
-  animation-duration: 5s;
-}
-#experience  .gradient-title {
-  background-image: linear-gradient(to right, #c9a84c, #e8c96a, #c9a84c, #e8c96a, #c9a84c);
-  animation-duration: 6s;
-}
-#capabilities .gradient-title {
-  background-image: linear-gradient(to right, #a78bfa, #c084fc, #7ec8e3, #c084fc, #a78bfa);
-  animation-duration: 4.5s;
-}
-#projects    .gradient-title {
-  background-image: linear-gradient(to right, #4a8fff, #7ec8e3, #4a8fff, #7ec8e3, #4a8fff);
-  animation-duration: 5.5s;
-}
+#about       .gradient-title { background-image: linear-gradient(to right, #7ec8e3, #4a8fff, #7ec8e3, #4a8fff, #7ec8e3); animation-duration: 5s; }
+#experience  .gradient-title { background-image: linear-gradient(to right, #c9a84c, #e8c96a, #c9a84c, #e8c96a, #c9a84c); animation-duration: 6s; }
+#capabilities .gradient-title { background-image: linear-gradient(to right, #a78bfa, #c084fc, #7ec8e3, #c084fc, #a78bfa); animation-duration: 4.5s; }
+#projects    .gradient-title { background-image: linear-gradient(to right, #4a8fff, #7ec8e3, #4a8fff, #7ec8e3, #4a8fff); animation-duration: 5.5s; }
 
 /* ── ABOUT CARDS ── */
 .about-grid {
@@ -1447,7 +1444,8 @@ footer {
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero-section">
+  <canvas id="lightfall-canvas" aria-hidden="true"></canvas>
   <div class="hero-eyebrow">Business Intelligence</div>
   <h1>王<span>一</span>昊</h1>
   <div class="hero-divider"></div>
@@ -1474,6 +1472,250 @@ footer {
     Scroll
   </div>
 </section>
+
+<script>
+/* ── LIGHTFALL WebGL ── */
+(function(){
+  const canvas = document.getElementById('lightfall-canvas');
+  if (!canvas) return;
+
+  const gl = canvas.getContext('webgl', { alpha: true, antialias: true, premultipliedAlpha: false });
+  if (!gl) return;
+
+  // ── 优化①：prefers-reduced-motion → 直接跳过，不初始化 WebGL ──
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    canvas.style.display = 'none';
+    return;
+  }
+
+  // ── config ──
+  const CFG = {
+    colors: ['#7ec8e3','#4a8fff','#a78bfa','#c084fc'],
+    backgroundColor: '#060912',
+    speed: 0.45,
+    streakCount: 2,       // 减少至2条，画面更稀疏有呼吸感
+    streakWidth: 0.9,
+    streakLength: 1.4,    // 拉长尾迹，单条更飘逸
+    glow: 0.85,
+    density: 0.35,        // 降低角频率，竖向间距更大
+    twinkle: 0.6,
+    zoom: 3.2,            // 拉远视角，空间感更强
+    backgroundGlow: 0.25,
+    opacity: 0.65,        // 整体更透明，不抢文字
+    mouseStrength: 0.5,
+    mouseRadius: 0.6,
+    mouseDampening: 0.14,
+  };
+
+  const MAX_COLORS = 8;
+  const hexToRGB = h => {
+    const c = h.replace('#','').padEnd(6,'0');
+    return [parseInt(c.slice(0,2),16)/255, parseInt(c.slice(2,4),16)/255, parseInt(c.slice(4,6),16)/255];
+  };
+  const prepColors = input => {
+    const base = (input||[]).slice(0,MAX_COLORS);
+    const count = base.length;
+    const arr = [];
+    for(let i=0;i<MAX_COLORS;i++) arr.push(hexToRGB(base[Math.min(i,count-1)]));
+    const avg=[0,0,0];
+    for(let i=0;i<count;i++){avg[0]+=arr[i][0];avg[1]+=arr[i][1];avg[2]+=arr[i][2];}
+    avg[0]/=count;avg[1]/=count;avg[2]/=count;
+    return {arr,count,avg};
+  };
+
+  const vert = `
+    attribute vec2 position;
+    varying vec2 vUv;
+    void main(){vUv=position*0.5+0.5;gl_Position=vec4(position,0.0,1.0);}
+  `;
+  const frag = `
+    precision highp float;
+    uniform vec3  iResolution;
+    uniform vec2  iMouse;
+    uniform float iTime;
+    uniform vec3  uColor0,uColor1,uColor2,uColor3,uColor4,uColor5,uColor6,uColor7;
+    uniform int   uColorCount;
+    uniform vec3  uBgColor,uMouseColor;
+    uniform float uSpeed,uStreakWidth,uStreakLength,uGlow,uDensity,uTwinkle,uZoom,uBgGlow,uOpacity,uMouseStrength,uMouseRadius;
+    uniform int   uStreakCount;
+    varying vec2 vUv;
+
+    vec3 palette(float h){
+      int count=uColorCount; if(count<1)count=1;
+      int idx=int(floor(clamp(h,0.0,0.999999)*float(count)));
+      if(idx<=0)return uColor0; if(idx==1)return uColor1; if(idx==2)return uColor2;
+      if(idx==3)return uColor3; if(idx==4)return uColor4; if(idx==5)return uColor5;
+      if(idx==6)return uColor6; return uColor7;
+    }
+    vec3 tanhv(vec3 x){vec3 e=exp(-2.0*x);return(1.0-e)/(1.0+e);}
+
+    vec2 sceneC(vec2 frag,vec2 r){
+      vec2 P=(frag+frag-r)/r.x; float z=0.0,d=1e3; vec4 O=vec4(0.0);
+      for(int k=0;k<39;k++){
+        if(d<=1e-4)break;
+        O=z*normalize(vec4(P,uZoom,0.0))-vec4(0.0,4.0,1.0,0.0)/4.5;
+        d=1.0-sqrt(length(O*O)); z+=d;
+      }
+      return vec2(O.x,atan(O.z,O.y));
+    }
+
+    void main(){
+      vec2 C=vUv*iResolution.xy;
+      vec2 r=iResolution.xy;
+      vec2 uv0=(C+C-r)/r.x;
+      float T=0.1*iTime*uSpeed+9.0;
+      float angRings=max(1.0,floor(6.28318530718*max(uDensity,0.05)+0.5));
+      vec2 Y=vec2(5e-3,6.28318530718/angRings);
+
+      vec2 c0=sceneC(C,r);
+      vec2 cdx=sceneC(C+vec2(1.0,0.0),r);
+      vec2 cdy=sceneC(C+vec2(0.0,1.0),r);
+      vec2 dCx=cdx-c0, dCy=cdy-c0;
+      dCx.y-=6.28318530718*floor(dCx.y/6.28318530718+0.5);
+      dCy.y-=6.28318530718*floor(dCy.y/6.28318530718+0.5);
+      vec2 fw=abs(dCx)+abs(dCy);
+      C=c0;
+
+      vec2 P=vec2(2.0,1.0)*uv0-(r/r.x)*vec2(0.0,1.0);
+      vec4 O=vec4(uBgColor*90.0*uBgGlow/(1e3*dot(P,P)+6.0),0.0);
+
+      float mGlow=0.0;
+      vec2 mN=(iMouse+iMouse-r)/r.x;
+      float md=length(uv0-mN);
+      mGlow=exp(-md*md/max(uMouseRadius*uMouseRadius,1e-4))*uMouseStrength;
+      O.rgb+=uMouseColor*mGlow*0.25;
+
+      float zr=5e-4*uStreakWidth;
+      vec2 rr=vec2(max(length(fw),1e-5));
+      float tail=19.0/max(uStreakLength,0.05);
+
+      for(int m=0;m<16;m++){
+        if(m>=uStreakCount)break;
+        float jf=float(m)+1.0;
+        float ic=fract(sin(dot(vec2(jf,floor(C.x/Y.x+0.5)),vec2(7.0,11.0))*73.0));
+        vec2 Pp=C-(T+T*ic)*vec2(0.0,1.0);
+        Pp-=floor(Pp/Y+0.5)*Y;
+        float h=fract(8663.0*ic);
+        vec3 col=palette(h);
+        float weight=mix(1.5,1.0+sin(T+7.0*h+4.0),uTwinkle)*(1.0+mGlow*2.0);
+        vec2 inner=vec2(length(max(Pp,vec2(-1.0,0.0))),length(Pp)-zr)-zr;
+        vec2 sm=vec2(1.0)-smoothstep(-rr,rr,inner);
+        O.rgb+=dot(sm,vec2(exp(tail*Pp.y),3.0))*col*weight;
+        C.x+=Y.x/8.0;
+      }
+
+      vec3 colr=sqrt(tanhv(max(O.rgb*uGlow-vec3(0.04,0.08,0.02),0.0)));
+      gl_FragColor=vec4(colr,uOpacity);
+    }
+  `;
+
+  function compileShader(type, src){
+    const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)){console.error(gl.getShaderInfoLog(s));return null;}
+    return s;
+  }
+  const vs=compileShader(gl.VERTEX_SHADER,vert);
+  const fs=compileShader(gl.FRAGMENT_SHADER,frag);
+  if(!vs||!fs)return;
+
+  const prog=gl.createProgram();
+  gl.attachShader(prog,vs); gl.attachShader(prog,fs); gl.linkProgram(prog);
+  if(!gl.getProgramParameter(prog,gl.LINK_STATUS)){console.error(gl.getProgramInfoLog(prog));return;}
+  gl.useProgram(prog);
+
+  const posLoc=gl.getAttribLocation(prog,'position');
+  const buf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(posLoc);
+  gl.vertexAttribPointer(posLoc,2,gl.FLOAT,false,0,0);
+
+  const U = n => gl.getUniformLocation(prog, n);
+  const uLoc = {
+    iResolution: U('iResolution'), iMouse: U('iMouse'), iTime: U('iTime'),
+    uColor0:U('uColor0'),uColor1:U('uColor1'),uColor2:U('uColor2'),uColor3:U('uColor3'),
+    uColor4:U('uColor4'),uColor5:U('uColor5'),uColor6:U('uColor6'),uColor7:U('uColor7'),
+    uColorCount:U('uColorCount'), uBgColor:U('uBgColor'), uMouseColor:U('uMouseColor'),
+    uSpeed:U('uSpeed'), uStreakWidth:U('uStreakWidth'), uStreakLength:U('uStreakLength'),
+    uGlow:U('uGlow'), uDensity:U('uDensity'), uTwinkle:U('uTwinkle'), uZoom:U('uZoom'),
+    uBgGlow:U('uBgGlow'), uOpacity:U('uOpacity'),
+    uStreakCount:U('uStreakCount'), uMouseStrength:U('uMouseStrength'), uMouseRadius:U('uMouseRadius'),
+  };
+
+  const {arr, count, avg} = prepColors(CFG.colors);
+  const bgRGB = hexToRGB(CFG.backgroundColor);
+  gl.uniform3fv(uLoc.uBgColor, bgRGB);
+  gl.uniform3fv(uLoc.uMouseColor, avg);
+  gl.uniform3fv(uLoc.uColor0, arr[0]); gl.uniform3fv(uLoc.uColor1, arr[1]);
+  gl.uniform3fv(uLoc.uColor2, arr[2]); gl.uniform3fv(uLoc.uColor3, arr[3]);
+  gl.uniform3fv(uLoc.uColor4, arr[4]); gl.uniform3fv(uLoc.uColor5, arr[5]);
+  gl.uniform3fv(uLoc.uColor6, arr[6]); gl.uniform3fv(uLoc.uColor7, arr[7]);
+  gl.uniform1i(uLoc.uColorCount, count);
+  gl.uniform1f(uLoc.uSpeed, CFG.speed);
+  gl.uniform1i(uLoc.uStreakCount, Math.max(1,Math.min(16,Math.round(CFG.streakCount))));
+  gl.uniform1f(uLoc.uStreakWidth, CFG.streakWidth);
+  gl.uniform1f(uLoc.uStreakLength, CFG.streakLength);
+  gl.uniform1f(uLoc.uGlow, CFG.glow);
+  gl.uniform1f(uLoc.uDensity, CFG.density);
+  gl.uniform1f(uLoc.uTwinkle, CFG.twinkle);
+  gl.uniform1f(uLoc.uZoom, CFG.zoom);
+  gl.uniform1f(uLoc.uBgGlow, CFG.backgroundGlow);
+  gl.uniform1f(uLoc.uOpacity, CFG.opacity);
+  gl.uniform1f(uLoc.uMouseStrength, CFG.mouseStrength);
+  gl.uniform1f(uLoc.uMouseRadius, CFG.mouseRadius);
+
+  // 优化②：dpr 上限 1.5，高分屏不必要的超采样
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  let W=0, H=0;
+  const resize = () => {
+    const hero = document.getElementById('hero-section');
+    W = hero.offsetWidth; H = hero.offsetHeight;
+    canvas.width = W*dpr; canvas.height = H*dpr;
+    canvas.style.width = W+'px'; canvas.style.height = H+'px';
+    gl.viewport(0,0,canvas.width,canvas.height);
+    gl.uniform3f(uLoc.iResolution, canvas.width, canvas.height, 1);
+  };
+  resize();
+  window.addEventListener('resize', resize);
+
+  const mouse = [0, 0];
+  const mouseTarget = [canvas.width/2, canvas.height/2];
+  document.getElementById('hero-section').addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouseTarget[0] = (e.clientX - rect.left) * dpr;
+    mouseTarget[1] = (rect.height - (e.clientY - rect.top)) * dpr;
+  });
+
+  let lastT = 0;
+  let rafId = null;
+  let isVisible = true;   // 优化③：IntersectionObserver 控制渲染开关
+
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+  function loop(t){
+    rafId = requestAnimationFrame(loop);
+    if (!isVisible) return;   // 滚出视口后跳过绘制，但保持 RAF 以便重新进入时立即恢复
+    const dt = Math.min((t - lastT) / 1000, 0.05);  // 防止长时间挂起后时间跳变
+    lastT = t;
+    const tau = Math.max(1e-4, CFG.mouseDampening);
+    const f = 1 - Math.exp(-dt / tau);
+    mouse[0] += (mouseTarget[0] - mouse[0]) * f;
+    mouse[1] += (mouseTarget[1] - mouse[1]) * f;
+    gl.uniform2fv(uLoc.iMouse, mouse);
+    gl.uniform1f(uLoc.iTime, t * 0.001);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+
+  // 优化③：hero 离开视口时暂停绘制
+  const observer = new IntersectionObserver(entries => {
+    isVisible = entries[0].isIntersecting;
+  }, { threshold: 0.01 });
+  observer.observe(document.getElementById('hero-section'));
+
+  rafId = requestAnimationFrame(loop);
+})();
+</script>
 
 <script>
 (function(){
