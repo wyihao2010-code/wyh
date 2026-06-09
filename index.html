@@ -75,32 +75,71 @@ nav {
 /* ── SLOGAN SECTION ── */
 .slogan-section {
   min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
   padding: 80px 10%;
   overflow: hidden;
 }
 
-.slogan-cn {
-  font-family: 'Noto Sans SC', sans-serif;
-  font-size: clamp(36px, 6vw, 80px);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: 0.05em;
-  margin-bottom: 28px;
-  color: var(--text);
+/* 两行共用的 grid 容器，· 列宽固定，左右列等宽自动撑开 */
+.slogan-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: stretch;
 }
 
-.slogan-en {
+.slogan-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+/* 左侧：右对齐 */
+.slogan-left  { text-align: right; }
+/* 右侧：左对齐 */
+.slogan-right { text-align: left; }
+
+/* · 轴心 */
+.slogan-dot {
   font-family: 'Noto Sans SC', sans-serif;
-  font-size: clamp(13px, 1.6vw, 20px);
+  font-size: clamp(28px, 5.5vw, 80px);
+  font-weight: 700;
+  color: #ffffff;
+  padding: 0 0.3em;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.slogan-dot-en {
+  font-size: clamp(11px, 1.6vw, 20px);
   font-weight: 300;
-  letter-spacing: 0.28em;
+  color: var(--muted);
+  padding: 0 0.5em;
+  letter-spacing: 0;
+}
+
+/* 中文行字体 */
+.slogan-row:not(.slogan-row-en) .slogan-left,
+.slogan-row:not(.slogan-row-en) .slogan-right {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: clamp(28px, 5.5vw, 80px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+}
+
+/* 英文行字体 */
+.slogan-row-en .slogan-left,
+.slogan-row-en .slogan-right {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: clamp(11px, 1.6vw, 20px);
+  font-weight: 300;
+  letter-spacing: 0.22em;
   color: var(--muted);
   text-transform: uppercase;
 }
@@ -126,6 +165,12 @@ nav {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* · 轴心自身淡入 */
+.slogan-dot, .slogan-dot-en {
+  opacity: 0;
+  animation: charIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 /* slogan 向下滚动指示 */
 .slogan-scroll {
   position: absolute;
@@ -147,6 +192,33 @@ nav {
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateX(-50%) translateY(10px); }
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .slogan-section {
+    padding: 60px 6%;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  .slogan-dot {
+    font-size: clamp(22px, 6vw, 40px);
+    padding: 0 0.2em;
+  }
+  .slogan-dot-en {
+    font-size: clamp(10px, 2.8vw, 14px);
+  }
+  .slogan-row:not(.slogan-row-en) .slogan-left,
+  .slogan-row:not(.slogan-row-en) .slogan-right {
+    font-size: clamp(22px, 6vw, 40px);
+    letter-spacing: 0.02em;
+  }
+  .slogan-row-en .slogan-left,
+  .slogan-row-en .slogan-right {
+    font-size: clamp(9px, 2.8vw, 14px);
+    letter-spacing: 0.12em;
+  }
+  .slogan-layout { gap: 16px; }
+  .slogan-scroll { bottom: 32px; }
 }
 
 /* ── HERO ── */
@@ -1522,8 +1594,18 @@ footer {
 
 <!-- SLOGAN -->
 <section class="slogan-section" id="slogan-section">
-  <div class="slogan-cn" id="slogan-cn" aria-label="数据看穿经营 · 洞察驱动增长"></div>
-  <div class="slogan-en" id="slogan-en" aria-label="Think in Data · Act on Insight"></div>
+  <div class="slogan-layout">
+    <div class="slogan-row" id="slogan-cn-row">
+      <div class="slogan-left"  id="slogan-cn-left"></div>
+      <div class="slogan-dot"   id="slogan-cn-dot"></div>
+      <div class="slogan-right" id="slogan-cn-right"></div>
+    </div>
+    <div class="slogan-row slogan-row-en" id="slogan-en-row">
+      <div class="slogan-left"  id="slogan-en-left"></div>
+      <div class="slogan-dot slogan-dot-en" id="slogan-en-dot"></div>
+      <div class="slogan-right" id="slogan-en-right"></div>
+    </div>
+  </div>
   <div class="slogan-scroll">
     <div class="scroll-line"></div>
     Scroll
@@ -3138,41 +3220,58 @@ const state = {
 <script>
 /* ── SLOGAN SPLIT ANIMATION ── */
 (function () {
-  const cnEl = document.getElementById('slogan-cn');
-  const enEl = document.getElementById('slogan-en');
+  const CHAR_DELAY = 110;
+  const START_CN   = 400;
 
-  /* ── 中文逐字 ── */
-  const cnText = '数据看穿经营 · 洞察驱动增长';
-  const CHAR_DELAY = 110; // ms per char
-  const START_CN   = 400; // ms initial delay
+  /* 工具：往容器逐字/词注入 span */
+  function injectChars(el, chars, startDelay, cls) {
+    chars.forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.className = cls;
+      span.textContent = ch;
+      span.style.animationDelay = (startDelay + i * CHAR_DELAY) + 'ms';
+      el.appendChild(span);
+    });
+  }
 
-  [...cnText].forEach((ch, i) => {
-    const span = document.createElement('span');
-    span.className = 'split-char';
-    span.textContent = ch;
-    span.style.animationDelay = (START_CN + i * CHAR_DELAY) + 'ms';
-    cnEl.appendChild(span);
-  });
+  /* ── 中文：「数据看穿经营」· 「洞察驱动增长」── */
+  const cnLeft  = '数据看穿经营';
+  const cnRight = '洞察驱动增长';
+  const cnDot   = document.getElementById('slogan-cn-dot');
 
-  /* ── 英文逐词 ── */
-  // 英文在中文全部入场后再开始
-  const START_EN = START_CN + cnText.length * CHAR_DELAY + 500;
-  // 按 · 分成三段，保留间距
-  const enSegments = ['Think\u00a0in\u00a0Data', '\u00a0\u00b7\u00a0', 'Act\u00a0on\u00a0Insight'];
+  injectChars(document.getElementById('slogan-cn-left'),  [...cnLeft],  START_CN, 'split-char');
+  // · 在中文左侧全部入场后出现
+  const dotDelayCn = START_CN + cnLeft.length * CHAR_DELAY;
+  cnDot.textContent = '·';
+  cnDot.style.animationDelay = dotDelayCn + 'ms';
+  // 右侧紧接 ·
+  injectChars(document.getElementById('slogan-cn-right'), [...cnRight], dotDelayCn + CHAR_DELAY, 'split-char');
 
-  let wordIdx = 0;
-  enSegments.forEach(seg => {
-    // 以实际空格拆词（已用 \u00a0 粘合组内词，· 本身一个 segment）
-    const tokens = seg.split(' ');
-    tokens.forEach((token, ti) => {
+  /* ── 英文：「Think in Data」· 「Act on Insight」── */
+  const enLeftWords  = ['Think', 'in', 'Data'];
+  const enRightWords = ['Act', 'on', 'Insight'];
+  const enDot        = document.getElementById('slogan-en-dot');
+
+  // 英文在中文全部完成后开始
+  const totalCnChars = cnLeft.length + 1 + cnRight.length;
+  const START_EN = START_CN + totalCnChars * CHAR_DELAY + 500;
+  const WORD_DELAY = 130;
+
+  function injectWords(el, words, startDelay) {
+    words.forEach((w, i) => {
       const span = document.createElement('span');
       span.className = 'split-word';
-      span.textContent = token + (ti < tokens.length - 1 ? ' ' : '');
-      span.style.animationDelay = (START_EN + wordIdx * 120) + 'ms';
-      enEl.appendChild(span);
-      wordIdx++;
+      span.textContent = w + (i < words.length - 1 ? '\u00a0' : '');
+      span.style.animationDelay = (startDelay + i * WORD_DELAY) + 'ms';
+      el.appendChild(span);
     });
-  });
+  }
+
+  injectWords(document.getElementById('slogan-en-left'),  enLeftWords,  START_EN);
+  const dotDelayEn = START_EN + enLeftWords.length * WORD_DELAY;
+  enDot.textContent = '·';
+  enDot.style.animationDelay = dotDelayEn + 'ms';
+  injectWords(document.getElementById('slogan-en-right'), enRightWords, dotDelayEn + WORD_DELAY);
 })();
 </script>
 </body>
