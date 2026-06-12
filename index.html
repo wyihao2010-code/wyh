@@ -349,6 +349,23 @@ nav {
   max-width:520px; color:var(--muted);
   font-size:15px; line-height:2.1;
 }
+.hero-welcome {
+  margin-top:18px;
+  font-size:12px;
+  letter-spacing:1.5px;
+  color:var(--accent2);
+  opacity:0;
+  transition: opacity 0.6s ease;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.hero-welcome.is-visible { opacity:0.85; }
+.hero-welcome::before {
+  content:''; display:inline-block;
+  width:18px; height:1px; background:var(--accent2);
+  flex-shrink:0;
+}
 
 .scroll-line {
   width:1px; height:40px;
@@ -1630,6 +1647,7 @@ footer {
     长期聚焦集团经营分析、战略规划、电商运营与财经价值创造，<br>
     致力于推动企业数智化转型与经营效率提升。
   </p>
+  <div class="hero-welcome" id="hero-welcome"></div>
 </section>
 
 <script>
@@ -3262,6 +3280,26 @@ const state = {
   enDot.textContent = '·';
   enDot.style.animation = `charIn 0.6s cubic-bezier(0.22,1,0.36,1) ${dotDelayEn}ms forwards`;
   injectWords(document.getElementById('slogan-en-right'), enRightWords, dotDelayEn + WORD_DELAY);
+})();
+</script>
+
+<!-- ── 高德地图 IP 定位欢迎语 ── -->
+<script src="https://webapi.amap.com/maps?v=2.0&key=1c27d0b90f2e1131fbacf863a706b256"></script>
+<script>
+(function(){
+  const el = document.getElementById('hero-welcome');
+  if (!el || typeof AMap === 'undefined') return;
+
+  AMap.plugin('AMap.CitySearch', function () {
+    const citySearch = new AMap.CitySearch();
+    citySearch.getLocalCity(function (status, result) {
+      if (status === 'complete' && result && result.info === 'OK') {
+        const city = result.city || result.province || '远方';
+        el.textContent = `欢迎来自${city}的朋友！`;
+        el.classList.add('is-visible');
+      }
+    });
+  });
 })();
 </script>
 
