@@ -9,6 +9,7 @@
 
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+img, svg, canvas, video { max-width:100%; }
 
 :root {
   /* 新调色盘：以墨、骨、金为轴 */
@@ -34,7 +35,7 @@
   --spine-w: 1px;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: 'Noto Sans SC', sans-serif;
@@ -42,6 +43,7 @@ body {
   color: var(--text);
   overflow-x: hidden;
   line-height: 1.85;
+  min-width: 320px;
 }
 
 /* ── 极淡纸纹 ── */
@@ -68,6 +70,7 @@ nav {
   display:flex; justify-content:space-between; align-items:center;
   background: linear-gradient(to bottom, rgba(9,9,12,0.92) 0%, transparent 100%);
   backdrop-filter: blur(1px);
+  min-width:0;
 }
 .nav-logo {
   font-family: 'Noto Serif SC', serif;
@@ -75,6 +78,8 @@ nav {
   letter-spacing: 6px;
   color: var(--text2);
   opacity: 0.85;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 .nav-links { display:flex; gap:40px; list-style:none; }
 .nav-links a {
@@ -106,14 +111,17 @@ nav {
   align-items: stretch;
   position: relative;
   z-index: 1;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .slogan-row {
   display: flex;
   justify-content: center;
   align-items: baseline;
-  flex-wrap: nowrap;
-  white-space: nowrap;
+  flex-wrap: wrap;
+  white-space: normal;
+  text-align: center;
 }
 
 /* 中文行字体 */
@@ -187,17 +195,21 @@ nav {
 
 @media (max-width: 600px) {
   .slogan-section {
-    padding: 60px 6%;
+    padding: 60px 5%;
     min-height: 100vh;
     min-height: 100dvh;
   }
   .slogan-row:not(.slogan-row-en) {
-    font-size: clamp(22px, 8vw, 36px);
+    font-size: clamp(18px, 7vw, 32px);
     letter-spacing: 0.04em;
+    text-align: center;
+    line-height: 1.6;
   }
   .slogan-row-en {
-    font-size: clamp(12px, 5vw, 28px);
-    letter-spacing: 0.04em;
+    font-size: clamp(11px, 4vw, 22px);
+    letter-spacing: 0.03em;
+    text-align: center;
+    word-spacing: 0.15em;
   }
   .slogan-layout { gap: 14px; }
   .slogan-scroll { bottom: 32px; }
@@ -237,7 +249,7 @@ nav {
 }
 .hero h1 {
   font-family:'Noto Serif SC', serif;
-  font-size:clamp(72px, 11vw, 130px);
+  font-size:clamp(48px, 11vw, 130px);
   font-weight:200; line-height:1;
   letter-spacing:0.15em;
   color: var(--text2);
@@ -256,6 +268,7 @@ nav {
   width:fit-content;
   max-width:min(760px, 100%);
   padding:14px 0;
+  overflow:visible;
 }
 .focus-word {
   position:relative;
@@ -276,6 +289,7 @@ nav {
     color 0.5s ease,
     transform 0.5s ease;
   white-space:nowrap;
+  max-width:100%;
 }
 .focus-word.is-active {
   filter:blur(0);
@@ -385,10 +399,12 @@ section { position:relative; z-index:1; padding:120px 10%; }
 }
 .section-title {
   font-family:'Noto Serif SC', serif;
-  font-size:clamp(28px,4.5vw,48px);
+  font-size:clamp(24px,4.5vw,48px);
   font-weight:200; margin-bottom:72px;
   color:var(--text2); line-height:1.25;
   letter-spacing: 0.06em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 .section-title em {
   font-style:normal; color:var(--muted);
@@ -584,6 +600,7 @@ section { position:relative; z-index:1; padding:120px 10%; }
   transition: background 0.4s;
   position:relative; overflow:hidden;
   cursor:pointer;
+  min-width: 0;
 }
 /* 左侧金色垂线，hover 时显现 */
 .proj-card::before {
@@ -631,6 +648,8 @@ footer {
   align-items:center;
   gap:0;
   padding:64px 10%;
+  min-width:0;
+  overflow:hidden;
 }
 
 .footer-ident {
@@ -676,6 +695,8 @@ footer {
 .fl-value {
   font-size:12px; color:var(--muted);
   letter-spacing:0.3px; transition:color 0.3s;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }
 .footer-link-item:hover .fl-value { color:var(--gold2); }
 .fl-arrow {
@@ -777,6 +798,7 @@ footer {
   display:flex; justify-content:space-between; align-items:center;
   margin-bottom:48px;
   border-bottom:1px solid var(--border-soft); padding-bottom:24px;
+  flex-wrap:wrap; gap:16px;
 }
 .tool-overlay-back {
   font-size:11px; color:var(--muted); cursor:pointer;
@@ -910,7 +932,7 @@ footer {
       background: rgba(195,158,79,0.04);
       border-radius: var(--radius);
       text-align: center;
-      font-size: clamp(22px, 2.4vw, 34px);
+      font-size: clamp(14px, 2.4vw, 34px);
       font-weight: 300;
       color: var(--gold2);
       font-family: "Cormorant Garamond","Noto Serif SC",serif;
@@ -1396,6 +1418,9 @@ footer {
           "svg"
           "k";
       }
+#viz-overlay .metrics { grid-template-columns: 1fr 1fr; }
+#viz-overlay h1 { font-size: clamp(18px, 5vw, 28px); }
+#viz-overlay .formula-main { font-size: 14px; letter-spacing: 0; }
 
     
 }
@@ -1585,20 +1610,28 @@ footer {
   .footer-link-item:hover::before { left:0; right:0; }
   .footer-wechat { flex-direction:row; align-items:center; justify-content:flex-start; gap:20px; padding-left:0; }
   .footer-copy { padding:16px 6%; }
+  .tool-overlay-inner { padding:48px 6%; }
+  .tool-overlay-header { flex-wrap:wrap; gap:12px; }
+  .tool-overlay-title { font-size:20px; }
 }
 @media(max-width:600px){
   .cap-grid { grid-template-columns:1fr; }
   .about-grid { grid-template-columns:1fr; }
   .nav-links { display:none; }
+  .hero { padding:80px 5% 52px; }
+  .hero h1 { font-size: clamp(40px, 14vw, 72px); letter-spacing: 0.08em; }
+  .hero-desc { font-size:13px; max-width:100%; }
   .hero-focus {
     gap:8px 10px;
     padding:8px 0 10px;
-    flex-wrap:nowrap;
+    flex-wrap:wrap;
+    max-width:100%;
   }
   .focus-word {
     font-size:clamp(12px,3.9vw,16px);
     letter-spacing:0.6px;
     line-height:1.65;
+    white-space:normal;
   }
   .focus-corner {
     width:8px;
@@ -1612,6 +1645,26 @@ footer {
   .focus-corner.bottom-right { right:-8px; }
   .focus-corner.bottom-left,
   .focus-corner.bottom-right { bottom:-7px; }
+  /* Section & general */
+  section { padding:60px 5%; }
+  .section-title { margin-bottom:40px; }
+  .about-card { padding:32px 24px; min-height:auto; }
+  .proj-card { padding:32px 24px; }
+  .cap-item { padding:28px 24px; }
+  /* Tool overlay */
+  .tool-overlay-inner { padding:36px 5%; }
+  .tool-overlay-title { font-size:18px; }
+  .tool-overlay-header { flex-direction:column; align-items:flex-start; gap:12px; }
+  /* Calculator */
+  .calc-row { grid-template-columns:1fr; gap:0; }
+  .calc-wrap { max-width:100%; }
+  .calc-tabs { flex-direction:column; }
+  /* Footer */
+  .footer-copy { flex-direction:column; align-items:flex-start; gap:6px; }
+  .footer-copy-right { flex-wrap:wrap; }
+  .footer-name { font-size:24px; }
+  /* Closing */
+  .closing-section { padding:40px 5%; }
 }
 /* ── LIMS DASHBOARD OVERLAY ── */
 #lims-overlay {
@@ -2856,6 +2909,8 @@ footer {
   margin-top: 48px;
   margin-bottom: 0;
   line-height: 2;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 </style>
@@ -3385,7 +3440,7 @@ footer {
         <div class="tool-overlay-title">单品经营三角模型</div>
         <div class="tool-overlay-sub">Data Visualization · 经营分析仪表盘</div>
       </div>
-      <button class="tool-overlay-switch" id="switch-to-calc" style="font-size:11px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px;letter-spacing:2px;background:none;border:none;transition:color 0.3s;text-transform:uppercase;white-space:nowrap;">切换到复合增长计算器 →</button>
+      <button class="tool-overlay-switch" id="switch-to-calc" style="font-size:11px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px;letter-spacing:2px;background:none;border:none;transition:color 0.3s;text-transform:uppercase;white-space:normal;text-align:left;">切换到复合增长计算器 →</button>
     </div>
 
     <div class="viz-dashboard">
@@ -3575,7 +3630,7 @@ footer {
         <div class="tool-overlay-title">复合增长计算器</div>
         <div class="tool-overlay-sub">AI Workflow · 经营分析工具</div>
       </div>
-      <button class="tool-overlay-switch" id="switch-to-viz" style="font-size:11px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px;letter-spacing:2px;background:none;border:none;transition:color 0.3s;text-transform:uppercase;white-space:nowrap;">← 切换到经营三角模型</button>
+      <button class="tool-overlay-switch" id="switch-to-viz" style="font-size:11px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px;letter-spacing:2px;background:none;border:none;transition:color 0.3s;text-transform:uppercase;white-space:normal;text-align:left;">← 切换到经营三角模型</button>
     </div>
 
     <div class="calc-wrap">
