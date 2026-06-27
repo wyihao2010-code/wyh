@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>王一昊 | 经营分析 × 战略洞察</title>
+<title>王一昊｜洞察世界，定义方向，创造价值，沉淀认知</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;600;700&family=Noto+Sans+SC:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 
@@ -109,53 +109,33 @@ nav {
 }
 
 .slogan-row {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-}
-
-.slogan-left  { text-align: right; }
-.slogan-right { text-align: left; }
-
-/* · 轴心 */
-.slogan-dot {
-  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
-  font-size: clamp(28px, 5.5vw, 80px);
-  font-weight: 300;
-  color: var(--gold);
-  padding: 0 0.35em;
-  line-height: 1.3;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: nowrap;
   white-space: nowrap;
-}
-.slogan-dot-en {
-  font-size: clamp(11px, 1.6vw, 20px);
-  font-weight: 300;
-  color: var(--muted);
-  padding: 0 0.55em;
-  letter-spacing: 0;
 }
 
 /* 中文行字体 */
-.slogan-row:not(.slogan-row-en) .slogan-left,
-.slogan-row:not(.slogan-row-en) .slogan-right {
+.slogan-row:not(.slogan-row-en) {
   font-family: 'Noto Serif SC', serif;
-  font-size: clamp(28px, 5.5vw, 80px);
+  font-size: clamp(26px, 4.2vw, 48px);
   font-weight: 200;
-  line-height: 1.3;
-  letter-spacing: 0.1em;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
   color: var(--text2);
 }
 
-/* 英文行字体 */
-.slogan-row-en .slogan-left,
-.slogan-row-en .slogan-right {
+/* 英文行字体 — 中文的 1/2.3 ≈ 0.435 */
+.slogan-row-en {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(12px, 1.7vw, 22px);
+  font-size: clamp(14px, 3vw, 40px);
   font-weight: 300;
   font-style: italic;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.06em;
+  word-spacing: 0.3em;
   color: var(--muted);
-  text-transform: none;
+  margin-top: 12px;
 }
 
 /* 逐字动画 */
@@ -179,11 +159,7 @@ nav {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* · 轴心，初始隐藏，由 JS 注入完整 animation */
-.slogan-dot, .slogan-dot-en {
-  opacity: 0;
-  transform: translateY(20px);
-}
+
 
 /* slogan 向下滚动指示 */
 .slogan-scroll {
@@ -215,22 +191,13 @@ nav {
     min-height: 100vh;
     min-height: 100dvh;
   }
-  .slogan-dot {
-    font-size: clamp(22px, 6vw, 40px);
-    padding: 0 0.2em;
-  }
-  .slogan-dot-en {
-    font-size: clamp(10px, 2.8vw, 14px);
-  }
-  .slogan-row:not(.slogan-row-en) .slogan-left,
-  .slogan-row:not(.slogan-row-en) .slogan-right {
-    font-size: clamp(22px, 6vw, 40px);
+  .slogan-row:not(.slogan-row-en) {
+    font-size: clamp(22px, 8vw, 36px);
     letter-spacing: 0.04em;
   }
-  .slogan-row-en .slogan-left,
-  .slogan-row-en .slogan-right {
-    font-size: clamp(10px, 2.8vw, 14px);
-    letter-spacing: 0.1em;
+  .slogan-row-en {
+    font-size: clamp(12px, 5vw, 28px);
+    letter-spacing: 0.04em;
   }
   .slogan-layout { gap: 14px; }
   .slogan-scroll { bottom: 32px; }
@@ -364,6 +331,17 @@ nav {
   font-size:14px; line-height:2.2;
   font-weight:300;
   letter-spacing:0.3px;
+  text-align:left;
+  align-self:flex-start;
+}
+.hero-desc-en {
+  font-family:'Cormorant Garamond', serif;
+  font-size:13px; font-weight:300; font-style:italic;
+  color:var(--dim);
+  letter-spacing:0.04em;
+  text-align:center;
+  margin-top:4px;
+  opacity:0.7;
 }
 .hero-welcome {
   margin-top:24px;
@@ -512,7 +490,7 @@ section { position:relative; z-index:1; padding:120px 10%; }
 /* 左列时间轴上的小金点 */
 .exp-item::after {
   content:''; position:absolute;
-  left:calc(180px + 60px - 3px); top:56px;
+  left:calc(180px + 60px - 3px); top:calc(52px + 11px);
   width:5px; height:5px; border-radius:50%;
   background:var(--gold);
   opacity: 0.6;
@@ -554,6 +532,7 @@ section { position:relative; z-index:1; padding:120px 10%; }
   gap:1px; background:var(--border-soft);
   border:1px solid var(--border-soft);
   border-radius:2px; overflow:hidden;
+  grid-auto-rows: 1fr;
 }
 .cap-item {
   background: var(--bg2);
@@ -561,6 +540,8 @@ section { position:relative; z-index:1; padding:120px 10%; }
   transition: background 0.4s;
   position:relative;
   overflow:hidden;
+  display:flex; flex-direction:column;
+  align-items:flex-start;
 }
 /* 悬停顶边金线 */
 .cap-item::before {
@@ -602,6 +583,7 @@ section { position:relative; z-index:1; padding:120px 10%; }
   padding:48px 44px;
   transition: background 0.4s;
   position:relative; overflow:hidden;
+  cursor:pointer;
 }
 /* 左侧金色垂线，hover 时显现 */
 .proj-card::before {
@@ -773,7 +755,8 @@ footer {
 .cap-item.clickable h3 { color:var(--gold2); }
 .cap-item.clickable .cap-link-hint {
   font-size:10px; color:var(--gold); letter-spacing:2px;
-  margin-top:10px; display:flex; align-items:center; gap:6px;
+  margin-top:auto; padding-top:14px; border-top:1px solid var(--border-soft);
+  width:100%;
   text-transform:uppercase; opacity:0.75;
 }
 .cap-item.clickable .cap-link-hint::after { content:'→'; }
@@ -803,6 +786,7 @@ footer {
 }
 .tool-overlay-back:hover { color:var(--gold2); }
 .tool-overlay-back::before { content:'←'; font-size:14px; color:var(--gold); }
+.tool-overlay-switch:hover { color:var(--gold2) !important; }
 .tool-overlay-title {
   font-family:'Noto Serif SC', serif;
   font-size:26px; font-weight:200; color:var(--text2);
@@ -1629,6 +1613,1251 @@ footer {
   .focus-corner.bottom-left,
   .focus-corner.bottom-right { bottom:-7px; }
 }
+/* ── LIMS DASHBOARD OVERLAY ── */
+#lims-overlay {
+  color-scheme: dark;
+  --lbg: #09090c;
+  --lpanel: #0e0e12;
+  --lpanel2: #141418;
+  --lline: rgba(255,255,255,0.06);
+  --ltext: #dfd9cc;
+  --lmuted: #7d7870;
+  --lgold: #c39e4f;
+  --lgold2: #e8c97e;
+  --lgold-dim: rgba(195,158,79,0.15);
+  --lgreen: #7cb87a;
+  --lamber: #d4a847;
+  --lred: #c05555;
+  --lblue: #5a8fcc;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+#lims-overlay * { box-sizing: border-box; }
+#lims-overlay .lims-dashboard {
+  max-width: 1200px; margin: 0 auto;
+}
+.lims-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--lline);
+  margin-bottom: 1px;
+}
+.lims-kpi {
+  background: var(--lpanel);
+  padding: 28px 24px;
+  position: relative;
+}
+.lims-kpi::before {
+  content: '';
+  position: absolute; left: 0; top: 20%; bottom: 20%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--lgold), transparent);
+  opacity: 0.4;
+}
+.lims-kpi-label {
+  font-size: 10px; color: var(--lmuted);
+  letter-spacing: 2.5px; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.lims-kpi-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 300;
+  color: var(--ltext);
+  letter-spacing: 0.02em;
+}
+.lims-kpi-unit {
+  font-size: 12px; color: var(--lmuted);
+  margin-left: 4px;
+}
+.lims-kpi-trend {
+  font-size: 11px; margin-top: 8px;
+  display: flex; align-items: center; gap: 4px;
+}
+.lims-kpi-trend.up { color: var(--lgreen); }
+.lims-kpi-trend.down { color: var(--lred); }
+.lims-kpi-trend.flat { color: var(--lmuted); }
+.lims-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--lline);
+  margin-top: 1px;
+}
+.lims-panel {
+  background: var(--lpanel);
+  padding: 32px 28px;
+}
+.lims-panel-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px; font-weight: 300;
+  color: var(--lgold);
+  letter-spacing: 0.08em;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--lline);
+}
+.lims-bar-group {
+  margin-bottom: 18px;
+}
+.lims-bar-label {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--lmuted);
+  margin-bottom: 8px;
+}
+.lims-bar-label span:last-child {
+  color: var(--ltext);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+}
+.lims-bar-track {
+  height: 4px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 0;
+  overflow: hidden;
+}
+.lims-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--lgold), var(--lgold2));
+  transition: width 1s cubic-bezier(0.16,1,0.3,1);
+}
+.lims-bar-fill.green { background: linear-gradient(to right, #5a9a58, var(--lgreen)); }
+.lims-bar-fill.blue { background: linear-gradient(to right, #4a7ab8, var(--lblue)); }
+.lims-bar-fill.amber { background: linear-gradient(to right, #b8923a, var(--lamber)); }
+.lims-stat-row {
+  display: flex; justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--lline);
+  font-size: 13px;
+}
+.lims-stat-row:last-child { border-bottom: none; }
+.lims-stat-label { color: var(--lmuted); }
+.lims-stat-value { color: var(--ltext); font-family: 'Cormorant Garamond', serif; font-size: 15px; }
+.lims-status-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.lims-status-dot.green { background: var(--lgreen); }
+.lims-status-dot.amber { background: var(--lamber); }
+.lims-status-dot.red { background: var(--lred); }
+.lims-chart-area {
+  height: 180px;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  padding-top: 20px;
+}
+.lims-chart-bar {
+  flex: 1;
+  background: linear-gradient(to top, var(--lgold-dim), rgba(195,158,79,0.35));
+  min-height: 4px;
+  transition: height 1s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+}
+.lims-chart-bar:hover {
+  background: linear-gradient(to top, rgba(195,158,79,0.3), var(--lgold));
+}
+.lims-chart-bar::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: -20px; left: 50%; transform: translateX(-50%);
+  font-size: 9px; color: var(--dim);
+  white-space: nowrap;
+}
+.lims-month-labels {
+  display: flex; gap: 2px; margin-top: 24px;
+}
+.lims-month-labels span {
+  flex: 1; text-align: center;
+  font-size: 9px; color: var(--dim);
+  letter-spacing: 1px;
+}
+.lims-full-row {
+  grid-column: 1 / -1;
+}
+.lims-equip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--lline);
+}
+.lims-equip-item {
+  background: var(--lpanel2);
+  padding: 20px 16px;
+  text-align: center;
+}
+.lims-equip-name {
+  font-size: 11px; color: var(--lmuted);
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+}
+.lims-equip-rate {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 300;
+  color: var(--ltext);
+}
+.lims-equip-status {
+  font-size: 10px; margin-top: 6px;
+}
+.lims-note {
+  font-size: 11px; color: var(--dim);
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--lline);
+  line-height: 2;
+  letter-spacing: 0.5px;
+}
+@media (max-width: 900px) {
+  .lims-kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .lims-grid { grid-template-columns: 1fr; }
+  .lims-equip-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .lims-kpi-row { grid-template-columns: 1fr; }
+  .lims-equip-grid { grid-template-columns: 1fr; }
+  .lims-kpi-value { font-size: 26px; }
+}
+
+/* ── OBSIDIAN KNOWLEDGE SYSTEM OVERLAY ── */
+#obsidian-overlay {
+  color-scheme: dark;
+  --obg: #09090c;
+  --opanel: #0e0e12;
+  --opanel2: #141418;
+  --oline: rgba(255,255,255,0.06);
+  --otext: #dfd9cc;
+  --omuted: #7d7870;
+  --ogold: #c39e4f;
+  --ogold2: #e8c97e;
+  --ogold-dim: rgba(195,158,79,0.15);
+  --ogreen: #7cb87a;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+#obsidian-overlay * { box-sizing: border-box; }
+#obsidian-overlay .obs-dashboard { max-width: 1200px; margin: 0 auto; }
+.obs-hero {
+  text-align: center;
+  padding: 40px 0 60px;
+}
+.obs-hero h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(28px, 4.5vw, 42px);
+  font-weight: 200;
+  color: var(--text2);
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+}
+.obs-hero p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 2;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.obs-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--oline);
+  margin-bottom: 1px;
+}
+.obs-kpi {
+  background: var(--opanel);
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+}
+.obs-kpi::before {
+  content: '';
+  position: absolute; left: 0; top: 20%; bottom: 20%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--ogold), transparent);
+  opacity: 0.4;
+}
+.obs-kpi-label {
+  font-size: 10px; color: var(--omuted);
+  letter-spacing: 2.5px; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.obs-kpi-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 300;
+  color: var(--otext);
+}
+.obs-kpi-desc {
+  font-size: 11px; color: var(--omuted);
+  margin-top: 8px;
+  line-height: 1.6;
+}
+.obs-section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px; font-weight: 300;
+  color: var(--ogold);
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--oline);
+}
+.obs-layers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--oline);
+  margin-bottom: 1px;
+}
+.obs-layer {
+  background: var(--opanel);
+  padding: 32px 24px;
+}
+.obs-layer-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; color: var(--ogold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+.obs-layer h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px; font-weight: 300;
+  color: var(--text2);
+  margin-bottom: 14px;
+  letter-spacing: 0.06em;
+}
+.obs-layer ul {
+  list-style: none; padding: 0;
+}
+.obs-layer li {
+  font-size: 12px; color: var(--muted);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--oline);
+  line-height: 1.8;
+}
+.obs-layer li:last-child { border-bottom: none; }
+.obs-scenarios {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--oline);
+  margin-bottom: 1px;
+}
+.obs-scenario {
+  background: var(--opanel);
+  padding: 32px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.obs-scenario::before {
+  content: '';
+  position: absolute; left: 0; top: 10%; bottom: 10%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--ogold), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.obs-scenario:hover::before { opacity: 0.6; }
+.obs-scenario:hover { background: var(--opanel2); }
+.obs-scenario-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; color: var(--ogold);
+  letter-spacing: 2px;
+  font-style: italic;
+  margin-bottom: 14px;
+  opacity: 0.6;
+}
+.obs-scenario h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px; font-weight: 300;
+  color: var(--text2);
+  margin-bottom: 12px;
+  letter-spacing: 0.06em;
+}
+.obs-scenario p {
+  font-size: 12px; color: var(--muted);
+  line-height: 2;
+}
+.obs-summary {
+  background: var(--opanel);
+  padding: 48px 40px;
+  margin-top: 1px;
+  text-align: center;
+}
+.obs-summary-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 200;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+  margin-bottom: 36px;
+  line-height: 1.8;
+}
+.obs-summary-quote em {
+  color: var(--ogold);
+  font-style: normal;
+}
+.obs-outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--oline);
+}
+.obs-outcome {
+  background: var(--opanel2);
+  padding: 28px 20px;
+}
+.obs-outcome p {
+  font-size: 12px; color: var(--muted);
+  line-height: 2;
+}
+.obs-outcome strong {
+  display: block;
+  font-size: 13px; color: var(--otext);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.obs-note {
+  font-size: 11px; color: var(--dim);
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--oline);
+  line-height: 2;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .obs-kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .obs-layers { grid-template-columns: 1fr; }
+  .obs-scenarios { grid-template-columns: 1fr; }
+  .obs-outcomes { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .obs-kpi-row { grid-template-columns: 1fr; }
+}
+
+/* ── E-COMMERCE ANALYSIS OVERLAY ── */
+#ecom-overlay {
+  color-scheme: dark;
+  --ebg: #09090c;
+  --epanel: #0e0e12;
+  --epanel2: #141418;
+  --eline: rgba(255,255,255,0.06);
+  --etext: #dfd9cc;
+  --emuted: #7d7870;
+  --egold: #c39e4f;
+  --egold2: #e8c97e;
+  --egold-dim: rgba(195,158,79,0.15);
+  font-family: 'Noto Sans SC', sans-serif;
+}
+#ecom-overlay * { box-sizing: border-box; }
+#ecom-overlay .ecom-dashboard { max-width: 1200px; margin: 0 auto; }
+.ecom-hero {
+  text-align: center;
+  padding: 40px 0 50px;
+}
+.ecom-hero h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(28px, 4.5vw, 42px);
+  font-weight: 200;
+  color: var(--text2);
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+}
+.ecom-hero p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 2;
+  max-width: 640px;
+  margin: 0 auto 32px;
+}
+.ecom-flow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.ecom-flow-step {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  color: var(--etext);
+  letter-spacing: 0.06em;
+  padding: 10px 20px;
+  position: relative;
+}
+.ecom-flow-arrow {
+  font-size: 14px;
+  color: var(--egold);
+  opacity: 0.6;
+}
+.ecom-section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px; font-weight: 300;
+  color: var(--egold);
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--eline);
+}
+.ecom-method-chain {
+  display: flex;
+  gap: 1px;
+  background: var(--eline);
+  margin-bottom: 1px;
+  overflow-x: auto;
+}
+.ecom-method {
+  flex: 1;
+  min-width: 200px;
+  background: var(--epanel);
+  padding: 32px 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.ecom-method::before {
+  content: '';
+  position: absolute; left: 0; top: 15%; bottom: 15%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--egold), transparent);
+  opacity: 0.35;
+}
+.ecom-method-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; color: var(--egold);
+  letter-spacing: 2px; font-style: italic;
+  opacity: 0.5; margin-bottom: 14px;
+}
+.ecom-method h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px; font-weight: 300;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.ecom-method-sub {
+  font-size: 11px; color: var(--egold);
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+.ecom-method-q {
+  font-size: 12px; color: var(--etext);
+  padding: 10px 14px;
+  background: var(--egold-dim);
+  border-left: 1px solid var(--egold);
+  margin-bottom: 16px;
+  line-height: 1.8;
+  font-weight: 400;
+}
+.ecom-method ul {
+  list-style: none; padding: 0; margin: 0;
+}
+.ecom-method li {
+  font-size: 12px; color: var(--emuted);
+  padding: 5px 0;
+  line-height: 1.8;
+}
+.ecom-method li::before {
+  content: '·';
+  color: var(--egold);
+  margin-right: 8px;
+}
+/* 四层框架图 */
+.ecom-framework {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--eline);
+  margin: 1px 0;
+}
+.ecom-fw-layer {
+  background: var(--epanel);
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+}
+.ecom-fw-layer::before {
+  content: '';
+  position: absolute; left: 0; top: 15%; bottom: 15%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--egold), transparent);
+  opacity: 0.4;
+}
+.ecom-fw-label {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px; color: var(--egold);
+  letter-spacing: 0.08em;
+  min-width: 80px;
+  white-space: nowrap;
+}
+.ecom-fw-content {
+  font-size: 13px; color: var(--emuted);
+  letter-spacing: 2px;
+}
+.ecom-fw-arrow {
+  text-align: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--egold);
+  opacity: 0.5;
+  background: var(--ebg);
+}
+/* 项目成果 */
+.ecom-outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--eline);
+  margin-bottom: 1px;
+}
+.ecom-outcome {
+  background: var(--epanel);
+  padding: 32px 24px;
+}
+.ecom-outcome h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px; font-weight: 300;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+.ecom-outcome p {
+  font-size: 12px; color: var(--emuted);
+  line-height: 2;
+}
+.ecom-applicable {
+  background: var(--epanel2);
+  padding: 28px 32px;
+  margin-top: 1px;
+}
+.ecom-applicable h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px; font-weight: 300;
+  color: var(--egold);
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+.ecom-applicable ul {
+  list-style: none; padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px 24px;
+}
+.ecom-applicable li {
+  font-size: 12px; color: var(--emuted);
+  padding: 4px 0;
+  line-height: 1.8;
+}
+.ecom-applicable li::before {
+  content: '·';
+  color: var(--egold);
+  margin-right: 8px;
+}
+.ecom-quote {
+  background: var(--epanel);
+  padding: 48px 40px;
+  margin-top: 1px;
+  text-align: center;
+}
+.ecom-quote p {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 200;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+  line-height: 2;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.ecom-note {
+  font-size: 11px; color: var(--dim);
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--eline);
+  line-height: 2;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .ecom-method-chain { flex-direction: column; }
+  .ecom-method { min-width: auto; }
+  .ecom-outcomes { grid-template-columns: 1fr; }
+  .ecom-fw-layer { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+@media (max-width: 600px) {
+  .ecom-flow { flex-direction: column; gap: 4px; }
+  .ecom-flow-arrow { transform: rotate(90deg); }
+}
+
+/* ── PRODUCT ANALYSIS OVERLAY ── */
+#product-overlay {
+  color-scheme: dark;
+  --pbg: #09090c;
+  --ppanel: #0e0e12;
+  --ppanel2: #141418;
+  --pline: rgba(255,255,255,0.06);
+  --ptext: #dfd9cc;
+  --pmuted: #7d7870;
+  --pgold: #c39e4f;
+  --pgold2: #e8c97e;
+  --pgold-dim: rgba(195,158,79,0.15);
+  font-family: 'Noto Sans SC', sans-serif;
+}
+#product-overlay * { box-sizing: border-box; }
+#product-overlay .prod-dashboard { max-width: 1200px; margin: 0 auto; }
+.prod-hero {
+  text-align: center;
+  padding: 40px 0 50px;
+}
+.prod-hero h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(28px, 4.5vw, 42px);
+  font-weight: 200;
+  color: var(--text2);
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+}
+.prod-hero p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 2;
+  max-width: 660px;
+  margin: 0 auto 28px;
+}
+.prod-hero-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  color: var(--pgold);
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+.prod-section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px; font-weight: 300;
+  color: var(--pgold);
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--pline);
+}
+/* 分析链路 */
+.prod-chain {
+  display: flex;
+  gap: 1px;
+  background: var(--pline);
+  margin-bottom: 1px;
+  overflow-x: auto;
+}
+.prod-chain-step {
+  flex: 1;
+  min-width: 180px;
+  background: var(--ppanel);
+  padding: 28px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.prod-chain-step::before {
+  content: '';
+  position: absolute; left: 0; top: 15%; bottom: 15%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--pgold), transparent);
+  opacity: 0.35;
+}
+.prod-chain-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; color: var(--pgold);
+  letter-spacing: 2px; font-style: italic;
+  opacity: 0.5; margin-bottom: 12px;
+}
+.prod-chain-step h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px; font-weight: 300;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+.prod-chain-step p {
+  font-size: 12px; color: var(--pmuted);
+  line-height: 2;
+}
+/* 四大模块 2×2 */
+.prod-modules {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--pline);
+  margin-bottom: 1px;
+}
+.prod-module {
+  background: var(--ppanel);
+  padding: 32px 28px;
+  position: relative;
+}
+.prod-module::before {
+  content: '';
+  position: absolute; left: 0; top: 15%; bottom: 15%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--pgold), transparent);
+  opacity: 0.35;
+}
+.prod-module-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px; color: var(--pgold);
+  letter-spacing: 2px; font-style: italic;
+  opacity: 0.5; margin-bottom: 14px;
+}
+.prod-module h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px; font-weight: 300;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.prod-module-q {
+  font-size: 12px; color: var(--ptext);
+  padding: 10px 14px;
+  background: var(--pgold-dim);
+  border-left: 1px solid var(--pgold);
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+.prod-module ul {
+  list-style: none; padding: 0; margin: 0;
+}
+.prod-module li {
+  font-size: 12px; color: var(--pmuted);
+  padding: 4px 0;
+  line-height: 1.8;
+}
+.prod-module li::before {
+  content: '·';
+  color: var(--pgold);
+  margin-right: 8px;
+}
+/* 增长归因公式 */
+.prod-formula {
+  background: var(--ppanel2);
+  padding: 28px 32px;
+  text-align: center;
+}
+.prod-formula-label {
+  font-size: 11px; color: var(--pgold);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.prod-formula-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; color: var(--text2);
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+.prod-formula-parts {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.prod-formula-part {
+  font-size: 12px; color: var(--pmuted);
+  padding: 6px 14px;
+  border: 1px solid var(--pline);
+}
+/* 驾驶舱 */
+.prod-cockpit {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--pline);
+  margin-bottom: 1px;
+}
+.prod-gauge {
+  background: var(--ppanel);
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+}
+.prod-gauge::before {
+  content: '';
+  position: absolute; left: 0; top: 20%; bottom: 20%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--pgold), transparent);
+  opacity: 0.4;
+}
+.prod-gauge h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px; font-weight: 300;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.prod-gauge p {
+  font-size: 11px; color: var(--pmuted);
+  line-height: 1.8;
+}
+/* 项目价值 */
+.prod-outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--pline);
+  margin-bottom: 1px;
+}
+.prod-outcome {
+  background: var(--ppanel);
+  padding: 32px 24px;
+}
+.prod-outcome h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px; font-weight: 300;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+.prod-outcome p {
+  font-size: 12px; color: var(--pmuted);
+  line-height: 2;
+}
+.prod-quote {
+  background: var(--ppanel);
+  padding: 48px 40px;
+  margin-top: 1px;
+  text-align: center;
+}
+.prod-quote p {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 200;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+  line-height: 2;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.prod-note {
+  font-size: 11px; color: var(--dim);
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--pline);
+  line-height: 2;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .prod-chain { flex-direction: column; }
+  .prod-chain-step { min-width: auto; }
+  .prod-modules { grid-template-columns: 1fr; }
+  .prod-cockpit { grid-template-columns: repeat(2, 1fr); }
+  .prod-outcomes { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .prod-cockpit { grid-template-columns: 1fr; }
+}
+
+
+/* ── STRATEGY OVERLAY ── */
+#strategy-overlay {
+  color-scheme: dark;
+  --sbg: #09090c; --spanel: #0e0e12; --spanel2: #141418;
+  --sline: rgba(255,255,255,0.06); --stext: #dfd9cc; --smuted: #7d7870;
+  --sgold: #c39e4f; --sgold2: #e8c97e; --sgold-dim: rgba(195,158,79,0.15);
+  font-family: 'Noto Sans SC', sans-serif;
+}
+#strategy-overlay * { box-sizing: border-box; }
+#strategy-overlay .strat-dashboard { max-width: 1200px; margin: 0 auto; }
+.strat-hero { text-align: center; padding: 40px 0 50px; }
+.strat-hero h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(28px,4.5vw,42px); font-weight: 200; color: var(--text2); letter-spacing: 0.08em; margin-bottom: 20px; }
+.strat-hero p { font-size: 14px; color: var(--smuted); line-height: 2; max-width: 660px; margin: 0 auto 28px; }
+.strat-hero-flow { display: flex; justify-content: center; align-items: center; gap: 0; flex-wrap: wrap; }
+.strat-hero-flow span { font-family: 'Noto Serif SC', serif; font-size: 14px; color: var(--stext); letter-spacing: 0.06em; padding: 10px 20px; }
+.strat-hero-flow .arrow { font-size: 14px; color: var(--sgold); opacity: 0.6; padding: 0; }
+.strat-section-title { font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 300; color: var(--sgold); letter-spacing: 0.08em; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--sline); }
+.strat-chain { display: flex; gap: 1px; background: var(--sline); margin-bottom: 1px; overflow-x: auto; }
+.strat-chain-step { flex: 1; min-width: 180px; background: var(--spanel); padding: 28px 20px; position: relative; display: flex; flex-direction: column; }
+.strat-chain-step::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--sgold), transparent); opacity: 0.35; }
+.strat-chain-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--sgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.strat-chain-step h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.strat-chain-step p { font-size: 12px; color: var(--smuted); line-height: 2; }
+.strat-modules { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--sline); margin-bottom: 1px; }
+.strat-module { background: var(--spanel); padding: 32px 28px; position: relative; }
+.strat-module::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--sgold), transparent); opacity: 0.35; }
+.strat-module-tag { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--sgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 14px; }
+.strat-module h4 { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 8px; }
+.strat-module-q { font-size: 12px; color: var(--stext); padding: 10px 14px; background: var(--sgold-dim); border-left: 1px solid var(--sgold); margin-bottom: 16px; line-height: 1.8; }
+.strat-module ul { list-style: none; padding: 0; margin: 0; }
+.strat-module li { font-size: 12px; color: var(--smuted); padding: 4px 0; line-height: 1.8; }
+.strat-module li::before { content: '·'; color: var(--sgold); margin-right: 8px; }
+.strat-module-kw { font-size: 10px; color: var(--sgold); letter-spacing: 2px; margin-top: 14px; opacity: 0.5; text-transform: uppercase; }
+/* 五层矩阵 */
+.strat-matrix { display: flex; flex-direction: column; gap: 1px; background: var(--sline); margin: 1px 0; }
+.strat-matrix-layer { background: var(--spanel); padding: 24px 32px; display: flex; align-items: center; gap: 24px; position: relative; }
+.strat-matrix-layer::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--sgold), transparent); opacity: 0.4; }
+.strat-matrix-label { font-family: 'Noto Serif SC', serif; font-size: 13px; color: var(--sgold); letter-spacing: 0.08em; min-width: 100px; white-space: nowrap; }
+.strat-matrix-content { font-size: 13px; color: var(--smuted); letter-spacing: 2px; }
+.strat-matrix-arrow { text-align: center; padding: 6px 0; font-size: 14px; color: var(--sgold); opacity: 0.5; background: var(--sbg); }
+.strat-outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--sline); margin-bottom: 1px; }
+.strat-outcome { background: var(--spanel); padding: 32px 24px; }
+.strat-outcome h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.strat-outcome p { font-size: 12px; color: var(--smuted); line-height: 2; }
+.strat-quote { background: var(--spanel); padding: 48px 40px; margin-top: 1px; text-align: center; }
+.strat-quote p { font-family: 'Noto Serif SC', serif; font-size: clamp(16px,2.5vw,22px); font-weight: 200; color: var(--text2); letter-spacing: 0.06em; line-height: 2; max-width: 960px; margin: 0 auto; }
+.strat-note { font-size: 11px; color: var(--dim); margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--sline); line-height: 2; letter-spacing: 0.5px; text-align: center; }
+@media (max-width: 900px) { .strat-chain { flex-direction: column; } .strat-chain-step { min-width: auto; } .strat-modules { grid-template-columns: 1fr; } .strat-outcomes { grid-template-columns: 1fr; } .strat-matrix-layer { flex-direction: column; align-items: flex-start; gap: 8px; } }
+@media (max-width: 600px) { .strat-hero-flow { flex-direction: column; gap: 4px; } .strat-hero-flow .arrow { transform: rotate(90deg); } }
+
+/* ── MANAGEMENT OVERLAY ── */
+#mgmt-overlay {
+  color-scheme: dark;
+  --mbg: #09090c; --mpanel: #0e0e12; --mpanel2: #141418;
+  --mline: rgba(255,255,255,0.06); --mtext: #dfd9cc; --mmuted: #7d7870;
+  --mgold: #c39e4f; --mgold2: #e8c97e; --mgold-dim: rgba(195,158,79,0.15);
+  font-family: 'Noto Sans SC', sans-serif;
+}
+#mgmt-overlay * { box-sizing: border-box; }
+#mgmt-overlay .mgmt-dashboard { max-width: 1200px; margin: 0 auto; }
+.mgmt-hero { text-align: center; padding: 40px 0 50px; }
+.mgmt-hero h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(28px,4.5vw,42px); font-weight: 200; color: var(--text2); letter-spacing: 0.08em; margin-bottom: 20px; }
+.mgmt-hero p { font-size: 14px; color: var(--mmuted); line-height: 2; max-width: 660px; margin: 0 auto 28px; }
+.mgmt-hero-flow { display: flex; justify-content: center; align-items: center; gap: 0; flex-wrap: wrap; }
+.mgmt-hero-flow span { font-family: 'Noto Serif SC', serif; font-size: 14px; color: var(--mtext); letter-spacing: 0.06em; padding: 10px 20px; }
+.mgmt-hero-flow .arrow { font-size: 14px; color: var(--mgold); opacity: 0.6; padding: 0; }
+.mgmt-section-title { font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 300; color: var(--mgold); letter-spacing: 0.08em; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--mline); }
+.mgmt-chain { display: flex; gap: 1px; background: var(--mline); margin-bottom: 1px; overflow-x: auto; }
+.mgmt-chain-step { flex: 1; min-width: 180px; background: var(--mpanel); padding: 28px 20px; position: relative; display: flex; flex-direction: column; }
+.mgmt-chain-step::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--mgold), transparent); opacity: 0.35; }
+.mgmt-chain-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--mgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.mgmt-chain-step h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.mgmt-chain-step p { font-size: 12px; color: var(--mmuted); line-height: 2; }
+.mgmt-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--mline); margin-bottom: 1px; }
+.mgmt-card { background: var(--mpanel); padding: 32px 28px; position: relative; }
+.mgmt-card::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--mgold), transparent); opacity: 0.35; }
+.mgmt-card-tag { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--mgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 14px; }
+.mgmt-card h4 { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 8px; }
+.mgmt-card-q { font-size: 12px; color: var(--mtext); padding: 10px 14px; background: var(--mgold-dim); border-left: 1px solid var(--mgold); margin-bottom: 16px; line-height: 1.8; }
+.mgmt-card ul { list-style: none; padding: 0; margin: 0; }
+.mgmt-card li { font-size: 12px; color: var(--mmuted); padding: 4px 0; line-height: 1.8; }
+.mgmt-card li::before { content: '·'; color: var(--mgold); margin-right: 8px; }
+.mgmt-card-kw { font-size: 10px; color: var(--mgold); letter-spacing: 2px; margin-top: 14px; opacity: 0.5; text-transform: uppercase; }
+/* 闭环引擎 */
+.mgmt-outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mline); margin-bottom: 1px; }
+.mgmt-outcome { background: var(--mpanel); padding: 32px 24px; }
+.mgmt-outcome h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.mgmt-outcome p { font-size: 12px; color: var(--mmuted); line-height: 2; }
+.mgmt-quote { background: var(--mpanel); padding: 48px 40px; margin-top: 1px; text-align: center; }
+.mgmt-quote p { font-family: 'Noto Serif SC', serif; font-size: clamp(16px,2.5vw,22px); font-weight: 200; color: var(--text2); letter-spacing: 0.06em; line-height: 2; max-width: 960px; margin: 0 auto; }
+.mgmt-note { font-size: 11px; color: var(--dim); margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--mline); line-height: 2; letter-spacing: 0.5px; text-align: center; }
+@media (max-width: 900px) { .mgmt-chain { flex-direction: column; } .mgmt-chain-step { min-width: auto; } .mgmt-cards { grid-template-columns: 1fr; } .mgmt-outcomes { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .mgmt-hero-flow { flex-direction: column; gap: 4px; } .mgmt-hero-flow .arrow { transform: rotate(90deg); } }
+
+
+/* ── STRATPLAN OVERLAY ── */
+#stratplan-overlay {
+  color-scheme: dark;
+  --spbg: #09090c; --sppanel: #0e0e12; --sppanel2: #141418;
+  --spline: rgba(255,255,255,0.06); --sptext: #dfd9cc; --spmuted: #7d7870;
+  --spgold: #c39e4f; --spgold2: #e8c97e; --spgold-dim: rgba(195,158,79,0.15);
+  font-family: 'Noto Sans SC', sans-serif;
+}
+#stratplan-overlay * { box-sizing: border-box; }
+#stratplan-overlay .sp-dashboard { max-width: 1200px; margin: 0 auto; }
+.sp-hero { text-align: center; padding: 40px 0 50px; }
+.sp-hero h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(28px,4.5vw,42px); font-weight: 200; color: var(--text2); letter-spacing: 0.08em; margin-bottom: 20px; }
+.sp-hero p { font-size: 14px; color: var(--spmuted); line-height: 2; max-width: 660px; margin: 0 auto 28px; }
+.sp-hero-flow { display: flex; justify-content: center; align-items: center; gap: 0; flex-wrap: wrap; }
+.sp-hero-flow span { font-family: 'Noto Serif SC', serif; font-size: 14px; color: var(--sptext); letter-spacing: 0.06em; padding: 10px 20px; }
+.sp-hero-flow .arrow { font-size: 14px; color: var(--spgold); opacity: 0.6; padding: 0; }
+.sp-section-title { font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 300; color: var(--spgold); letter-spacing: 0.08em; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--spline); }
+.sp-chain { display: flex; gap: 1px; background: var(--spline); margin-bottom: 1px; overflow-x: auto; }
+.sp-chain-step { flex: 1; min-width: 180px; background: var(--sppanel); padding: 28px 20px; position: relative; display: flex; flex-direction: column; }
+.sp-chain-step::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--spgold), transparent); opacity: 0.35; }
+.sp-chain-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--spgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.sp-chain-step h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.sp-chain-step p { font-size: 12px; color: var(--spmuted); line-height: 2; }
+.sp-chain-note { background: var(--sppanel2); padding: 20px 32px; text-align: center; font-size: 13px; color: var(--spmuted); letter-spacing: 0.04em; line-height: 1.8; margin-bottom: 1px; }
+.sp-cards { display: flex; gap: 1px; background: var(--spline); margin-bottom: 1px; overflow-x: auto; }
+.sp-card { flex: 1; min-width: 200px; background: var(--sppanel); padding: 28px 22px; position: relative; display: flex; flex-direction: column; }
+.sp-card::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--spgold), transparent); opacity: 0.35; }
+.sp-card-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--spgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.sp-card h4 { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 8px; }
+.sp-card-q { font-size: 12px; color: var(--sptext); padding: 10px 14px; background: var(--spgold-dim); border-left: 1px solid var(--spgold); margin-bottom: 14px; line-height: 1.8; }
+.sp-card ul { list-style: none; padding: 0; margin: 0; }
+.sp-card li { font-size: 12px; color: var(--spmuted); padding: 4px 0; line-height: 1.8; }
+.sp-card li::before { content: '·'; color: var(--spgold); margin-right: 8px; }
+.sp-card-kw { font-size: 10px; color: var(--spgold); letter-spacing: 2px; margin-top: auto; padding-top: 14px; opacity: 0.5; text-transform: uppercase; }
+/* 飞轮 */
+/* 五层矩阵 */
+.sp-matrix { display: flex; flex-direction: column; gap: 1px; background: var(--spline); margin: 1px 0; }
+.sp-matrix-layer { background: var(--sppanel); padding: 24px 32px; display: flex; align-items: center; gap: 24px; position: relative; }
+.sp-matrix-layer::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--spgold), transparent); opacity: 0.4; }
+.sp-matrix-label { font-family: 'Noto Serif SC', serif; font-size: 13px; color: var(--spgold); letter-spacing: 0.08em; min-width: 100px; white-space: nowrap; }
+.sp-matrix-content { font-size: 13px; color: var(--spmuted); letter-spacing: 2px; }
+.sp-matrix-arrow { text-align: center; padding: 6px 0; font-size: 14px; color: var(--spgold); opacity: 0.5; background: var(--spbg); }
+.sp-outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--spline); margin-bottom: 1px; }
+.sp-outcome { background: var(--sppanel); padding: 32px 24px; }
+.sp-outcome h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.sp-outcome p { font-size: 12px; color: var(--spmuted); line-height: 2; }
+.sp-quote { background: var(--sppanel); padding: 48px 40px; margin-top: 1px; text-align: center; }
+.sp-quote p { font-family: 'Noto Serif SC', serif; font-size: clamp(16px,2.5vw,22px); font-weight: 200; color: var(--text2); letter-spacing: 0.06em; line-height: 2; max-width: 960px; margin: 0 auto; }
+.sp-note { font-size: 11px; color: var(--dim); margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--spline); line-height: 2; letter-spacing: 0.5px; text-align: center; }
+@media (max-width: 900px) { .sp-chain { flex-direction: column; } .sp-chain-step { min-width: auto; } .sp-cards { flex-direction: column; } .sp-card { min-width: auto; } .sp-outcomes { grid-template-columns: 1fr; } .sp-matrix-layer { flex-direction: column; align-items: flex-start; gap: 8px; } }
+@media (max-width: 600px) { .sp-hero-flow { flex-direction: column; gap: 4px; } .sp-hero-flow .arrow { transform: rotate(90deg); } }
+
+
+/* ── FINANCE OVERLAY ── */
+#finance-overlay { color-scheme: dark; --fbg: #09090c; --fpanel: #0e0e12; --fpanel2: #141418; --fline: rgba(255,255,255,0.06); --ftext: #dfd9cc; --fmuted: #7d7870; --fgold: #c39e4f; --fgold2: #e8c97e; --fgold-dim: rgba(195,158,79,0.15); font-family: 'Noto Sans SC', sans-serif; }
+#finance-overlay * { box-sizing: border-box; }
+#finance-overlay .fin-dashboard { max-width: 1200px; margin: 0 auto; }
+.fin-hero { text-align: center; padding: 40px 0 50px; }
+.fin-hero h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(28px,4.5vw,42px); font-weight: 200; color: var(--text2); letter-spacing: 0.08em; margin-bottom: 20px; }
+.fin-hero p { font-size: 14px; color: var(--fmuted); line-height: 2; max-width: 660px; margin: 0 auto; }
+.fin-section-title { font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 300; color: var(--fgold); letter-spacing: 0.08em; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--fline); }
+.fin-chain { display: flex; gap: 1px; background: var(--fline); margin-bottom: 1px; overflow-x: auto; }
+.fin-chain-step { flex: 1; min-width: 180px; background: var(--fpanel); padding: 28px 20px; position: relative; display: flex; flex-direction: column; }
+.fin-chain-step::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--fgold), transparent); opacity: 0.35; }
+.fin-chain-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--fgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.fin-chain-step h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.fin-chain-step p { font-size: 12px; color: var(--fmuted); line-height: 2; }
+.fin-cards { display: flex; gap: 1px; background: var(--fline); margin-bottom: 1px; overflow-x: auto; }
+.fin-card { flex: 1; min-width: 200px; background: var(--fpanel); padding: 28px 22px; position: relative; display: flex; flex-direction: column; }
+.fin-card::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--fgold), transparent); opacity: 0.35; }
+.fin-card-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--fgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.fin-card h4 { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 8px; }
+.fin-card-q { font-size: 12px; color: var(--ftext); padding: 10px 14px; background: var(--fgold-dim); border-left: 1px solid var(--fgold); margin-bottom: 14px; line-height: 1.8; }
+.fin-card ul { list-style: none; padding: 0; margin: 0; }
+.fin-card li { font-size: 12px; color: var(--fmuted); padding: 4px 0; line-height: 1.8; }
+.fin-card li::before { content: '·'; color: var(--fgold); margin-right: 8px; }
+.fin-card-kw { font-size: 10px; color: var(--fgold); letter-spacing: 2px; margin-top: auto; padding-top: 14px; opacity: 0.5; text-transform: uppercase; }
+.fin-matrix { display: flex; flex-direction: column; gap: 1px; background: var(--fline); margin: 1px 0; }
+.fin-matrix-layer { background: var(--fpanel); padding: 24px 32px; display: flex; align-items: center; gap: 24px; position: relative; }
+.fin-matrix-layer::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--fgold), transparent); opacity: 0.4; }
+.fin-matrix-label { font-family: 'Noto Serif SC', serif; font-size: 13px; color: var(--fgold); letter-spacing: 0.08em; min-width: 100px; white-space: nowrap; }
+.fin-matrix-content { font-size: 13px; color: var(--fmuted); letter-spacing: 2px; }
+.fin-matrix-arrow { text-align: center; padding: 6px 0; font-size: 14px; color: var(--fgold); opacity: 0.5; background: var(--fbg); }
+.fin-outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--fline); margin-bottom: 1px; }
+.fin-outcome { background: var(--fpanel); padding: 32px 24px; }
+.fin-outcome h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.fin-outcome p { font-size: 12px; color: var(--fmuted); line-height: 2; }
+.fin-quote { background: var(--fpanel); padding: 48px 40px; margin-top: 1px; text-align: center; }
+.fin-quote p { font-family: 'Noto Serif SC', serif; font-size: clamp(16px,2.5vw,22px); font-weight: 200; color: var(--text2); letter-spacing: 0.06em; line-height: 2; max-width: 960px; margin: 0 auto; }
+.fin-note { font-size: 11px; color: var(--dim); margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--fline); line-height: 2; letter-spacing: 0.5px; text-align: center; }
+@media (max-width: 900px) { .fin-chain { flex-direction: column; } .fin-chain-step { min-width: auto; } .fin-cards { flex-direction: column; } .fin-card { min-width: auto; } .fin-outcomes { grid-template-columns: 1fr; } .fin-matrix-layer { flex-direction: column; align-items: flex-start; gap: 8px; } }
+
+/* ── QUALITY OVERLAY ── */
+#quality-overlay { color-scheme: dark; --qbg: #09090c; --qpanel: #0e0e12; --qpanel2: #141418; --qline: rgba(255,255,255,0.06); --qtext: #dfd9cc; --qmuted: #7d7870; --qgold: #c39e4f; --qgold2: #e8c97e; --qgold-dim: rgba(195,158,79,0.15); font-family: 'Noto Sans SC', sans-serif; }
+#quality-overlay * { box-sizing: border-box; }
+#quality-overlay .qua-dashboard { max-width: 1200px; margin: 0 auto; }
+.qua-hero { text-align: center; padding: 40px 0 50px; }
+.qua-hero h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(28px,4.5vw,42px); font-weight: 200; color: var(--text2); letter-spacing: 0.08em; margin-bottom: 20px; }
+.qua-hero p { font-size: 14px; color: var(--qmuted); line-height: 2; max-width: 660px; margin: 0 auto; }
+.qua-section-title { font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 300; color: var(--qgold); letter-spacing: 0.08em; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--qline); }
+.qua-chain { display: flex; gap: 1px; background: var(--qline); margin-bottom: 1px; overflow-x: auto; }
+.qua-chain-step { flex: 1; min-width: 180px; background: var(--qpanel); padding: 28px 20px; position: relative; display: flex; flex-direction: column; }
+.qua-chain-step::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--qgold), transparent); opacity: 0.35; }
+.qua-chain-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--qgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.qua-chain-step h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.qua-chain-step p { font-size: 12px; color: var(--qmuted); line-height: 2; }
+.qua-cards { display: flex; gap: 1px; background: var(--qline); margin-bottom: 1px; overflow-x: auto; }
+.qua-card { flex: 1; min-width: 200px; background: var(--qpanel); padding: 28px 22px; position: relative; display: flex; flex-direction: column; }
+.qua-card::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--qgold), transparent); opacity: 0.35; }
+.qua-card-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--qgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.qua-card h4 { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 8px; }
+.qua-card-q { font-size: 12px; color: var(--qtext); padding: 10px 14px; background: var(--qgold-dim); border-left: 1px solid var(--qgold); margin-bottom: 14px; line-height: 1.8; }
+.qua-card ul { list-style: none; padding: 0; margin: 0; }
+.qua-card li { font-size: 12px; color: var(--qmuted); padding: 4px 0; line-height: 1.8; }
+.qua-card li::before { content: '·'; color: var(--qgold); margin-right: 8px; }
+.qua-card-kw { font-size: 10px; color: var(--qgold); letter-spacing: 2px; margin-top: auto; padding-top: 14px; opacity: 0.5; text-transform: uppercase; }
+.qua-matrix { display: flex; flex-direction: column; gap: 1px; background: var(--qline); margin: 1px 0; }
+.qua-matrix-layer { background: var(--qpanel); padding: 24px 32px; display: flex; align-items: center; gap: 24px; position: relative; }
+.qua-matrix-layer::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--qgold), transparent); opacity: 0.4; }
+.qua-matrix-label { font-family: 'Noto Serif SC', serif; font-size: 13px; color: var(--qgold); letter-spacing: 0.08em; min-width: 100px; white-space: nowrap; }
+.qua-matrix-content { font-size: 13px; color: var(--qmuted); letter-spacing: 2px; }
+.qua-matrix-arrow { text-align: center; padding: 6px 0; font-size: 14px; color: var(--qgold); opacity: 0.5; background: var(--qbg); }
+.qua-outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--qline); margin-bottom: 1px; }
+.qua-outcome { background: var(--qpanel); padding: 32px 24px; }
+.qua-outcome h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.qua-outcome p { font-size: 12px; color: var(--qmuted); line-height: 2; }
+.qua-quote { background: var(--qpanel); padding: 48px 40px; margin-top: 1px; text-align: center; }
+.qua-quote p { font-family: 'Noto Serif SC', serif; font-size: clamp(16px,2.5vw,22px); font-weight: 200; color: var(--text2); letter-spacing: 0.06em; line-height: 2; max-width: 960px; margin: 0 auto; }
+.qua-note { font-size: 11px; color: var(--dim); margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--qline); line-height: 2; letter-spacing: 0.5px; text-align: center; }
+@media (max-width: 900px) { .qua-chain { flex-direction: column; } .qua-chain-step { min-width: auto; } .qua-cards { flex-direction: column; } .qua-card { min-width: auto; } .qua-outcomes { grid-template-columns: 1fr; } .qua-matrix-layer { flex-direction: column; align-items: flex-start; gap: 8px; } }
+
+/* ── Bottom return button in overlays ── */
+.tool-overlay-return {
+  display: block;
+  margin: 40px auto 0;
+  padding: 14px 40px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s;
+}
+.tool-overlay-return:hover {
+  color: var(--gold2);
+  border-color: var(--border-hover);
+}
+
+/* ── Management loop cycle ── */
+.mgmt-cycle { display: flex; gap: 1px; background: var(--mline); margin: 1px 0; overflow-x: auto; }
+.mgmt-cycle-step { flex: 1; min-width: 140px; background: var(--mpanel); padding: 24px 16px; text-align: center; position: relative; display: flex; flex-direction: column; align-items: center; }
+.mgmt-cycle-step::after { content: '→'; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--mgold); opacity: 0.5; z-index: 1; }
+.mgmt-cycle-step:last-child::after { content: ''; }
+.mgmt-cycle-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--mgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 10px; }
+.mgmt-cycle-step h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 8px; }
+.mgmt-cycle-step p { font-size: 11px; color: var(--mmuted); line-height: 1.8; }
+.mgmt-cycle-back { background: var(--mpanel2); padding: 14px 24px; text-align: center; font-size: 11px; color: var(--mgold); letter-spacing: 2px; opacity: 0.6; border-top: 1px solid var(--mline); }
+
+
+/* ── Closing Section ── */
+.closing-section {
+  position: relative;
+  z-index: 1;
+  padding: 60px 10%;
+  background: var(--bg2);
+  text-align: center;
+  border-top: 1px solid var(--border-soft);
+}
+.closing-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 200;
+  color: var(--text2);
+  letter-spacing: 0.06em;
+  line-height: 2.2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.closing-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(14px, 2vw, 18px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+@media (max-width: 900px) {
+  .cycle-step { padding: 0 16px; }
+}
+.cap-cycle-text {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 48px;
+  margin-bottom: 0;
+  line-height: 2;
+}
+
 </style>
 </head>
 <body>
@@ -1651,16 +2880,8 @@ footer {
 <!-- SLOGAN -->
 <section class="slogan-section" id="slogan-section">
   <div class="slogan-layout">
-    <div class="slogan-row" id="slogan-cn-row">
-      <div class="slogan-left"  id="slogan-cn-left"></div>
-      <div class="slogan-dot"   id="slogan-cn-dot"></div>
-      <div class="slogan-right" id="slogan-cn-right"></div>
-    </div>
-    <div class="slogan-row slogan-row-en" id="slogan-en-row">
-      <div class="slogan-left"  id="slogan-en-left"></div>
-      <div class="slogan-dot slogan-dot-en" id="slogan-en-dot"></div>
-      <div class="slogan-right" id="slogan-en-right"></div>
-    </div>
+    <div class="slogan-row" id="slogan-cn-row"></div>
+    <div class="slogan-row slogan-row-en" id="slogan-en-row"></div>
   </div>
   <div class="slogan-scroll">
     <div class="scroll-line"></div>
@@ -1679,6 +2900,7 @@ footer {
       <span class="focus-word is-active">经营分析</span>
       <span class="focus-word">战略洞察</span>
       <span class="focus-word">AI 驱动增长</span>
+      <span class="focus-word">知识管理</span>
       <div class="focus-frame" aria-hidden="true">
         <span class="focus-corner top-left"></span>
         <span class="focus-corner top-right"></span>
@@ -1689,7 +2911,7 @@ footer {
   </div>
   <p class="hero-desc">
     深挖数字资产价值，聚力擘画增长蓝图。<br>
-    长期聚焦集团经营分析、战略规划、电商运营与财经价值创造，<br>
+    长期聚焦集团经营分析、战略规划、知识管理与财经价值创造，<br>
     致力于推动企业数智化转型与经营效率提升。
   </p>
   <div class="hero-welcome" id="hero-welcome"></div>
@@ -1998,6 +3220,7 @@ footer {
 })();
 </script>
 
+
 <!-- ABOUT -->
 <section id="about">
   <div class="section-label">About</div>
@@ -2026,9 +3249,9 @@ footer {
     </div>
     <div class="about-card">
       <div class="about-card-inner">
-        <div class="about-card-eyebrow">AI Insights</div>
-        <h3>AI × 数据洞察</h3>
-        <p>探索 AI 与经营分析融合，强化数据驱动经营决策能力。</p>
+        <div class="about-card-eyebrow">AI & Knowledge</div>
+        <h3>AI × 数据洞察 × 知识管理</h3>
+        <p>融合AI经营分析，搭建个人知识管理体系，沉淀数据知识赋能复用决策。</p>
       </div>
     </div>
   </div>
@@ -2047,7 +3270,7 @@ footer {
       </div>
       <div class="exp-right">
         <h3>云南白药集团</h3>
-        <p>围绕经营增长、利润改善及经营效率提升，构建经营分析体系，推动数据向经营价值创造转化。</p>
+        <p>围绕经营与利润改善及经营效率提升，构建经营分析体系，推动数据向经营价值创造转化。</p>
         <span class="exp-tag">Business Analytics</span>
       </div>
     </div>
@@ -2084,39 +3307,44 @@ footer {
   <div class="section-label">Capabilities</div>
   <h2 class="section-title"><span class="gradient-title">核心能力</span><em>Core Skills</em></h2>
   <div class="cap-grid">
-    <div class="cap-item">
+    <div class="cap-item clickable" id="open-strategy" role="button" tabindex="0" aria-label="查看战略分析与市场洞察框架">
       <div class="cap-num">01</div>
       <h3>Strategic Analysis</h3>
       <p>战略分析与市场洞察</p>
+      <div class="cap-link-hint">战略洞察引擎</div>
     </div>
-    <div class="cap-item">
+    <div class="cap-item clickable" id="open-management" role="button" tabindex="0" aria-label="查看经营洞察与管理闭环框架">
       <div class="cap-num">02</div>
       <h3>Business Insight</h3>
       <p>经营洞察与管理闭环</p>
+      <div class="cap-link-hint">经营分析闭环引擎</div>
     </div>
-    <div class="cap-item clickable" id="open-viz" role="button" tabindex="0" aria-label="打开数据可视化仪表盘：单品经营三角模型">
+    <div class="cap-item clickable" id="open-obsidian" role="button" tabindex="0" aria-label="查看个人知识管理系统成果看板">
       <div class="cap-num">03</div>
-      <h3>Data Visualization</h3>
-      <p>数据可视化与仪表盘</p>
-      <div class="cap-link-hint">单品经营三角模型</div>
+      <h3>Knowledge System</h3>
+      <p>个人知识管理系统</p>
+      <div class="cap-link-hint">Obsidian 知识管理成果看板</div>
     </div>
-    <div class="cap-item clickable" id="open-calc" role="button" tabindex="0" aria-label="打开 AI 工具：复合增长计算器">
+    <div class="cap-item clickable" id="open-viz" role="button" tabindex="0" aria-label="打开数据可视化与 AI 工具集">
       <div class="cap-num">04</div>
-      <h3>AI Workflow</h3>
-      <p>AI 工具与智能化流程</p>
-      <div class="cap-link-hint">复合增长计算器</div>
+      <h3>Data Visualization &amp; AI Workflow</h3>
+      <p>数据可视化与 AI 智能化流程</p>
+      <div class="cap-link-hint">经营三角模型 · 复合增长计算器</div>
     </div>
-    <div class="cap-item">
+    <div class="cap-item clickable" id="open-finance" role="button" tabindex="0" aria-label="查看财经管理与价值创造框架">
       <div class="cap-num">05</div>
       <h3>Financial Management</h3>
       <p>财经管理与价值创造</p>
+      <div class="cap-link-hint">业财一体化与价值创造</div>
     </div>
-    <div class="cap-item">
+    <div class="cap-item clickable" id="open-quality" role="button" tabindex="0" aria-label="查看质量管理体系建设框架">
       <div class="cap-num">06</div>
       <h3>Quality Management System Construction</h3>
       <p>质量管理体系建设</p>
+      <div class="cap-link-hint">质量体系与持续改进</div>
     </div>
   </div>
+  <p class="cap-cycle-text">洞察世界 · 制定战略 · 经营落地 · 项目复盘 · 知识沉淀 —— 从外部洞察到知识沉淀的完整能力闭环</p>
 </section>
 
 <!-- PROJECTS -->
@@ -2124,22 +3352,22 @@ footer {
   <div class="section-label">Projects</div>
   <h2 class="section-title"><span class="gradient-title">代表项目</span><em>Selected Work</em></h2>
   <div class="proj-grid">
-    <div class="proj-card">
+    <div class="proj-card" id="open-product" tabindex="0" role="button" aria-label="查看大单品经营质量分析框架">
       <span class="proj-num">Project 01</span>
       <h3>大单品经营分析体系</h3>
       <p>构建销量、价格、结构、渠道多维经营分析模型，驱动核心单品增长决策。</p>
     </div>
-    <div class="proj-card">
+    <div class="proj-card" id="open-stratplan" tabindex="0" role="button" aria-label="查看集团战略规划体系建设框架">
       <span class="proj-num">Project 02</span>
       <h3>集团战略规划体系</h3>
       <p>参与集团中长期战略规划与战略管理办法建设，推动战略落地执行。</p>
     </div>
-    <div class="proj-card">
+    <div class="proj-card" id="open-ecom" tabindex="0" role="button" aria-label="查看电商项目经营分析框架">
       <span class="proj-num">Project 03</span>
       <h3>电商项目制管理优化</h3>
       <p>推动经营复盘机制与 ROI 体系建设，提升线上经营效率与资源配置精准度。</p>
     </div>
-    <div class="proj-card">
+    <div class="proj-card" id="open-lims" tabindex="0" role="button" aria-label="查看 LIMS 系统建设详情">
       <span class="proj-num">Project 04</span>
       <h3>LIMS 系统建设</h3>
       <p>主导实验室信息管理系统建设与流程优化，推动质量体系数字化升级。</p>
@@ -2157,6 +3385,7 @@ footer {
         <div class="tool-overlay-title">单品经营三角模型</div>
         <div class="tool-overlay-sub">Data Visualization · 经营分析仪表盘</div>
       </div>
+      <button class="tool-overlay-switch" id="switch-to-calc" style="font-size:11px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px;letter-spacing:2px;background:none;border:none;transition:color 0.3s;text-transform:uppercase;white-space:nowrap;">切换到复合增长计算器 →</button>
     </div>
 
     <div class="viz-dashboard">
@@ -2332,6 +3561,7 @@ footer {
       </section>
     </section>
   </main>
+  <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
 </div>
   </div>
 </div>
@@ -2345,6 +3575,7 @@ footer {
         <div class="tool-overlay-title">复合增长计算器</div>
         <div class="tool-overlay-sub">AI Workflow · 经营分析工具</div>
       </div>
+      <button class="tool-overlay-switch" id="switch-to-viz" style="font-size:11px;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:8px;letter-spacing:2px;background:none;border:none;transition:color 0.3s;text-transform:uppercase;white-space:nowrap;">← 切换到经营三角模型</button>
     </div>
 
     <div class="calc-wrap">
@@ -2455,10 +3686,1251 @@ footer {
         <strong>反算期数</strong>：<code>n = ln(期末/期初) / ln(1+r)</code><br>
         本工具为经营分析演算用途，不构成投资建议。
       </div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
     </div>
   </div>
 </div>
 
+
+<!-- LIMS DASHBOARD OVERLAY -->
+<div class="tool-overlay" id="lims-overlay" role="dialog" aria-modal="true" aria-label="LIMS 数字化智能驾驶舱">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-lims">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">LIMS 数字化智能驾驶舱</div>
+        <div class="tool-overlay-sub">Data Visualization · 实验室信息管理系统</div>
+      </div>
+    </div>
+
+    <div class="lims-dashboard">
+
+      <!-- KPI 概览 -->
+      <div class="lims-kpi-row">
+        <div class="lims-kpi">
+          <div class="lims-kpi-label">样品检测总量</div>
+          <div class="lims-kpi-value">12,846<span class="lims-kpi-unit">批次</span></div>
+          <div class="lims-kpi-trend up">▲ 18.3% 同比增长</div>
+        </div>
+        <div class="lims-kpi">
+          <div class="lims-kpi-label">检测完成率</div>
+          <div class="lims-kpi-value">96.7<span class="lims-kpi-unit">%</span></div>
+          <div class="lims-kpi-trend up">▲ 2.1pp 较上月</div>
+        </div>
+        <div class="lims-kpi">
+          <div class="lims-kpi-label">平均检测周期</div>
+          <div class="lims-kpi-value">3.2<span class="lims-kpi-unit">天</span></div>
+          <div class="lims-kpi-trend up">▼ 0.8天 缩短</div>
+        </div>
+        <div class="lims-kpi">
+          <div class="lims-kpi-label">质量合格率</div>
+          <div class="lims-kpi-value">99.2<span class="lims-kpi-unit">%</span></div>
+          <div class="lims-kpi-trend flat">— 持平</div>
+        </div>
+      </div>
+
+      <div class="lims-grid">
+
+        <!-- 检测类型分布 -->
+        <div class="lims-panel">
+          <div class="lims-panel-title">检测类型分布</div>
+          <div class="lims-bar-group">
+            <div class="lims-bar-label"><span>常规理化检测</span><span>4,521 批次</span></div>
+            <div class="lims-bar-track"><div class="lims-bar-fill" style="width:78%"></div></div>
+          </div>
+          <div class="lims-bar-group">
+            <div class="lims-bar-label"><span>微生物检测</span><span>2,836 批次</span></div>
+            <div class="lims-bar-track"><div class="lims-bar-fill green" style="width:56%"></div></div>
+          </div>
+          <div class="lims-bar-group">
+            <div class="lims-bar-label"><span>仪器分析</span><span>2,148 批次</span></div>
+            <div class="lims-bar-track"><div class="lims-bar-fill blue" style="width:45%"></div></div>
+          </div>
+          <div class="lims-bar-group">
+            <div class="lims-bar-label"><span>稳定性考察</span><span>1,927 批次</span></div>
+            <div class="lims-bar-track"><div class="lims-bar-fill amber" style="width:38%"></div></div>
+          </div>
+          <div class="lims-bar-group">
+            <div class="lims-bar-label"><span>环境监测</span><span>1,414 批次</span></div>
+            <div class="lims-bar-track"><div class="lims-bar-fill" style="width:28%"></div></div>
+          </div>
+        </div>
+
+        <!-- 质量指标 -->
+        <div class="lims-panel">
+          <div class="lims-panel-title">质量控制指标</div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label"><span class="lims-status-dot green"></span>OOS 发生率</span>
+            <span class="lims-stat-value">0.8%</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label"><span class="lims-status-dot green"></span>偏差处理及时率</span>
+            <span class="lims-stat-value">94.5%</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label"><span class="lims-status-dot amber"></span>CAPA 关闭率</span>
+            <span class="lims-stat-value">87.3%</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label"><span class="lims-status-dot green"></span>数据完整性合规率</span>
+            <span class="lims-stat-value">99.6%</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label"><span class="lims-status-dot green"></span>审计追踪覆盖率</span>
+            <span class="lims-stat-value">100%</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label"><span class="lims-status-dot green"></span>仪器校准到期率</span>
+            <span class="lims-stat-value">2.1%</span>
+          </div>
+        </div>
+
+        <!-- 月度检测趋势 -->
+        <div class="lims-panel lims-full-row">
+          <div class="lims-panel-title">月度检测量趋势</div>
+          <div class="lims-chart-area">
+            <div class="lims-chart-bar" style="height:45%" data-label="862"></div>
+            <div class="lims-chart-bar" style="height:52%" data-label="948"></div>
+            <div class="lims-chart-bar" style="height:48%" data-label="903"></div>
+            <div class="lims-chart-bar" style="height:61%" data-label="1,058"></div>
+            <div class="lims-chart-bar" style="height:58%" data-label="1,012"></div>
+            <div class="lims-chart-bar" style="height:65%" data-label="1,134"></div>
+            <div class="lims-chart-bar" style="height:72%" data-label="1,206"></div>
+            <div class="lims-chart-bar" style="height:68%" data-label="1,158"></div>
+            <div class="lims-chart-bar" style="height:75%" data-label="1,287"></div>
+            <div class="lims-chart-bar" style="height:82%" data-label="1,396"></div>
+            <div class="lims-chart-bar" style="height:78%" data-label="1,342"></div>
+            <div class="lims-chart-bar" style="height:88%" data-label="1,541"></div>
+          </div>
+          <div class="lims-month-labels">
+            <span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span>
+            <span>7月</span><span>8月</span><span>9月</span><span>10月</span><span>11月</span><span>12月</span>
+          </div>
+        </div>
+
+        <!-- 设备利用率 -->
+        <div class="lims-panel lims-full-row">
+          <div class="lims-panel-title">核心设备利用率</div>
+          <div class="lims-equip-grid">
+            <div class="lims-equip-item">
+              <div class="lims-equip-name">高效液相色谱仪</div>
+              <div class="lims-equip-rate">87.3<span class="lims-kpi-unit">%</span></div>
+              <div class="lims-equip-status"><span class="lims-status-dot green"></span>运行中</div>
+            </div>
+            <div class="lims-equip-item">
+              <div class="lims-equip-name">气相色谱仪</div>
+              <div class="lims-equip-rate">72.8<span class="lims-kpi-unit">%</span></div>
+              <div class="lims-equip-status"><span class="lims-status-dot green"></span>运行中</div>
+            </div>
+            <div class="lims-equip-item">
+              <div class="lims-equip-name">原子吸收光谱仪</div>
+              <div class="lims-equip-rate">65.4<span class="lims-kpi-unit">%</span></div>
+              <div class="lims-equip-status"><span class="lims-status-dot green"></span>运行中</div>
+            </div>
+            <div class="lims-equip-item">
+              <div class="lims-equip-name">紫外分光光度计</div>
+              <div class="lims-equip-rate">91.2<span class="lims-kpi-unit">%</span></div>
+              <div class="lims-equip-status"><span class="lims-status-dot amber"></span>高负荷</div>
+            </div>
+            <div class="lims-equip-item">
+              <div class="lims-equip-name">微生物限度仪</div>
+              <div class="lims-equip-rate">58.6<span class="lims-kpi-unit">%</span></div>
+              <div class="lims-equip-status"><span class="lims-status-dot green"></span>运行中</div>
+            </div>
+            <div class="lims-equip-item">
+              <div class="lims-equip-name">TOC 分析仪</div>
+              <div class="lims-equip-rate">43.7<span class="lims-kpi-unit">%</span></div>
+              <div class="lims-equip-status"><span class="lims-status-dot green"></span>运行中</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 流程效率 -->
+        <div class="lims-panel">
+          <div class="lims-panel-title">流程效率指标</div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label">样品登记到分发</span>
+            <span class="lims-stat-value">0.5 天</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label">检测到报告出具</span>
+            <span class="lims-stat-value">2.1 天</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label">报告审核周期</span>
+            <span class="lims-stat-value">0.6 天</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label">异常响应时间</span>
+            <span class="lims-stat-value">4.2 小时</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label">电子签名覆盖率</span>
+            <span class="lims-stat-value">100%</span>
+          </div>
+        </div>
+
+        <!-- 系统建设成果 -->
+        <div class="lims-panel">
+          <div class="lims-panel-title">数字化建设成果</div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label">无纸化率</span>
+            <span class="lims-stat-value">92%</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label">系统集成接口</span>
+            <span class="lims-stat-value">12 个</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label">在线用户数</span>
+            <span class="lims-stat-value">86 人</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label">SOP 电子化</span>
+            <span class="lims-stat-value">248 份</span>
+          </div>
+          <div class="lims-stat-row">
+            <span class="lims-stat-label">数据自动采集率</span>
+            <span class="lims-stat-value">78%</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="lims-note">
+        * 以上数据均为脱敏后示例数据，仅展示系统功能模块与分析维度，不代表实际业务指标。<br>
+        * 驾驶舱覆盖样品全生命周期管理、仪器数据自动采集、电子签名审批、审计追踪与合规报告等核心模块。
+      </div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- OBSIDIAN KNOWLEDGE SYSTEM OVERLAY -->
+<div class="tool-overlay" id="obsidian-overlay" role="dialog" aria-modal="true" aria-label="个人知识管理系统成果看板">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-obsidian">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">个人知识管理系统</div>
+        <div class="tool-overlay-sub">Knowledge System · Obsidian 知识管理成果看板</div>
+      </div>
+    </div>
+
+    <div class="obs-dashboard">
+
+      <!-- Hero -->
+      <div class="obs-hero">
+        <h2>用 Obsidian 构建个人知识管理系统</h2>
+        <p>将工作材料、经营分析、投资研究与 AI 协作沉淀为可检索、可复用、可迭代的知识资产。<br>从零散信息到可复用知识资产，构建个人经营分析中台。</p>
+      </div>
+
+      <!-- KPI 概览 -->
+      <div class="obs-kpi-row">
+        <div class="obs-kpi">
+          <div class="obs-kpi-label">知识笔记</div>
+          <div class="obs-kpi-value">1,200+</div>
+          <div class="obs-kpi-desc">条结构化笔记</div>
+        </div>
+        <div class="obs-kpi">
+          <div class="obs-kpi-label">项目沉淀</div>
+          <div class="obs-kpi-value">4 大领域</div>
+          <div class="obs-kpi-desc">经营分析、制度、投资、AI 工作流</div>
+        </div>
+        <div class="obs-kpi">
+          <div class="obs-kpi-label">模板体系</div>
+          <div class="obs-kpi-value">20+</div>
+          <div class="obs-kpi-desc">会议纪要、项目复盘、数据分析、读书笔记</div>
+        </div>
+        <div class="obs-kpi">
+          <div class="obs-kpi-label">AI 协作</div>
+          <div class="obs-kpi-value">多模型</div>
+          <div class="obs-kpi-desc">Codex / Claude / DeepSeek 与 Obsidian 联动</div>
+        </div>
+      </div>
+
+      <!-- 方法体系：三层架构 -->
+      <div style="margin-top:1px;">
+        <div class="obs-section-title">方法体系：三层架构</div>
+        <div class="obs-layers">
+          <div class="obs-layer">
+            <div class="obs-layer-tag">Input</div>
+            <h4>输入层</h4>
+            <ul>
+              <li>会议纪要与决策记录</li>
+              <li>经营报告与财务数据</li>
+              <li>行业研报与竞品分析</li>
+              <li>网页剪藏与 PDF 标注</li>
+              <li>投资数据与市场信号</li>
+              <li>工作材料与政策文件</li>
+            </ul>
+          </div>
+          <div class="obs-layer">
+            <div class="obs-layer-tag">Process</div>
+            <h4>加工层</h4>
+            <ul>
+              <li>标签体系与分类法</li>
+              <li>双向链接与知识图谱</li>
+              <li>Dataview 动态查询</li>
+              <li>标准化模板沉淀</li>
+              <li>周期复盘与迭代</li>
+              <li>AI 辅助摘要与关联</li>
+            </ul>
+          </div>
+          <div class="obs-layer">
+            <div class="obs-layer-tag">Output</div>
+            <h4>输出层</h4>
+            <ul>
+              <li>PPT 汇报与决策材料</li>
+              <li>制度文件与流程规范</li>
+              <li>分析报告与洞察文档</li>
+              <li>网页作品与个人品牌</li>
+              <li>AI 提示词库与工作流</li>
+              <li>知识卡片与培训材料</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 典型场景 -->
+      <div style="margin-top:1px;">
+        <div class="obs-section-title">典型知识库场景</div>
+        <div class="obs-scenarios">
+          <div class="obs-scenario">
+            <div class="obs-scenario-tag">Analytics</div>
+            <h4>经营分析知识库</h4>
+            <p>沉淀宏观环境、行业趋势、竞品动态、产品损益、费用管控等分析材料，形成可追溯的经营决策知识链。</p>
+          </div>
+          <div class="obs-scenario">
+            <div class="obs-scenario-tag">AI Workflow</div>
+            <h4>AI 工作流知识库</h4>
+            <p>沉淀 Codex、Claude、MCP、Agent 协作方案，记录 AI 辅助分析的 prompt 模板、工作流编排与最佳实践。</p>
+          </div>
+          <div class="obs-scenario">
+            <div class="obs-scenario-tag">Investment</div>
+            <h4>投资研究知识库</h4>
+            <p>沉淀 ETF 轮动策略、行业跟踪、个股研究、调仓逻辑，构建个人投资分析框架与决策日志。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 成效总结 -->
+      <div class="obs-summary">
+        <div class="obs-summary-quote">
+          Obsidian 不只是笔记工具，而是我的<em>个人经营分析中台</em>。
+        </div>
+        <div class="obs-outcomes">
+          <div class="obs-outcome">
+            <strong>信息查找从"翻文件"变成"按主题调用"</strong>
+            <p>通过双向链接与标签体系，实现跨项目、跨时间的知识检索，信息获取效率大幅提升。</p>
+          </div>
+          <div class="obs-outcome">
+            <strong>项目经验从"一次性材料"变成"可复用模块"</strong>
+            <p>每个项目的分析框架、数据模型、决策逻辑都被模板化沉淀，新项目可快速复用。</p>
+          </div>
+          <div class="obs-outcome">
+            <strong>AI 协作从"临时对话"变成"长期知识输入"</strong>
+            <p>AI 生成的分析结果、提示词、工作流被结构化归档，形成持续积累的 AI 协作知识库。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="obs-note">
+        * 知识管理系统基于 Obsidian 构建，结合双向链接、Dataview 查询、模板化沉淀与 AI 协作，实现知识资产的持续积累与复用。
+      </div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- E-COMMERCE ANALYSIS OVERLAY -->
+<div class="tool-overlay" id="ecom-overlay" role="dialog" aria-modal="true" aria-label="电商项目经营分析框架">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-ecom">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">电商项目经营分析框架</div>
+        <div class="tool-overlay-sub">Case Study · 从销售事件到经营项目的全链路分析</div>
+      </div>
+    </div>
+
+    <div class="ecom-dashboard">
+
+      <!-- Hero -->
+      <div class="ecom-hero">
+        <h2>电商项目经营分析框架</h2>
+        <p>将营销活动从「销售事件」升级为「经营项目」，建立从流量投入到长期价值的全链路分析体系。</p>
+        <div class="ecom-flow">
+          <span class="ecom-flow-step">投入</span>
+          <span class="ecom-flow-arrow">↓</span>
+          <span class="ecom-flow-step">流量</span>
+          <span class="ecom-flow-arrow">↓</span>
+          <span class="ecom-flow-step">成交</span>
+          <span class="ecom-flow-arrow">↓</span>
+          <span class="ecom-flow-step">利润</span>
+          <span class="ecom-flow-arrow">↓</span>
+          <span class="ecom-flow-step">用户资产</span>
+        </div>
+      </div>
+
+      <!-- 核心方法论 -->
+      <div style="margin-top:1px;">
+        <div class="ecom-section-title">核心方法论：五步经营链路</div>
+        <div class="ecom-method-chain">
+
+          <div class="ecom-method">
+            <div class="ecom-method-num">01</div>
+            <h4>前置投入</h4>
+            <div class="ecom-method-sub">成本投入</div>
+            <div class="ecom-method-q">投入是否合理？</div>
+            <ul>
+              <li>广告投放</li>
+              <li>品牌资源投入</li>
+              <li>营销活动成本</li>
+              <li>渠道资源配置</li>
+            </ul>
+          </div>
+
+          <div class="ecom-method">
+            <div class="ecom-method-num">02</div>
+            <h4>流量转化</h4>
+            <div class="ecom-method-sub">转化漏斗</div>
+            <div class="ecom-method-q">流量是否高效？</div>
+            <ul>
+              <li>曝光规模</li>
+              <li>访问转化</li>
+              <li>下单转化</li>
+              <li>支付转化</li>
+            </ul>
+          </div>
+
+          <div class="ecom-method">
+            <div class="ecom-method-num">03</div>
+            <h4>成交回款</h4>
+            <div class="ecom-method-sub">现金回流</div>
+            <div class="ecom-method-q">销售是否真正兑现？</div>
+            <ul>
+              <li>成交金额</li>
+              <li>回款周期</li>
+              <li>支付率</li>
+              <li>退款率</li>
+            </ul>
+          </div>
+
+          <div class="ecom-method">
+            <div class="ecom-method-num">04</div>
+            <h4>经营质量</h4>
+            <div class="ecom-method-sub">损益分析</div>
+            <div class="ecom-method-q">增长是否创造价值？</div>
+            <ul>
+              <li>毛利水平</li>
+              <li>费用结构</li>
+              <li>利润质量</li>
+              <li>投入产出比</li>
+            </ul>
+          </div>
+
+          <div class="ecom-method">
+            <div class="ecom-method-num">05</div>
+            <h4>长期价值</h4>
+            <div class="ecom-method-sub">长期增长</div>
+            <div class="ecom-method-q">活动结束后还能留下什么？</div>
+            <ul>
+              <li>用户沉淀</li>
+              <li>复购能力</li>
+              <li>私域运营</li>
+              <li>品牌资产积累</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 分析框架图 -->
+      <div style="margin-top:1px;">
+        <div class="ecom-section-title">分析框架：四层价值结构</div>
+        <div class="ecom-framework">
+          <div class="ecom-fw-layer">
+            <div class="ecom-fw-label">投入层</div>
+            <div class="ecom-fw-content">广告 ｜ 品牌 ｜ 渠道资源</div>
+          </div>
+          <div class="ecom-fw-arrow">↓</div>
+          <div class="ecom-fw-layer">
+            <div class="ecom-fw-label">经营层</div>
+            <div class="ecom-fw-content">曝光 → 下单 → 支付 → 回款</div>
+          </div>
+          <div class="ecom-fw-arrow">↓</div>
+          <div class="ecom-fw-layer">
+            <div class="ecom-fw-label">价值层</div>
+            <div class="ecom-fw-content">收入 ｜ 利润 ｜ 用户 ｜ 品牌</div>
+          </div>
+          <div class="ecom-fw-arrow">↓</div>
+          <div class="ecom-fw-layer">
+            <div class="ecom-fw-label">沉淀层</div>
+            <div class="ecom-fw-content">复购体系 ｜ 私域运营 ｜ 长期增长</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 项目成果 -->
+      <div style="margin-top:1px;">
+        <div class="ecom-section-title">项目成果</div>
+        <div class="ecom-outcomes">
+          <div class="ecom-outcome">
+            <h4>建立项目制经营视角</h4>
+            <p>从单纯关注销售规模，转向关注利润质量和长期经营价值。</p>
+          </div>
+          <div class="ecom-outcome">
+            <h4>建立全链路指标体系</h4>
+            <p>实现投入、转化、回款、利润和用户价值的统一分析框架。</p>
+          </div>
+          <div class="ecom-outcome">
+            <h4>建立可复制的方法论</h4>
+            <p>可应用于多种电商经营场景的分析与复盘。</p>
+          </div>
+        </div>
+        <div class="ecom-applicable">
+          <h4>方法论适用场景</h4>
+          <ul>
+            <li>电商营销活动复盘</li>
+            <li>达人合作项目评估</li>
+            <li>品牌投放效果分析</li>
+            <li>产品经营专项分析</li>
+            <li>年度经营分析体系建设</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 收尾金句 -->
+      <div class="ecom-quote">
+        <p>真正的经营分析，不是解释一次活动卖了多少，<br>而是回答：为什么增长、增长是否赚钱，以及增长能否持续。</p>
+      </div>
+
+      <div class="ecom-note">
+        * 本页为通用分析方法论展示，不涉及具体品牌、产品或经营数据。
+      </div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- PRODUCT ANALYSIS OVERLAY -->
+<div class="tool-overlay" id="product-overlay" role="dialog" aria-modal="true" aria-label="大单品经营质量分析框架">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-product">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">大单品经营质量分析框架</div>
+        <div class="tool-overlay-sub">Case Study · 从单品增长复盘到产品矩阵经营管理</div>
+      </div>
+    </div>
+
+    <div class="prod-dashboard">
+
+      <!-- Hero -->
+      <div class="prod-hero">
+        <h2>大单品经营质量分析框架</h2>
+        <p>基于多年度、多品类经营数据，识别增长来源、结构风险与产品矩阵优化方向。</p>
+        <div class="prod-hero-quote">从「单品驱动」升级为「矩阵管理」</div>
+      </div>
+
+      <!-- 核心分析链路 -->
+      <div style="margin-top:1px;">
+        <div class="prod-section-title">核心分析链路</div>
+        <div class="prod-chain">
+          <div class="prod-chain-step">
+            <div class="prod-chain-num">01</div>
+            <h4>趋势识别</h4>
+            <p>观察营收周期、季节波动、销售节奏和增长稳定性。</p>
+          </div>
+          <div class="prod-chain-step">
+            <div class="prod-chain-num">02</div>
+            <h4>结构拆解</h4>
+            <p>拆分业务单元、产品梯队、核心单品与长尾产品贡献。</p>
+          </div>
+          <div class="prod-chain-step">
+            <div class="prod-chain-num">03</div>
+            <h4>质量判断</h4>
+            <p>判断增长是否来自真实需求，而不是渠道压货或短期备货。</p>
+          </div>
+          <div class="prod-chain-step">
+            <div class="prod-chain-num">04</div>
+            <h4>增长归因</h4>
+            <p>拆解销量贡献、价格/结构贡献、渠道价值贡献。</p>
+          </div>
+          <div class="prod-chain-step">
+            <div class="prod-chain-num">05</div>
+            <h4>行动建议</h4>
+            <p>形成生产、库存、营销、产品组合的协同改进方案。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 四大分析模块 -->
+      <div style="margin-top:1px;">
+        <div class="prod-section-title">四大分析模块</div>
+        <div class="prod-modules">
+
+          <div class="prod-module">
+            <div class="prod-module-tag">A</div>
+            <h4>增长趋势分析</h4>
+            <div class="prod-module-q">增长是持续扩张，还是周期性冲高？</div>
+            <ul>
+              <li>月度营收趋势</li>
+              <li>年度复合增长</li>
+              <li>波动稳定性</li>
+              <li>旺淡季节奏</li>
+            </ul>
+          </div>
+
+          <div class="prod-module">
+            <div class="prod-module-tag">B</div>
+            <h4>产品结构分析</h4>
+            <div class="prod-module-q">是健康的产品矩阵，还是过度依赖少数单品？</div>
+            <ul>
+              <li>头部产品贡献度</li>
+              <li>长尾产品占比</li>
+              <li>产品梯队完整性</li>
+              <li>品类接续能力</li>
+            </ul>
+          </div>
+
+          <div class="prod-module">
+            <div class="prod-module-tag">C</div>
+            <h4>经营质量分析</h4>
+            <div class="prod-module-q">营收增长是否真正转化为经营质量提升？</div>
+            <ul>
+              <li>毛利变化</li>
+              <li>营收与终端动销匹配</li>
+              <li>渠道库存风险</li>
+              <li>费用与折扣影响</li>
+            </ul>
+          </div>
+
+          <div class="prod-module">
+            <div class="prod-module-tag">D</div>
+            <h4>增长归因分析</h4>
+            <div class="prod-module-q">增长到底来自销量、价格，还是渠道效率？</div>
+            <ul>
+              <li>终端销量贡献</li>
+              <li>价格/产品结构贡献</li>
+              <li>渠道价值贡献</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- 增长归因公式 -->
+        <div class="prod-formula">
+          <div class="prod-formula-label">Growth Decomposition</div>
+          <div class="prod-formula-main">营收变化 = 终端销量贡献 + 价格/结构贡献 + 渠道价值贡献</div>
+          <div class="prod-formula-parts">
+            <div class="prod-formula-part">ΔQ × P₀ × K₀</div>
+            <div class="prod-formula-part">Q₁ × ΔP × K₀</div>
+            <div class="prod-formula-part">Q₁ × P₁ × ΔK</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 产品矩阵驾驶舱 -->
+      <div style="margin-top:1px;">
+        <div class="prod-section-title">大单品经营质量驾驶舱</div>
+        <div class="prod-cockpit">
+          <div class="prod-gauge">
+            <h4>增长性</h4>
+            <p>趋势曲线<br>复合增长率</p>
+          </div>
+          <div class="prod-gauge">
+            <h4>稳定性</h4>
+            <p>波动系数<br>季节规律</p>
+          </div>
+          <div class="prod-gauge">
+            <h4>盈利性</h4>
+            <p>毛利水平<br>费用结构</p>
+          </div>
+          <div class="prod-gauge">
+            <h4>接续性</h4>
+            <p>产品梯队<br>品类衔接</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 项目价值 -->
+      <div style="margin-top:1px;">
+        <div class="prod-section-title">项目沉淀的方法价值</div>
+        <div class="prod-outcomes">
+          <div class="prod-outcome">
+            <h4>建立经营判断标准</h4>
+            <p>不只看规模增长，而是同时判断增长质量、波动风险和长期接续能力。</p>
+          </div>
+          <div class="prod-outcome">
+            <h4>建立产品矩阵视角</h4>
+            <p>从单个爆品表现，延伸到核心单品、成长单品、长尾单品的组合管理。</p>
+          </div>
+          <div class="prod-outcome">
+            <h4>推动产销协同决策</h4>
+            <p>将分析结果转化为生产备货、库存控制、营销节奏和产品组合优化建议。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 收尾金句 -->
+      <div class="prod-quote">
+        <p>真正的大单品管理，不是把一个产品做大，而是让增长可解释、风险可识别、矩阵可接续。</p>
+      </div>
+
+      <div class="prod-note">
+        * 本页为通用分析方法论展示，不涉及具体公司、品牌、产品名或经营数据。
+      </div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- STRATEGY OVERLAY -->
+<div class="tool-overlay" id="strategy-overlay" role="dialog" aria-modal="true" aria-label="战略分析与市场洞察">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-strategy">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">战略分析与市场洞察</div>
+        <div class="tool-overlay-sub">Strategic Intelligence · 从趋势判断到增长机会识别</div>
+      </div>
+    </div>
+
+    <div class="strat-dashboard">
+
+      <div class="strat-hero">
+        <h2>战略分析与市场洞察</h2>
+        <p>以行业结构、竞争格局与战略控制点为核心，结合市场情报、价值链拆解与关键假设管理，<br>支持从趋势判断到增长机会识别的战略分析工作。</p>
+        <div class="strat-hero-flow">
+          <span>趋势</span><span class="arrow">↓</span>
+          <span>格局</span><span class="arrow">↓</span>
+          <span>控制点</span><span class="arrow">↓</span>
+          <span>机会</span><span class="arrow">↓</span>
+          <span>战略行动</span>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="strat-section-title">核心分析链路</div>
+        <div class="strat-chain">
+          <div class="strat-chain-step"><div class="strat-chain-num">01</div><h4>行业全景</h4><p>从市场规模、增长速度、生命周期和核心驱动因素出发，建立行业全局认知。</p></div>
+          <div class="strat-chain-step"><div class="strat-chain-num">02</div><h4>竞争格局</h4><p>识别主要竞争玩家、子赛道变化、渠道结构与商业模式差异。</p></div>
+          <div class="strat-chain-step"><div class="strat-chain-num">03</div><h4>价值链拆解</h4><p>拆解从原材料到终端的价值链条，识别利润分配与关键瓶颈环节。</p></div>
+          <div class="strat-chain-step"><div class="strat-chain-num">04</div><h4>战略控制点</h4><p>识别真正决定利润分配的位置：渠道入口、品牌信任、技术壁垒或数据资产。</p></div>
+          <div class="strat-chain-step"><div class="strat-chain-num">05</div><h4>增长机会识别</h4><p>基于行业判断与竞争分析，识别进入、扩张或重构的战略机会窗口。</p></div>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="strat-section-title">四大分析模块</div>
+        <div class="strat-modules">
+
+          <div class="strat-module">
+            <div class="strat-module-tag">A</div>
+            <h4>行业全景分析</h4>
+            <div class="strat-module-q">行业处于什么阶段？未来会如何变化？</div>
+            <ul><li>市场规模</li><li>增长速度</li><li>生命周期</li><li>核心驱动因素</li><li>政策与技术趋势</li></ul>
+            <div class="strat-module-kw">Market Size · Growth · Lifecycle · Drivers · Trend</div>
+          </div>
+
+          <div class="strat-module">
+            <div class="strat-module-tag">B</div>
+            <h4>竞争格局分析</h4>
+            <div class="strat-module-q">谁在赢？为什么赢？</div>
+            <ul><li>竞争玩家</li><li>子赛道变化</li><li>渠道结构</li><li>商业模式</li><li>市场份额演变</li></ul>
+            <div class="strat-module-kw">Competition · Sub-segment · Channel · Business Model · Market Share</div>
+          </div>
+
+          <div class="strat-module">
+            <div class="strat-module-tag">C</div>
+            <h4>战略控制点识别</h4>
+            <div class="strat-module-q">真正决定利润分配的位置在哪里？</div>
+            <ul><li>渠道入口</li><li>品牌信任</li><li>技术壁垒</li><li>数据资产</li><li>核心资源</li><li>标准与牌照</li></ul>
+            <div class="strat-module-kw">Control Point · Entry Barrier · Brand · Data · Capability</div>
+          </div>
+
+          <div class="strat-module">
+            <div class="strat-module-tag">D</div>
+            <h4>战略假设迭代</h4>
+            <div class="strat-module-q">今天的判断，如何持续被验证？</div>
+            <ul><li>市场情报</li><li>竞争动作</li><li>政策变化</li><li>经营结果</li><li>假设修正</li></ul>
+            <div class="strat-module-kw">Hypothesis · Evidence · Iteration · Learning</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="strat-section-title">战略洞察引擎</div>
+        <div class="strat-matrix">
+          <div class="strat-matrix-layer"><div class="strat-matrix-label">外部环境</div><div class="strat-matrix-content">政策 ｜ 技术 ｜ 消费 ｜ 资本</div></div>
+          <div class="strat-matrix-arrow">↓</div>
+          <div class="strat-matrix-layer"><div class="strat-matrix-label">行业结构</div><div class="strat-matrix-content">规模 ｜ 增速 ｜ 生命周期</div></div>
+          <div class="strat-matrix-arrow">↓</div>
+          <div class="strat-matrix-layer"><div class="strat-matrix-label">竞争格局</div><div class="strat-matrix-content">玩家 ｜ 渠道 ｜ 价值链</div></div>
+          <div class="strat-matrix-arrow">↓</div>
+          <div class="strat-matrix-layer"><div class="strat-matrix-label">战略控制点</div><div class="strat-matrix-content">品牌 ｜ 资源 ｜ 技术 ｜ 数据</div></div>
+          <div class="strat-matrix-arrow">↓</div>
+          <div class="strat-matrix-layer"><div class="strat-matrix-label">增长机会</div><div class="strat-matrix-content">进入 ｜ 扩张 ｜ 重构</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="strat-section-title">项目沉淀的方法价值</div>
+        <div class="strat-outcomes">
+          <div class="strat-outcome"><h4>建立行业认知框架</h4><p>从零散信息中提炼行业演化规律，形成结构化的行业理解方式。</p></div>
+          <div class="strat-outcome"><h4>建立结构化战略判断</h4><p>让战略分析从经验驱动转向证据驱动，用数据和逻辑支撑关键决策。</p></div>
+          <div class="strat-outcome"><h4>建立增长机会识别能力</h4><p>在复杂竞争环境中识别长期竞争优势与资源配置方向。</p></div>
+        </div>
+      </div>
+
+      <div class="strat-quote">
+        <p>战略分析的本质，不是预测未来，而是在不确定性中识别决定未来的关键变量。</p>
+      </div>
+
+      <div class="strat-note">* 本页为通用分析方法论展示，不涉及具体公司、品牌或经营数据。</div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MANAGEMENT OVERLAY -->
+<div class="tool-overlay" id="mgmt-overlay" role="dialog" aria-modal="true" aria-label="经营洞察与管理闭环">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-mgmt">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">经营洞察与管理闭环</div>
+        <div class="tool-overlay-sub">Management Analytics · 从问题识别到持续改进的经营分析闭环</div>
+      </div>
+    </div>
+
+    <div class="mgmt-dashboard">
+
+      <div class="mgmt-hero">
+        <h2>经营洞察与管理闭环</h2>
+        <p>围绕收入、利润、毛利、费用、应收与效率等核心经营变量，<br>构建从问题识别、原因拆解、行动制定到复盘追踪的经营分析闭环。</p>
+        <div class="mgmt-hero-flow">
+          <span>结果</span><span class="arrow">↓</span>
+          <span>原因</span><span class="arrow">↓</span>
+          <span>行动</span><span class="arrow">↓</span>
+          <span>责任</span><span class="arrow">↓</span>
+          <span>复盘</span>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="mgmt-section-title">核心分析链路</div>
+        <div class="mgmt-chain">
+          <div class="mgmt-chain-step"><div class="mgmt-chain-num">01</div><h4>结果诊断</h4><p>从收入、利润、毛利、费用等核心指标出发，定位经营结果的真实状态。</p></div>
+          <div class="mgmt-chain-step"><div class="mgmt-chain-num">02</div><h4>业务拆解</h4><p>按产品、渠道、客户、区域、项目维度穿透，找到差异的真正来源。</p></div>
+          <div class="mgmt-chain-step"><div class="mgmt-chain-num">03</div><h4>经营洞察</h4><p>从数据中提炼经营判断，识别问题本质与潜在风险。</p></div>
+          <div class="mgmt-chain-step"><div class="mgmt-chain-num">04</div><h4>管理动作</h4><p>将洞察转化为具体的责任部门、改进措施、时间节点和跟踪机制。</p></div>
+          <div class="mgmt-chain-step"><div class="mgmt-chain-num">05</div><h4>会议闭环</h4><p>通过上期回顾、动作验证、责任复盘和下期跟踪，形成持续改进循环。</p></div>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="mgmt-section-title">四大能力模块</div>
+        <div class="mgmt-cards">
+
+          <div class="mgmt-card">
+            <div class="mgmt-card-tag">A</div>
+            <h4>结果诊断</h4>
+            <div class="mgmt-card-q">经营结果究竟发生了什么？</div>
+            <ul><li>收入</li><li>利润</li><li>毛利</li><li>费用</li><li>现金流</li><li>周转效率</li></ul>
+            <div class="mgmt-card-kw">Revenue · Profit · Margin · Cash Flow · Efficiency</div>
+          </div>
+
+          <div class="mgmt-card">
+            <div class="mgmt-card-tag">B</div>
+            <h4>业务拆解</h4>
+            <div class="mgmt-card-q">差异到底来自哪里？</div>
+            <ul><li>产品</li><li>渠道</li><li>客户</li><li>区域</li><li>项目</li><li>组织</li></ul>
+            <div class="mgmt-card-kw">Product · Channel · Customer · Region · Project</div>
+          </div>
+
+          <div class="mgmt-card">
+            <div class="mgmt-card-tag">C</div>
+            <h4>管理动作</h4>
+            <div class="mgmt-card-q">分析之后应该做什么？</div>
+            <ul><li>问题归因</li><li>责任部门</li><li>改进措施</li><li>时间节点</li><li>跟踪机制</li></ul>
+            <div class="mgmt-card-kw">Action · Owner · Timeline · Tracking</div>
+          </div>
+
+          <div class="mgmt-card">
+            <div class="mgmt-card-tag">D</div>
+            <h4>会议闭环</h4>
+            <div class="mgmt-card-q">如何形成持续改进机制？</div>
+            <ul><li>上期回顾</li><li>本期问题</li><li>动作验证</li><li>责任复盘</li><li>下期跟踪</li></ul>
+            <div class="mgmt-card-kw">Review · Issue · Validation · Improvement</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="mgmt-section-title">经营分析闭环引擎</div>
+        <div class="mgmt-cycle">
+          <div class="mgmt-cycle-step"><div class="mgmt-cycle-num">01</div><h4>经营结果</h4><p>收入｜利润｜现金</p></div>
+          <div class="mgmt-cycle-step"><div class="mgmt-cycle-num">02</div><h4>问题识别</h4><p>异常｜差异｜风险</p></div>
+          <div class="mgmt-cycle-step"><div class="mgmt-cycle-num">03</div><h4>经营洞察</h4><p>产品｜渠道｜客户</p></div>
+          <div class="mgmt-cycle-step"><div class="mgmt-cycle-num">04</div><h4>管理动作</h4><p>责任｜措施｜计划</p></div>
+          <div class="mgmt-cycle-step"><div class="mgmt-cycle-num">05</div><h4>经营复盘</h4><p>验证｜追踪｜迭代</p></div>
+        </div>
+        <div class="mgmt-cycle-back">↑ 复盘结果回流至下一轮经营结果诊断，形成持续改进闭环 ↑</div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="mgmt-section-title">项目沉淀的方法价值</div>
+        <div class="mgmt-outcomes">
+          <div class="mgmt-outcome"><h4>建立经营诊断体系</h4><p>从报表结果穿透到经营本质，让数据真正服务于管理决策。</p></div>
+          <div class="mgmt-outcome"><h4>建立业财协同机制</h4><p>让经营分析真正进入管理决策，推动业务与财务的深度协同。</p></div>
+          <div class="mgmt-outcome"><h4>建立持续改进闭环</h4><p>形成问题发现、责任落实和结果验证的循环体系。</p></div>
+        </div>
+      </div>
+
+      <div class="mgmt-quote">
+        <p>经营分析的价值，不是解释过去，而是推动组织持续做出更好的经营决策。</p>
+      </div>
+
+      <div class="mgmt-note">* 本页为通用分析方法论展示，不涉及具体公司、品牌或经营数据。</div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- STRATPLAN OVERLAY -->
+<div class="tool-overlay" id="stratplan-overlay" role="dialog" aria-modal="true" aria-label="集团战略规划体系建设">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-stratplan">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">集团战略规划体系建设</div>
+        <div class="tool-overlay-sub">Strategic Planning · 从规划文本到经营落地的战略管理体系</div>
+      </div>
+    </div>
+
+    <div class="sp-dashboard">
+
+      <div class="sp-hero">
+        <h2>集团战略规划体系建设</h2>
+        <p>参与集团中长期战略规划与战略管理机制建设，围绕战略研判、目标解码、路径设计与执行跟踪，<br>推动战略从规划文本走向经营落地。</p>
+        <div class="sp-hero-flow">
+          <span>洞察</span><span class="arrow">↓</span>
+          <span>战略</span><span class="arrow">↓</span>
+          <span>目标</span><span class="arrow">↓</span>
+          <span>行动</span><span class="arrow">↓</span>
+          <span>价值</span>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="sp-section-title">核心分析链路</div>
+        <div class="sp-chain">
+          <div class="sp-chain-step"><div class="sp-chain-num">01</div><h4>战略研判</h4><p>从宏观环境、行业趋势、竞争格局和公司能力出发，识别中长期发展方向。</p></div>
+          <div class="sp-chain-step"><div class="sp-chain-num">02</div><h4>战略规划</h4><p>明确愿景目标、核心战略主题、业务布局与增长路径，形成战略地图。</p></div>
+          <div class="sp-chain-step"><div class="sp-chain-num">03</div><h4>战略解码</h4><p>将集团战略分解为业务单元目标、关键专项任务和年度经营任务。</p></div>
+          <div class="sp-chain-step"><div class="sp-chain-num">04</div><h4>执行协同</h4><p>推动战略与预算、经营计划、重点项目和组织资源的深度协同。</p></div>
+          <div class="sp-chain-step"><div class="sp-chain-num">05</div><h4>战略闭环</h4><p>建立跟踪、评估、复盘和迭代机制，确保战略持续运行。</p></div>
+        </div>
+        <div class="sp-chain-note">从战略方向识别，到目标分解与组织协同，建立可执行、可跟踪、可复盘的战略管理体系。</div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="sp-section-title">五大能力模块</div>
+        <div class="sp-cards">
+
+          <div class="sp-card">
+            <div class="sp-card-num">01</div>
+            <h4>战略研判</h4>
+            <div class="sp-card-q">未来应该向哪里发展？</div>
+            <ul><li>宏观环境分析</li><li>行业趋势判断</li><li>竞争格局演化</li><li>公司能力评估</li><li>中长期机会识别</li></ul>
+            <div class="sp-card-kw">Macro · Industry · Competition · Capability · Opportunity</div>
+          </div>
+
+          <div class="sp-card">
+            <div class="sp-card-num">02</div>
+            <h4>战略规划</h4>
+            <div class="sp-card-q">应该构建什么样的发展路径？</div>
+            <ul><li>中长期发展目标</li><li>核心战略主题</li><li>业务布局设计</li><li>增长路径设计</li><li>资源配置方向</li></ul>
+            <div class="sp-card-kw">Vision · Mission · Portfolio · Growth · Roadmap</div>
+          </div>
+
+          <div class="sp-card">
+            <div class="sp-card-num">03</div>
+            <h4>战略解码</h4>
+            <div class="sp-card-q">战略如何转化为组织行动？</div>
+            <ul><li>集团战略目标</li><li>业务单元目标</li><li>关键专项任务</li><li>年度经营任务</li><li>阶段里程碑</li></ul>
+            <div class="sp-card-kw">Objective · Initiative · Milestone · Alignment</div>
+          </div>
+
+          <div class="sp-card">
+            <div class="sp-card-num">04</div>
+            <h4>战略管理机制</h4>
+            <div class="sp-card-q">如何确保战略持续运行？</div>
+            <ul><li>战略制定机制</li><li>评审机制</li><li>分解机制</li><li>跟踪机制</li><li>复盘机制</li></ul>
+            <div class="sp-card-kw">Governance · Review · Tracking · Feedback</div>
+          </div>
+
+          <div class="sp-card">
+            <div class="sp-card-num">05</div>
+            <h4>战略落地执行</h4>
+            <div class="sp-card-q">如何避免战略停留在PPT？</div>
+            <ul><li>战略与预算协同</li><li>战略与经营计划协同</li><li>战略与重点项目协同</li><li>战略与组织资源协同</li><li>战略执行复盘</li></ul>
+            <div class="sp-card-kw">Budget · Plan · Project · Execution · Review</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="sp-section-title">集团战略管理闭环</div>
+        <div class="sp-matrix">
+          <div class="sp-matrix-layer"><div class="sp-matrix-label">战略洞察</div><div class="sp-matrix-content">宏观 ｜ 行业 ｜ 竞争 ｜ 能力</div></div>
+          <div class="sp-matrix-arrow">↓</div>
+          <div class="sp-matrix-layer"><div class="sp-matrix-label">战略规划</div><div class="sp-matrix-content">愿景 ｜ 目标 ｜ 业务布局 ｜ 增长路径</div></div>
+          <div class="sp-matrix-arrow">↓</div>
+          <div class="sp-matrix-layer"><div class="sp-matrix-label">战略解码</div><div class="sp-matrix-content">战略主题 ｜ 专项任务 ｜ 年度目标</div></div>
+          <div class="sp-matrix-arrow">↓</div>
+          <div class="sp-matrix-layer"><div class="sp-matrix-label">执行协同</div><div class="sp-matrix-content">预算 ｜ 计划 ｜ 项目 ｜ 组织资源</div></div>
+          <div class="sp-matrix-arrow">↓</div>
+          <div class="sp-matrix-layer"><div class="sp-matrix-label">战略闭环</div><div class="sp-matrix-content">跟踪 ｜ 评估 ｜ 复盘 ｜ 迭代</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="sp-section-title">项目沉淀的方法价值</div>
+        <div class="sp-outcomes">
+          <div class="sp-outcome"><h4>建立战略管理体系</h4><p>从一次性规划文件升级为持续运行的战略管理机制。</p></div>
+          <div class="sp-outcome"><h4>建立目标协同机制</h4><p>实现集团战略与业务单元目标、重点专项和年度经营计划的有效衔接。</p></div>
+          <div class="sp-outcome"><h4>建立战略执行闭环</h4><p>推动战略制定、分解、跟踪、复盘形成循环迭代，提升组织战略执行能力。</p></div>
+        </div>
+      </div>
+
+      <div class="sp-quote">
+        <p>战略的价值，不在于写出一份规划，<br>而在于让组织知道为什么做、做什么，以及如何持续做到。</p>
+      </div>
+
+      <div class="sp-note">* 本页为通用分析方法论展示，不涉及具体公司、品牌或经营数据。</div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- FINANCE OVERLAY -->
+<div class="tool-overlay" id="finance-overlay" role="dialog" aria-modal="true" aria-label="财经管理与价值创造">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-finance">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">财经管理与价值创造</div>
+        <div class="tool-overlay-sub">Financial Management · 从核算支持走向价值创造</div>
+      </div>
+    </div>
+    <div class="fin-dashboard">
+
+      <div class="fin-hero">
+        <h2>财经管理与价值创造</h2>
+        <p>围绕业财一体化、资源配置、预算管理与经营分析，推动财务从核算支持走向价值创造，<br>增强经营决策、过程管控与结果复盘能力。</p>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="fin-section-title">核心能力链路</div>
+        <div class="fin-chain">
+          <div class="fin-chain-step"><div class="fin-chain-num">01</div><h4>业财一体化</h4><p>以「预算 → 核算 → 经营 → 考核」形成闭环，把财务逻辑嵌入业务流程与经营管理。</p></div>
+          <div class="fin-chain-step"><div class="fin-chain-num">02</div><h4>资源配置</h4><p>从静态部门预算转向按「战场、项目、场景」配置资源，提升投入产出匹配度。</p></div>
+          <div class="fin-chain-step"><div class="fin-chain-num">03</div><h4>财经组织</h4><p>推动 COE、BP、SSC 协同演进，强化规则管理、数据治理与决策支持能力。</p></div>
+          <div class="fin-chain-step"><div class="fin-chain-num">04</div><h4>经营管控</h4><p>围绕毛利、费用、利润、现金流和应收等关键指标，建立事前、事中、事后联动机制。</p></div>
+          <div class="fin-chain-step"><div class="fin-chain-num">05</div><h4>价值创造</h4><p>通过成本管控、预算追踪、项目复盘和经营改善，把财务能力转化为增长质量和经营效率。</p></div>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="fin-section-title">五大能力模块</div>
+        <div class="fin-cards">
+          <div class="fin-card">
+            <div class="fin-card-num">01</div>
+            <h4>业财一体化</h4>
+            <div class="fin-card-q">如何让财务逻辑真正嵌入业务流程？</div>
+            <ul><li>预算编制与分解</li><li>核算口径统一</li><li>经营分析联动</li><li>考核指标衔接</li></ul>
+            <div class="fin-card-kw">Budget · Accounting · Analysis · KPI</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-num">02</div>
+            <h4>资源配置</h4>
+            <div class="fin-card-q">资源应该投向哪里？如何提升投入产出？</div>
+            <ul><li>战场优先级判断</li><li>项目制资源匹配</li><li>场景化预算配置</li><li>投入产出追踪</li></ul>
+            <div class="fin-card-kw">Resource · Priority · ROI · Allocation</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-num">03</div>
+            <h4>财经组织建设</h4>
+            <div class="fin-card-q">财经组织如何从记账走向决策支持？</div>
+            <ul><li>COE 规则管理</li><li>BP 业务赋能</li><li>SSC 效率提升</li><li>数据治理体系</li></ul>
+            <div class="fin-card-kw">COE · BP · SSC · Governance</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-num">04</div>
+            <h4>经营管控</h4>
+            <div class="fin-card-q">如何建立事前、事中、事后的联动机制？</div>
+            <ul><li>毛利监控</li><li>费用管控</li><li>现金流管理</li><li>应收周转</li></ul>
+            <div class="fin-card-kw">Margin · Cost · Cash Flow · AR</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-num">05</div>
+            <h4>价值创造</h4>
+            <div class="fin-card-q">财务能力如何转化为经营效率？</div>
+            <ul><li>成本管控</li><li>预算追踪</li><li>项目复盘</li><li>经营改善</li></ul>
+            <div class="fin-card-kw">Cost · Budget · Review · Improvement</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="fin-section-title">业财一体化闭环</div>
+        <div class="fin-matrix">
+          <div class="fin-matrix-layer"><div class="fin-matrix-label">预算管理</div><div class="fin-matrix-content">目标编制 ｜ 资源配置 ｜ 分解下达</div></div>
+          <div class="fin-matrix-arrow">↓</div>
+          <div class="fin-matrix-layer"><div class="fin-matrix-label">核算管理</div><div class="fin-matrix-content">口径统一 ｜ 数据归集 ｜ 报表输出</div></div>
+          <div class="fin-matrix-arrow">↓</div>
+          <div class="fin-matrix-layer"><div class="fin-matrix-label">经营分析</div><div class="fin-matrix-content">差异识别 ｜ 原因拆解 ｜ 洞察输出</div></div>
+          <div class="fin-matrix-arrow">↓</div>
+          <div class="fin-matrix-layer"><div class="fin-matrix-label">管理动作</div><div class="fin-matrix-content">责任落实 ｜ 改进措施 ｜ 跟踪闭环</div></div>
+          <div class="fin-matrix-arrow">↓</div>
+          <div class="fin-matrix-layer"><div class="fin-matrix-label">考核复盘</div><div class="fin-matrix-content">结果评估 ｜ 经验沉淀 ｜ 迭代优化</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="fin-section-title">能力沉淀</div>
+        <div class="fin-outcomes">
+          <div class="fin-outcome"><h4>业财融合能力</h4><p>以业财一体化打通预算、核算、分析与复盘链路，推动财务逻辑嵌入业务流程。</p></div>
+          <div class="fin-outcome"><h4>资源配置能力</h4><p>从静态预算转向动态资源配置，按战场、项目、场景精准匹配，提升投入产出效率。</p></div>
+          <div class="fin-outcome"><h4>价值创造能力</h4><p>推动财务从后台支持走向价值创造，支撑经营决策、过程管控与结果复盘。</p></div>
+        </div>
+      </div>
+
+      <div class="fin-quote">
+        <p>财经管理的价值，不在于把账算清楚，<br>而在于让资源配置更精准、经营管控更前置、增长质量更可衡量。</p>
+      </div>
+      <div class="fin-note">* 本页为通用能力方法论展示，不涉及具体公司、品牌或经营数据。</div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- QUALITY OVERLAY -->
+<div class="tool-overlay" id="quality-overlay" role="dialog" aria-modal="true" aria-label="质量管理体系建设">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-quality">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">质量管理体系建设</div>
+        <div class="tool-overlay-sub">Quality System · 从单点合规走向持续改进</div>
+      </div>
+    </div>
+    <div class="qua-dashboard">
+
+      <div class="qua-hero">
+        <h2>质量管理体系建设</h2>
+        <p>围绕实验室管理、流程标准化与质量体系建设，<br>推动质量管理从单点合规走向过程协同、系统支撑与持续改进。</p>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="qua-section-title">核心能力链路</div>
+        <div class="qua-chain">
+          <div class="qua-chain-step"><div class="qua-chain-num">01</div><h4>体系建设</h4><p>基于标准化管理思路，推进质量管理框架、制度要求和执行流程统一。</p></div>
+          <div class="qua-chain-step"><div class="qua-chain-num">02</div><h4>实验室管理</h4><p>围绕实验室业务场景推动信息化建设，提升检测、记录、追溯与协同效率。</p></div>
+          <div class="qua-chain-step"><div class="qua-chain-num">03</div><h4>流程优化</h4><p>打通研发、生产、检验、仓储等关键环节，强化过程控制与跨部门协同。</p></div>
+          <div class="qua-chain-step"><div class="qua-chain-num">04</div><h4>系统支撑</h4><p>结合 LIMS 等数字化工具，推动质量数据留痕、流程规范和管理可追溯。</p></div>
+          <div class="qua-chain-step"><div class="qua-chain-num">05</div><h4>持续改进</h4><p>以 PDCA、风险思维和过程评价为抓手，推动质量体系从文件合规走向运营能力。</p></div>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="qua-section-title">五大能力模块</div>
+        <div class="qua-cards">
+          <div class="qua-card">
+            <div class="qua-card-num">01</div>
+            <h4>体系建设</h4>
+            <div class="qua-card-q">如何建立统一的质量管理框架？</div>
+            <ul><li>质量管理框架设计</li><li>制度要求统一</li><li>执行流程标准化</li><li>文件体系管理</li></ul>
+            <div class="qua-card-kw">Framework · Standard · SOP · Documentation</div>
+          </div>
+          <div class="qua-card">
+            <div class="qua-card-num">02</div>
+            <h4>实验室管理</h4>
+            <div class="qua-card-q">如何提升实验室运营效率与合规水平？</div>
+            <ul><li>检测流程管理</li><li>记录与追溯</li><li>设备与试剂管理</li><li>人员能力建设</li></ul>
+            <div class="qua-card-kw">Testing · Traceability · Equipment · Competence</div>
+          </div>
+          <div class="qua-card">
+            <div class="qua-card-num">03</div>
+            <h4>流程优化</h4>
+            <div class="qua-card-q">如何打通关键环节实现过程协同？</div>
+            <ul><li>研发流程衔接</li><li>生产过程控制</li><li>检验与仓储联动</li><li>跨部门协同机制</li></ul>
+            <div class="qua-card-kw">R&D · Production · QC · Collaboration</div>
+          </div>
+          <div class="qua-card">
+            <div class="qua-card-num">04</div>
+            <h4>系统支撑</h4>
+            <div class="qua-card-q">如何用数字化工具支撑质量管理？</div>
+            <ul><li>LIMS 系统建设</li><li>质量数据留痕</li><li>流程在线化</li><li>管理可追溯</li></ul>
+            <div class="qua-card-kw">LIMS · Digital · Data · Audit Trail</div>
+          </div>
+          <div class="qua-card">
+            <div class="qua-card-num">05</div>
+            <h4>持续改进</h4>
+            <div class="qua-card-q">如何让质量体系持续运转而非一次性合规？</div>
+            <ul><li>PDCA 循环</li><li>风险思维</li><li>过程评价</li><li>CAPA 管理</li></ul>
+            <div class="qua-card-kw">PDCA · Risk · Process · CAPA</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="qua-section-title">质量管理体系框架</div>
+        <div class="qua-matrix">
+          <div class="qua-matrix-layer"><div class="qua-matrix-label">体系建设</div><div class="qua-matrix-content">框架 ｜ 制度 ｜ 流程 ｜ 文件</div></div>
+          <div class="qua-matrix-arrow">↓</div>
+          <div class="qua-matrix-layer"><div class="qua-matrix-label">过程控制</div><div class="qua-matrix-content">研发 ｜ 生产 ｜ 检验 ｜ 仓储</div></div>
+          <div class="qua-matrix-arrow">↓</div>
+          <div class="qua-matrix-layer"><div class="qua-matrix-label">系统支撑</div><div class="qua-matrix-content">LIMS ｜ 数据留痕 ｜ 流程在线 ｜ 追溯</div></div>
+          <div class="qua-matrix-arrow">↓</div>
+          <div class="qua-matrix-layer"><div class="qua-matrix-label">合规保障</div><div class="qua-matrix-content">审计 ｜ 偏差 ｜ CAPA ｜ 变更</div></div>
+          <div class="qua-matrix-arrow">↓</div>
+          <div class="qua-matrix-layer"><div class="qua-matrix-label">持续改进</div><div class="qua-matrix-content">PDCA ｜ 风险评价 ｜ 过程优化 ｜ 迭代</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:1px;">
+        <div class="qua-section-title">能力沉淀</div>
+        <div class="qua-outcomes">
+          <div class="qua-outcome"><h4>体系建设能力</h4><p>基于标准化管理思路，推进质量管理框架、制度和执行流程的统一与落地。</p></div>
+          <div class="qua-outcome"><h4>数字化支撑能力</h4><p>结合 LIMS 等工具推动质量数据留痕、流程规范和管理可追溯，提升运营效率。</p></div>
+          <div class="qua-outcome"><h4>持续改进能力</h4><p>以 PDCA 和风险思维推动质量体系从文件合规走向运营能力，实现持续改进。</p></div>
+        </div>
+      </div>
+
+      <div class="qua-quote">
+        <p>质量管理的价值，不在于通过一次审计，而在于让标准成为习惯、让改进成为机制。</p>
+      </div>
+      <div class="qua-note">* 本页为通用能力方法论展示，不涉及具体公司、品牌或经营数据。</div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -2877,12 +5349,119 @@ const state = {
   function fmt(n){ return Number.isFinite(n)?n.toLocaleString('zh-CN',{maximumFractionDigits:2}):n; }
   function parseNum(s){ return parseFloat(String(s).replace(/,/g,'')); }
 
-  /* ── overlay open/close ── */
+  /* ── calc overlay open/close ── */
   const overlay = document.getElementById('calc-overlay');
-  document.getElementById('open-calc').addEventListener('click', ()=>{ overlay.classList.add('active'); document.body.style.overflow='hidden'; });
-  document.getElementById('open-calc').addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { overlay.classList.add('active'); document.body.style.overflow='hidden'; }});
   document.getElementById('close-calc').addEventListener('click', ()=>{ overlay.classList.remove('active'); document.body.style.overflow=''; });
-  document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ overlay.classList.remove('active'); document.body.style.overflow=''; }});
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && overlay.classList.contains('active')){ overlay.classList.remove('active'); document.body.style.overflow=''; }});
+
+  /* ── LIMS overlay ── */
+  const limsOverlay = document.getElementById('lims-overlay');
+  const limsOpen = document.getElementById('open-lims');
+  const limsClose = document.getElementById('close-lims');
+  function openLims(){ limsOverlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeLims(){ limsOverlay.classList.remove('active'); document.body.style.overflow=''; }
+  limsOpen.addEventListener('click', openLims);
+  limsOpen.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openLims(); } });
+  limsClose.addEventListener('click', closeLims);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && limsOverlay.classList.contains('active')) closeLims(); });
+
+  /* ── Obsidian overlay ── */
+  const obsOverlay = document.getElementById('obsidian-overlay');
+  const obsOpen = document.getElementById('open-obsidian');
+  const obsClose = document.getElementById('close-obsidian');
+  function openObs(){ obsOverlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeObs(){ obsOverlay.classList.remove('active'); document.body.style.overflow=''; }
+  obsOpen.addEventListener('click', openObs);
+  obsOpen.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openObs(); } });
+  obsClose.addEventListener('click', closeObs);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && obsOverlay.classList.contains('active')) closeObs(); });
+
+  /* ── E-commerce overlay ── */
+  const ecomOverlay = document.getElementById('ecom-overlay');
+  const ecomOpen = document.getElementById('open-ecom');
+  const ecomClose = document.getElementById('close-ecom');
+  function openEcom(){ ecomOverlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeEcom(){ ecomOverlay.classList.remove('active'); document.body.style.overflow=''; }
+  ecomOpen.addEventListener('click', openEcom);
+  ecomOpen.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openEcom(); } });
+  ecomClose.addEventListener('click', closeEcom);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && ecomOverlay.classList.contains('active')) closeEcom(); });
+
+  /* ── Product overlay ── */
+  const prodOverlay = document.getElementById('product-overlay');
+  const prodOpen = document.getElementById('open-product');
+  const prodClose = document.getElementById('close-product');
+  function openProd(){ prodOverlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeProd(){ prodOverlay.classList.remove('active'); document.body.style.overflow=''; }
+  prodOpen.addEventListener('click', openProd);
+  prodOpen.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openProd(); } });
+  prodClose.addEventListener('click', closeProd);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && prodOverlay.classList.contains('active')) closeProd(); });
+
+  /* ── Strategy overlay ── */
+  const stratOverlay = document.getElementById('strategy-overlay');
+  const stratOpen = document.getElementById('open-strategy');
+  const stratClose = document.getElementById('close-strategy');
+  function openStrat(){ stratOverlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeStrat(){ stratOverlay.classList.remove('active'); document.body.style.overflow=''; }
+  stratOpen.addEventListener('click', openStrat);
+  stratOpen.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openStrat(); } });
+  stratClose.addEventListener('click', closeStrat);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && stratOverlay.classList.contains('active')) closeStrat(); });
+
+  /* ── Management overlay ── */
+  const mgmtOverlay = document.getElementById('mgmt-overlay');
+  const mgmtOpen = document.getElementById('open-management');
+  const mgmtClose = document.getElementById('close-mgmt');
+  function openMgmt(){ mgmtOverlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeMgmt(){ mgmtOverlay.classList.remove('active'); document.body.style.overflow=''; }
+  mgmtOpen.addEventListener('click', openMgmt);
+  mgmtOpen.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openMgmt(); } });
+  mgmtClose.addEventListener('click', closeMgmt);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && mgmtOverlay.classList.contains('active')) closeMgmt(); });
+
+  /* ── Stratplan overlay ── */
+  const spOverlay = document.getElementById('stratplan-overlay');
+  const spOpen = document.getElementById('open-stratplan');
+  const spClose = document.getElementById('close-stratplan');
+  function openSP(){ spOverlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeSP(){ spOverlay.classList.remove('active'); document.body.style.overflow=''; }
+  spOpen.addEventListener('click', openSP);
+  spOpen.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openSP(); } });
+  spClose.addEventListener('click', closeSP);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && spOverlay.classList.contains('active')) closeSP(); });
+
+  /* ── Finance overlay ── */
+  const finOverlay = document.getElementById('finance-overlay');
+  const finOpen = document.getElementById('open-finance');
+  const finClose = document.getElementById('close-finance');
+  function openFin(){ finOverlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeFin(){ finOverlay.classList.remove('active'); document.body.style.overflow=''; }
+  finOpen.addEventListener('click', openFin);
+  finOpen.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openFin(); } });
+  finClose.addEventListener('click', closeFin);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && finOverlay.classList.contains('active')) closeFin(); });
+
+  /* ── Quality overlay ── */
+  const quaOverlay = document.getElementById('quality-overlay');
+  const quaOpen = document.getElementById('open-quality');
+  const quaClose = document.getElementById('close-quality');
+  function openQua(){ quaOverlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeQua(){ quaOverlay.classList.remove('active'); document.body.style.overflow=''; }
+  quaOpen.addEventListener('click', openQua);
+  quaOpen.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openQua(); } });
+  quaClose.addEventListener('click', closeQua);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && quaOverlay.classList.contains('active')) closeQua(); });
+
+  /* ── cross-navigation: viz ↔ calc ── */
+  document.getElementById('switch-to-calc').addEventListener('click', ()=>{
+    document.getElementById('viz-overlay').classList.remove('active');
+    document.getElementById('calc-overlay').classList.add('active');
+  });
+  document.getElementById('switch-to-viz').addEventListener('click', ()=>{
+    document.getElementById('calc-overlay').classList.remove('active');
+    document.getElementById('viz-overlay').classList.add('active');
+  });
 
   /* ── tabs ── */
   document.querySelectorAll('.calc-tab').forEach(btn=>{
@@ -3012,6 +5591,7 @@ const state = {
 })();
 </script>
 
+
 <!-- FOOTER -->
 <footer id="contact">
 
@@ -3049,7 +5629,7 @@ const state = {
   </div>
 
   <div class="footer-copy">
-    <div class="footer-copy-left">© 2025 王一昊 · All rights reserved</div>
+    <div class="footer-copy-left">© 2026 王一昊 · All rights reserved</div>
     <div class="footer-copy-right">
       <span>经营分析</span>
       <span>战略规划</span>
@@ -3058,6 +5638,16 @@ const state = {
   </div>
 
 </footer>
+
+<!-- CLOSING -->
+<section class="closing-section">
+  <div class="closing-quote">
+    数据穿透经营·战略驱动增长<br>
+    <span class="closing-en">Think in Data · Act on Strategy</span>
+  </div>
+</section>
+
+
 
 <script>
 /* ── SLOGAN SPLIT ANIMATION ── */
@@ -3071,49 +5661,22 @@ const state = {
       const span = document.createElement('span');
       span.className = cls;
       span.textContent = ch;
+      if (ch === ' ') { span.style.width = '0.45em'; span.style.display = 'inline-block'; }
       span.style.animationDelay = (startDelay + i * CHAR_DELAY) + 'ms';
       el.appendChild(span);
     });
   }
 
-  /* ── 中文：「数据穿透经营」· 「战略驱动增长」── */
-  const cnLeft  = '数据穿透经营';
-  const cnRight = '战略驱动增长';
-  const cnDot   = document.getElementById('slogan-cn-dot');
+  /* ── 中文：洞察世界，定义方向，创造价值，沉淀认知。 ── */
+  const cnText = '洞察世界，定义方向，创造价值，沉淀认知。';
+  const cnRow = document.getElementById('slogan-cn-row');
+  injectChars(cnRow, [...cnText], START_CN, 'split-char');
 
-  injectChars(document.getElementById('slogan-cn-left'),  [...cnLeft],  START_CN, 'split-char');
-  // · 在中文左侧全部入场后出现
-  const dotDelayCn = START_CN + cnLeft.length * CHAR_DELAY;
-  cnDot.textContent = '·';
-  cnDot.style.animation = `charIn 0.6s cubic-bezier(0.22,1,0.36,1) ${dotDelayCn}ms forwards`;
-  // 右侧紧接 ·
-  injectChars(document.getElementById('slogan-cn-right'), [...cnRight], dotDelayCn + CHAR_DELAY, 'split-char');
-
-  /* ── 英文：「Think in Data」· 「Act on Strategy」── */
-  const enLeftWords  = ['Think', 'in', 'Data'];
-  const enRightWords = ['Act', 'on', 'Strategy'];
-  const enDot        = document.getElementById('slogan-en-dot');
-
-  // 英文在中文全部完成后开始
-  const totalCnChars = cnLeft.length + 1 + cnRight.length;
-  const START_EN = START_CN + totalCnChars * CHAR_DELAY + 500;
-  const WORD_DELAY = 130;
-
-  function injectWords(el, words, startDelay) {
-    words.forEach((w, i) => {
-      const span = document.createElement('span');
-      span.className = 'split-word';
-      span.textContent = w + (i < words.length - 1 ? '\u00a0' : '');
-      span.style.animationDelay = (startDelay + i * WORD_DELAY) + 'ms';
-      el.appendChild(span);
-    });
-  }
-
-  injectWords(document.getElementById('slogan-en-left'),  enLeftWords,  START_EN);
-  const dotDelayEn = START_EN + enLeftWords.length * WORD_DELAY;
-  enDot.textContent = '·';
-  enDot.style.animation = `charIn 0.6s cubic-bezier(0.22,1,0.36,1) ${dotDelayEn}ms forwards`;
-  injectWords(document.getElementById('slogan-en-right'), enRightWords, dotDelayEn + WORD_DELAY);
+  /* ── 英文：Understand the World. Define Direction. Create Value. Compound Wisdom. ── */
+  const enText = 'Understand the World. Define Direction. Create Value. Compound Wisdom.';
+  const enRow = document.getElementById('slogan-en-row');
+  const START_EN = START_CN + cnText.length * CHAR_DELAY + 500;
+  injectChars(enRow, [...enText], START_EN, 'split-word');
 })();
 </script>
 
