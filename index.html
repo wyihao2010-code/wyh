@@ -2850,6 +2850,99 @@ footer {
 @media (max-width: 600px) { .sp-hero-flow { flex-direction: column; gap: 4px; } .sp-hero-flow .arrow { transform: rotate(90deg); } }
 
 
+/* ── MULTI-AGENT OVERLAY ── */
+#multiagent-overlay { color-scheme: dark; --mabg: #09090c; --mapanel: #0e0e12; --mapanel2: #141418; --maline: rgba(255,255,255,0.06); --matext: #dfd9cc; --mamuted: #7d7870; --magold: #c39e4f; --magold2: #e8c97e; --magold-dim: rgba(195,158,79,0.15); font-family: 'Noto Sans SC', sans-serif; }
+#multiagent-overlay * { box-sizing: border-box; }
+#multiagent-overlay .ma-dashboard { max-width: 1200px; margin: 0 auto; }
+.ma-hero { text-align: center; padding: 40px 0 50px; }
+.ma-hero h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(28px,4.5vw,42px); font-weight: 200; color: var(--text2); letter-spacing: 0.08em; margin-bottom: 20px; }
+.ma-hero p { font-size: 14px; color: var(--mamuted); line-height: 2; max-width: 660px; margin: 0 auto 28px; }
+.ma-hero-flow { display: flex; justify-content: center; align-items: center; gap: 0; flex-wrap: wrap; }
+.ma-hero-flow span { font-family: 'Noto Serif SC', serif; font-size: 14px; color: var(--matext); letter-spacing: 0.06em; padding: 10px 20px; }
+.ma-hero-flow .arrow { font-size: 14px; color: var(--magold); opacity: 0.6; padding: 0; }
+.ma-section-title { font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 300; color: var(--magold); letter-spacing: 0.08em; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--maline); }
+.ma-chain { display: flex; gap: 1px; background: var(--maline); margin-bottom: 1px; overflow-x: auto; }
+.ma-chain-step { flex: 1; min-width: 180px; background: var(--mapanel); padding: 28px 20px; position: relative; display: flex; flex-direction: column; }
+.ma-chain-step::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--magold), transparent); opacity: 0.35; }
+.ma-chain-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--magold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.ma-chain-step h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.ma-chain-step p { font-size: 12px; color: var(--mamuted); line-height: 2; }
+.ma-cards { display: flex; gap: 1px; background: var(--maline); margin-bottom: 1px; overflow-x: auto; }
+.ma-card { flex: 1; min-width: 200px; background: var(--mapanel); padding: 28px 22px; position: relative; display: flex; flex-direction: column; }
+.ma-card::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--magold), transparent); opacity: 0.35; }
+.ma-card-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--magold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.ma-card h4 { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 8px; }
+.ma-card-q { font-size: 12px; color: var(--matext); padding: 10px 14px; background: var(--magold-dim); border-left: 1px solid var(--magold); margin-bottom: 14px; line-height: 1.8; }
+.ma-card ul { list-style: none; padding: 0; margin: 0; }
+.ma-card li { font-size: 12px; color: var(--mamuted); padding: 4px 0; line-height: 1.8; }
+.ma-card li::before { content: '·'; color: var(--magold); margin-right: 8px; }
+.ma-card-kw { font-size: 10px; color: var(--magold); letter-spacing: 2px; margin-top: auto; padding-top: 14px; opacity: 0.5; text-transform: uppercase; }
+.ma-layers { display: flex; flex-direction: column; gap: 1px; background: var(--maline); margin: 1px 0; }
+.ma-layer { background: var(--mapanel); padding: 28px 32px; display: flex; align-items: center; gap: 24px; position: relative; }
+.ma-layer::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--magold), transparent); opacity: 0.4; }
+.ma-layer-label { font-family: 'Noto Serif SC', serif; font-size: 13px; color: var(--magold); letter-spacing: 0.08em; min-width: 120px; white-space: nowrap; }
+.ma-layer-content { font-size: 13px; color: var(--mamuted); letter-spacing: 2px; }
+.ma-layer-arrow { text-align: center; padding: 6px 0; font-size: 14px; color: var(--magold); opacity: 0.5; background: var(--mabg); }
+.ma-outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--maline); margin-bottom: 1px; }
+.ma-outcome { background: var(--mapanel); padding: 32px 24px; }
+.ma-outcome h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.ma-outcome p { font-size: 12px; color: var(--mamuted); line-height: 2; }
+.ma-quote.page-quote::before,
+.ma-quote.page-quote::after    { background: var(--magold, var(--gold)); opacity: 0.18; }
+.ma-quote.page-quote em        { color: var(--magold, var(--gold)); }
+.ma-quote    { background: var(--mapanel); }
+.ma-note { font-size: 11px; color: var(--dim); margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--maline); line-height: 2; letter-spacing: 0.5px; text-align: center; }
+@media (max-width: 900px) { .ma-chain { flex-direction: column; } .ma-chain-step { min-width: auto; } .ma-cards { flex-direction: column; } .ma-card { min-width: auto; } .ma-outcomes { grid-template-columns: 1fr; } .ma-layer { flex-direction: column; align-items: flex-start; gap: 8px; } }
+@media (max-width: 600px) { .ma-hero-flow { flex-direction: column; gap: 4px; } .ma-hero-flow .arrow { transform: rotate(90deg); } }
+
+
+/* ── AI FACTORY OVERLAY ── */
+#aifactory-overlay { color-scheme: dark; --afbg: #09090c; --afpanel: #0e0e12; --afpanel2: #141418; --afline: rgba(255,255,255,0.06); --aftext: #dfd9cc; --afmuted: #7d7870; --afgold: #c39e4f; --afgold2: #e8c97e; --afgold-dim: rgba(195,158,79,0.15); font-family: 'Noto Sans SC', sans-serif; }
+#aifactory-overlay * { box-sizing: border-box; }
+#aifactory-overlay .af-dashboard { max-width: 1200px; margin: 0 auto; }
+.af-hero { text-align: center; padding: 40px 0 50px; }
+.af-hero h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(28px,4.5vw,42px); font-weight: 200; color: var(--text2); letter-spacing: 0.08em; margin-bottom: 20px; }
+.af-hero p { font-size: 14px; color: var(--afmuted); line-height: 2; max-width: 660px; margin: 0 auto 28px; }
+.af-hero-flow { display: flex; justify-content: center; align-items: center; gap: 0; flex-wrap: wrap; }
+.af-hero-flow span { font-family: 'Noto Serif SC', serif; font-size: 14px; color: var(--aftext); letter-spacing: 0.06em; padding: 10px 20px; }
+.af-hero-flow .arrow { font-size: 14px; color: var(--afgold); opacity: 0.6; padding: 0; }
+.af-section-title { font-family: 'Noto Serif SC', serif; font-size: 16px; font-weight: 300; color: var(--afgold); letter-spacing: 0.08em; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--afline); }
+.af-chain { display: flex; gap: 1px; background: var(--afline); margin-bottom: 1px; overflow-x: auto; }
+.af-chain-step { flex: 1; min-width: 180px; background: var(--afpanel); padding: 28px 20px; position: relative; display: flex; flex-direction: column; }
+.af-chain-step::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--afgold), transparent); opacity: 0.35; }
+.af-chain-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--afgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.af-chain-step h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.af-chain-step p { font-size: 12px; color: var(--afmuted); line-height: 2; }
+.af-chain-note { background: var(--afpanel2); padding: 20px 32px; text-align: center; font-size: 13px; color: var(--afmuted); letter-spacing: 0.04em; line-height: 1.8; margin-bottom: 1px; }
+.af-cards { display: flex; gap: 1px; background: var(--afline); margin-bottom: 1px; overflow-x: auto; }
+.af-card { flex: 1; min-width: 200px; background: var(--afpanel); padding: 28px 22px; position: relative; display: flex; flex-direction: column; }
+.af-card::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--afgold), transparent); opacity: 0.35; }
+.af-card-num { font-family: 'Cormorant Garamond', serif; font-size: 11px; color: var(--afgold); letter-spacing: 2px; font-style: italic; opacity: 0.5; margin-bottom: 12px; }
+.af-card h4 { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 8px; }
+.af-card-q { font-size: 12px; color: var(--aftext); padding: 10px 14px; background: var(--afgold-dim); border-left: 1px solid var(--afgold); margin-bottom: 14px; line-height: 1.8; }
+.af-card ul { list-style: none; padding: 0; margin: 0; }
+.af-card li { font-size: 12px; color: var(--afmuted); padding: 4px 0; line-height: 1.8; }
+.af-card li::before { content: '·'; color: var(--afgold); margin-right: 8px; }
+.af-card-kw { font-size: 10px; color: var(--afgold); letter-spacing: 2px; margin-top: auto; padding-top: 14px; opacity: 0.5; text-transform: uppercase; }
+.af-layers { display: flex; flex-direction: column; gap: 1px; background: var(--afline); margin: 1px 0; }
+.af-layer { background: var(--afpanel); padding: 28px 32px; display: flex; align-items: center; gap: 24px; position: relative; }
+.af-layer::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 1px; background: linear-gradient(to bottom, transparent, var(--afgold), transparent); opacity: 0.4; }
+.af-layer-label { font-family: 'Noto Serif SC', serif; font-size: 13px; color: var(--afgold); letter-spacing: 0.08em; min-width: 120px; white-space: nowrap; }
+.af-layer-content { font-size: 13px; color: var(--afmuted); letter-spacing: 2px; }
+.af-layer-arrow { text-align: center; padding: 6px 0; font-size: 14px; color: var(--afgold); opacity: 0.5; background: var(--afbg); }
+.af-outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--afline); margin-bottom: 1px; }
+.af-outcome { background: var(--afpanel); padding: 32px 24px; }
+.af-outcome h4 { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 300; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 12px; }
+.af-outcome p { font-size: 12px; color: var(--afmuted); line-height: 2; }
+.af-quote.page-quote::before,
+.af-quote.page-quote::after    { background: var(--afgold, var(--gold)); opacity: 0.18; }
+.af-quote.page-quote em        { color: var(--afgold, var(--gold)); }
+.af-quote    { background: var(--afpanel); }
+.af-note { font-size: 11px; color: var(--dim); margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--afline); line-height: 2; letter-spacing: 0.5px; text-align: center; }
+@media (max-width: 900px) { .af-chain { flex-direction: column; } .af-chain-step { min-width: auto; } .af-cards { flex-direction: column; } .af-card { min-width: auto; } .af-outcomes { grid-template-columns: 1fr; } .af-layer { flex-direction: column; align-items: flex-start; gap: 8px; } }
+@media (max-width: 600px) { .af-hero-flow { flex-direction: column; gap: 4px; } .af-hero-flow .arrow { transform: rotate(90deg); } }
+
+
 /* ── FINANCE OVERLAY ── */
 #finance-overlay { color-scheme: dark; --fbg: #09090c; --fpanel: #0e0e12; --fpanel2: #141418; --fline: rgba(255,255,255,0.06); --ftext: #dfd9cc; --fmuted: #7d7870; --fgold: #c39e4f; --fgold2: #e8c97e; --fgold-dim: rgba(195,158,79,0.15); font-family: 'Noto Sans SC', sans-serif; }
 #finance-overlay * { box-sizing: border-box; }
@@ -3271,6 +3364,16 @@ footer {
       <span class="proj-num">Project 04</span>
       <h3>LIMS 系统建设</h3>
       <p>主导实验室信息管理系统建设与流程优化，推动质量体系数字化升级。</p>
+    </div>
+    <div class="proj-card" id="open-multiagent" tabindex="0" role="button" aria-label="查看多 Agent 协同工作台详情">
+      <span class="proj-num">Project 05</span>
+      <h3>多 Agent 协同工作台</h3>
+      <p>以共享目录为状态面、文件驱动协作为核心，把多 Agent 协作从共享聊天记录升级为共享状态系统。</p>
+    </div>
+    <div class="proj-card" id="open-aifactory" tabindex="0" role="button" aria-label="查看 AI 驱动经营分析智能工厂详情">
+      <span class="proj-num">Project 06</span>
+      <h3>AI 驱动经营分析智能工厂</h3>
+      <p>把知识库、方法论库、案例库与 AI 工具链组织成可复用的分析生产线，实现方法资产驱动的半自动化输出。</p>
     </div>
   </div>
 </section>
@@ -3964,13 +4067,13 @@ footer {
         <p>将营销活动从「销售事件」升级为「经营项目」，建立从流量投入到长期价值的全链路分析体系。</p>
         <div class="ecom-flow">
           <span class="ecom-flow-step">投入</span>
-          <span class="ecom-flow-arrow">↓</span>
+          <span class="ecom-flow-arrow">→</span>
           <span class="ecom-flow-step">流量</span>
-          <span class="ecom-flow-arrow">↓</span>
+          <span class="ecom-flow-arrow">→</span>
           <span class="ecom-flow-step">成交</span>
-          <span class="ecom-flow-arrow">↓</span>
+          <span class="ecom-flow-arrow">→</span>
           <span class="ecom-flow-step">利润</span>
-          <span class="ecom-flow-arrow">↓</span>
+          <span class="ecom-flow-arrow">→</span>
           <span class="ecom-flow-step">用户资产</span>
         </div>
       </div>
@@ -4308,10 +4411,10 @@ footer {
         <h2>战略分析与市场洞察</h2>
         <p>以行业结构、竞争格局与战略控制点为核心，结合市场情报、价值链拆解与关键假设管理，<br>支持从趋势判断到增长机会识别的战略分析工作。</p>
         <div class="strat-hero-flow">
-          <span>趋势</span><span class="arrow">↓</span>
-          <span>格局</span><span class="arrow">↓</span>
-          <span>控制点</span><span class="arrow">↓</span>
-          <span>机会</span><span class="arrow">↓</span>
+          <span>趋势</span><span class="arrow">→</span>
+          <span>格局</span><span class="arrow">→</span>
+          <span>控制点</span><span class="arrow">→</span>
+          <span>机会</span><span class="arrow">→</span>
           <span>战略行动</span>
         </div>
       </div>
@@ -4418,10 +4521,10 @@ footer {
         <h2>经营洞察与管理闭环</h2>
         <p>围绕收入、利润、毛利、费用、应收与效率等核心经营变量，<br>构建从问题识别、原因拆解、行动制定到复盘追踪的经营分析闭环。</p>
         <div class="mgmt-hero-flow">
-          <span>结果</span><span class="arrow">↓</span>
-          <span>原因</span><span class="arrow">↓</span>
-          <span>行动</span><span class="arrow">↓</span>
-          <span>责任</span><span class="arrow">↓</span>
+          <span>结果</span><span class="arrow">→</span>
+          <span>原因</span><span class="arrow">→</span>
+          <span>行动</span><span class="arrow">→</span>
+          <span>责任</span><span class="arrow">→</span>
           <span>复盘</span>
         </div>
       </div>
@@ -4525,10 +4628,10 @@ footer {
         <h2>集团战略规划体系建设</h2>
         <p>参与集团中长期战略规划与战略管理机制建设，围绕战略研判、目标解码、路径设计与执行跟踪，<br>推动战略从规划文本走向经营落地。</p>
         <div class="sp-hero-flow">
-          <span>洞察</span><span class="arrow">↓</span>
-          <span>战略</span><span class="arrow">↓</span>
-          <span>目标</span><span class="arrow">↓</span>
-          <span>行动</span><span class="arrow">↓</span>
+          <span>洞察</span><span class="arrow">→</span>
+          <span>战略</span><span class="arrow">→</span>
+          <span>目标</span><span class="arrow">→</span>
+          <span>行动</span><span class="arrow">→</span>
           <span>价值</span>
         </div>
       </div>
@@ -4831,6 +4934,397 @@ footer {
     </div>
   </div>
 </div>
+
+
+<!-- MULTI-AGENT OVERLAY -->
+<div class="tool-overlay" id="multiagent-overlay" role="dialog" aria-modal="true" aria-label="多 Agent 协同工作台">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-multiagent">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">多 Agent 协同工作台</div>
+        <div class="tool-overlay-sub">AI Collaboration · 从共享聊天记录到共享状态系统的协作工程</div>
+      </div>
+    </div>
+
+    <div class="ma-dashboard">
+
+      <!-- Hero -->
+      <div class="ma-hero">
+        <h2>多 Agent 协同工作台</h2>
+        <p>围绕多 Agent 协作效率而设计的本地工作台项目，以共享目录为唯一状态面，以结构化 Markdown 文件为上下文载体，<br>把「多轮对话协作」转化为「文件驱动协作」。</p>
+        <div class="ma-hero-flow">
+          <span>主会话</span><span class="arrow">→</span>
+          <span>文件状态</span><span class="arrow">→</span>
+          <span>实现会话</span><span class="arrow">→</span>
+          <span>审查会话</span><span class="arrow">→</span>
+          <span>集成产出</span>
+        </div>
+      </div>
+
+      <!-- 四层架构 -->
+      <div style="margin-top:1px;">
+        <div class="ma-section-title">四层协作架构</div>
+        <div class="ma-chain">
+          <div class="ma-chain-step">
+            <div class="ma-chain-num">01</div>
+            <h4>协作架构层</h4>
+            <p>明确 A/B/C 三角色分工：主会话负责架构与写回，实现会话负责开发产出，审查会话负责 review 与集成建议。</p>
+          </div>
+          <div class="ma-chain-step">
+            <div class="ma-chain-num">02</div>
+            <h4>上下文工程层</h4>
+            <p>通过 project_brief.md、context.md、output_A.md、output_B.md、review.md 五个核心文件，把需求、状态、产出和审查拆成最小上下文单元。</p>
+          </div>
+          <div class="ma-chain-step">
+            <div class="ma-chain-num">03</div>
+            <h4>Skill 治理层</h4>
+            <p>把协作方法沉淀为可复用能力：Claude协同工作台定义角色流水线，project-handoff 用于长期项目交接，codex-self-evolution-bootstrap 用于初始化与 memory 闭环。</p>
+          </div>
+          <div class="ma-chain-step">
+            <div class="ma-chain-num">04</div>
+            <h4>MCP 治理层</h4>
+            <p>把本地工具接入从「能配上」提升为「能长期稳定复用」，引入共享运行时、各 Agent 配置适配层和本地凭证边界分离。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 核心能力模块 -->
+      <div style="margin-top:1px;">
+        <div class="ma-section-title">核心能力模块</div>
+        <div class="ma-cards">
+
+          <div class="ma-card">
+            <div class="ma-card-num">01</div>
+            <h4>文件驱动协作</h4>
+            <div class="ma-card-q">如何让多个 Agent 不依赖同一段长历史？</div>
+            <ul>
+              <li>共享目录为唯一状态面</li>
+              <li>结构化 Markdown 为上下文载体</li>
+              <li>filesystem MCP 统一写入职责</li>
+              <li>最小上下文单元避免重复复制</li>
+            </ul>
+            <div class="ma-card-kw">State · File · Context · MCP</div>
+          </div>
+
+          <div class="ma-card">
+            <div class="ma-card-num">02</div>
+            <h4>角色分工与写入边界</h4>
+            <div class="ma-card-q">如何防止多会话状态漂移？</div>
+            <ul>
+              <li>单一主写入口设计</li>
+              <li>主会话承担所有写入职责</li>
+              <li>实现与审查会话只读访问</li>
+              <li>写入边界防止状态冲突</li>
+            </ul>
+            <div class="ma-card-kw">Role · Write · Boundary · Audit</div>
+          </div>
+
+          <div class="ma-card">
+            <div class="ma-card-num">03</div>
+            <h4>Skill 与 MCP 分类治理</h4>
+            <div class="ma-card-q">方法资产与运行时资产如何分别管理？</div>
+            <ul>
+              <li>Skill 负责方法分发与复用</li>
+              <li>MCP 负责运行时能力接入</li>
+              <li>六层验收标准验证配置</li>
+              <li>安全边界分离与凭证控制</li>
+            </ul>
+            <div class="ma-card-kw">Skill · MCP · Runtime · Security</div>
+          </div>
+
+          <div class="ma-card">
+            <div class="ma-card-num">04</div>
+            <h4>可审计工作流</h4>
+            <div class="ma-card-q">如何让协作过程可追溯、可续接？</div>
+            <ul>
+              <li>看板为调度入口</li>
+              <li>低上下文、可续接的会话设计</li>
+              <li>外部可审计的文件状态</li>
+              <li>可复用的规则体系</li>
+            </ul>
+            <div class="ma-card-kw">Kanban · Traceable · Reusable</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 协作状态流转 -->
+      <div style="margin-top:1px;">
+        <div class="ma-section-title">文件驱动协作状态流转</div>
+        <div class="ma-layers">
+          <div class="ma-layer">
+            <div class="ma-layer-label">需求定义</div>
+            <div class="ma-layer-content">project_brief.md ｜ 需求、目标与约束</div>
+          </div>
+          <div class="ma-layer-arrow">↓</div>
+          <div class="ma-layer">
+            <div class="ma-layer-label">状态同步</div>
+            <div class="ma-layer-content">context.md ｜ 当前进度、阻塞与决策</div>
+          </div>
+          <div class="ma-layer-arrow">↓</div>
+          <div class="ma-layer">
+            <div class="ma-layer-label">产出交付</div>
+            <div class="ma-layer-content">output_A.md ｜ output_B.md ｜ 各角色产出物</div>
+          </div>
+          <div class="ma-layer-arrow">↓</div>
+          <div class="ma-layer">
+            <div class="ma-layer-label">审查集成</div>
+            <div class="ma-layer-content">review.md ｜ 审查意见与集成建议</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 项目沉淀 -->
+      <div style="margin-top:1px;">
+        <div class="ma-section-title">项目沉淀的方法价值</div>
+        <div class="ma-outcomes">
+          <div class="ma-outcome">
+            <h4>协作过程工程化</h4>
+            <p>证明多 Agent 协作的关键不在于共享同一段长历史，而在于让状态、角色、文件流转和写入边界变得清晰。</p>
+          </div>
+          <div class="ma-outcome">
+            <h4>两类资产分类治理</h4>
+            <p>Skill 负责方法分发与复用，MCP 负责运行时能力接入与安全边界控制，避免把 plugin、MCP、portable skill 混成一套共享逻辑。</p>
+          </div>
+          <div class="ma-outcome">
+            <h4>单一主写入口</h4>
+            <p>让协作过程既高效又能防止状态漂移，这一点对多会话环境尤其关键。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 经验总结 -->
+      <div style="margin-top:1px;">
+        <div class="ma-section-title">经验总结</div>
+        <div class="ma-cards">
+          <div class="ma-card">
+            <div class="ma-card-num">Ⅰ</div>
+            <h4>先设计上下文结构</h4>
+            <p>AI 协作要先设计上下文结构，再谈模型分工；如果没有最小上下文文件集，再多角色也只是在重复复制聊天记录。</p>
+          </div>
+          <div class="ma-card">
+            <div class="ma-card-num">Ⅱ</div>
+            <h4>区分方法层与运行时层</h4>
+            <p>Skill 解决「怎么做」，MCP 解决「能调用什么」，两者不能混治理。</p>
+          </div>
+          <div class="ma-card">
+            <div class="ma-card-num">Ⅲ</div>
+            <h4>依赖外部可审计状态</h4>
+            <p>真正可持续的多 Agent 工作流，不依赖对话平台本身，而依赖外部可审计的文件状态和可复用的规则体系。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 收尾金句 -->
+      <div class="ma-quote page-quote">
+        <p>把多 Agent 协作从「共享聊天记录」升级为「共享状态系统」，<br>AI 才真正开始成为<em>团队生产力</em>，而不是<em>临时助手</em>。</p>
+      </div>
+
+      <div class="ma-note">* 本页为通用技术方法论展示，不涉及具体产品、客户或商业数据。</div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- AI FACTORY OVERLAY -->
+<div class="tool-overlay" id="aifactory-overlay" role="dialog" aria-modal="true" aria-label="AI 驱动经营分析智能工厂">
+  <div class="tool-overlay-inner">
+    <div class="tool-overlay-header">
+      <button class="tool-overlay-back" id="close-aifactory">返回主页</button>
+      <div>
+        <div class="tool-overlay-title">AI 驱动经营分析智能工厂</div>
+        <div class="tool-overlay-sub">AI Production Line · 从个人经验驱动到方法资产驱动的分析生产线</div>
+      </div>
+    </div>
+
+    <div class="af-dashboard">
+
+      <!-- Hero -->
+      <div class="af-hero">
+        <h2>AI 驱动经营分析智能工厂</h2>
+        <p>把知识库、模板库、案例库和 AI 工具链组织成一条可复用、可协同、可持续产出的分析生产线，<br>让经营分析从「靠个人经验临场组织」走向「方法资产驱动的半自动化输出」。</p>
+        <div class="af-hero-flow">
+          <span>知识库</span><span class="arrow">→</span>
+          <span>方法论库</span><span class="arrow">→</span>
+          <span>案例库</span><span class="arrow">→</span>
+          <span>Agent 库</span><span class="arrow">→</span>
+          <span>自动输出</span>
+        </div>
+      </div>
+
+      <!-- 五层能力建设 -->
+      <div style="margin-top:1px;">
+        <div class="af-section-title">五层能力建设</div>
+        <div class="af-chain">
+          <div class="af-chain-step">
+            <div class="af-chain-num">01</div>
+            <h4>知识库</h4>
+            <p>把经营分析、预算管理、战略研究、行业洞察等已有内容沉淀为结构化知识资产。</p>
+          </div>
+          <div class="af-chain-step">
+            <div class="af-chain-num">02</div>
+            <h4>方法论库</h4>
+            <p>将静态分析模板升级为可调用的分析规则，抽象成「指标定义、拆解维度、标准逻辑、常见异常、推荐输出」的统一框架。</p>
+          </div>
+          <div class="af-chain-step">
+            <div class="af-chain-num">03</div>
+            <h4>案例库</h4>
+            <p>把真实问题沉淀为「背景—问题—分析过程—解决方案—结果—经验总结」的标准案例，让 AI 调取相似场景类比。</p>
+          </div>
+          <div class="af-chain-step">
+            <div class="af-chain-num">04</div>
+            <h4>Agent 库</h4>
+            <p>给不同模型明确分工：经营分析 Agent、战略研究 Agent、PPT Agent、审核 Agent，复杂任务从单模型调用转向多角色协作。</p>
+          </div>
+          <div class="af-chain-step">
+            <div class="af-chain-num">05</div>
+            <h4>自动输出</h4>
+            <p>将经营分析报告、董事会 PPT、汇报讲稿和专项问题清单串成一条自动输出产线。</p>
+          </div>
+        </div>
+        <div class="af-chain-note">知识库 → 方法论库 → 案例库 → Agent 库 → AI Flow → 自动输出：能力建设的正确顺序</div>
+      </div>
+
+      <!-- 核心能力模块 -->
+      <div style="margin-top:1px;">
+        <div class="af-section-title">核心能力模块</div>
+        <div class="af-cards">
+
+          <div class="af-card">
+            <div class="af-card-num">01</div>
+            <h4>方法资产结构化</h4>
+            <div class="af-card-q">经营分析的瓶颈在哪里？</div>
+            <ul>
+              <li>分析方法没有被结构化</li>
+              <li>每次分析都从零组织</li>
+              <li>把判断方法沉淀为可复用框架</li>
+              <li>从「靠经验」到「靠体系」</li>
+            </ul>
+            <div class="af-card-kw">Method · Structure · Reuse</div>
+          </div>
+
+          <div class="af-card">
+            <div class="af-card-num">02</div>
+            <h4>案例资产驱动</h4>
+            <div class="af-card-q">真实案例为什么比通用知识更重要？</div>
+            <ul>
+              <li>保留判断链条与场景约束</li>
+              <li>包含结果反馈与经验总结</li>
+              <li>支持相似场景类比调用</li>
+              <li>让 AI 不只会讲原理</li>
+            </ul>
+            <div class="af-card-kw">Case · Context · Analogy</div>
+          </div>
+
+          <div class="af-card">
+            <div class="af-card-num">03</div>
+            <h4>多角色协作流</h4>
+            <div class="af-card-q">复杂任务如何从单模型转向多角色？</div>
+            <ul>
+              <li>经营分析 Agent 负责数据解读</li>
+              <li>战略研究 Agent 负责趋势洞察</li>
+              <li>PPT Agent 负责可视化输出</li>
+              <li>审核 Agent 负责质量把关</li>
+            </ul>
+            <div class="af-card-kw">Agent · Role · Pipeline</div>
+          </div>
+
+          <div class="af-card">
+            <div class="af-card-num">04</div>
+            <h4>能力产品化输出</h4>
+            <div class="af-card-q">网站如何从「做过什么」变成「能做什么」？</div>
+            <ul>
+              <li>个人网站从履历展示到能力输出</li>
+              <li>方法产品与案例展示入口</li>
+              <li>让网站成为能力系统的证明</li>
+              <li>持续产出而非静态陈列</li>
+            </ul>
+            <div class="af-card-kw">Product · Portfolio · Output</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 分析生产线 -->
+      <div style="margin-top:1px;">
+        <div class="af-section-title">分析生产线全景</div>
+        <div class="af-layers">
+          <div class="af-layer">
+            <div class="af-layer-label">输入层</div>
+            <div class="af-layer-content">经营数据 ｜ 行业报告 ｜ 业务问题</div>
+          </div>
+          <div class="af-layer-arrow">↓</div>
+          <div class="af-layer">
+            <div class="af-layer-label">方法层</div>
+            <div class="af-layer-content">知识库调用 ｜ 方法论匹配 ｜ 案例类比</div>
+          </div>
+          <div class="af-layer-arrow">↓</div>
+          <div class="af-layer">
+            <div class="af-layer-label">协作层</div>
+            <div class="af-layer-content">分析 Agent ｜ 研究 Agent ｜ 输出 Agent ｜ 审核 Agent</div>
+          </div>
+          <div class="af-layer-arrow">↓</div>
+          <div class="af-layer">
+            <div class="af-layer-label">输出层</div>
+            <div class="af-layer-content">分析报告 ｜ 董事会 PPT ｜ 汇报讲稿 ｜ 专项清单</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 项目沉淀 -->
+      <div style="margin-top:1px;">
+        <div class="af-section-title">项目沉淀的方法价值</div>
+        <div class="af-outcomes">
+          <div class="af-outcome">
+            <h4>重构分析生产方式</h4>
+            <p>不是做「一个 AI 功能」，而是把已有知识、方法、案例和工具链组织成一条可持续复用的分析生产线。</p>
+          </div>
+          <div class="af-outcome">
+            <h4>案例资产比通用知识更有价值</h4>
+            <p>真实案例保留了判断链条、场景约束和结果反馈，这是通用知识无法替代的。</p>
+          </div>
+          <div class="af-outcome">
+            <h4>能力建设顺序很重要</h4>
+            <p>强调「知识库—方法论库—案例库—Agent 库—AI Flow—自动输出」的能力建设顺序，避免陷入工具堆砌。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 经验总结 -->
+      <div style="margin-top:1px;">
+        <div class="af-section-title">经验总结</div>
+        <div class="af-cards">
+          <div class="af-card">
+            <div class="af-card-num">Ⅰ</div>
+            <h4>瓶颈在方法资产</h4>
+            <p>经营分析的瓶颈往往不在数据本身，而在方法资产没有被结构化，导致每次分析都从零组织。</p>
+          </div>
+          <div class="af-card">
+            <div class="af-card-num">Ⅱ</div>
+            <h4>AI 的价值是复用而非替代</h4>
+            <p>AI 在经营分析里最有价值的不是替代判断，而是复用框架、调用案例、协同产出和缩短从输入到结论的路径。</p>
+          </div>
+          <div class="af-card">
+            <div class="af-card-num">Ⅲ</div>
+            <h4>平台化建立在稳定基础上</h4>
+            <p>平台化和工程治理应当建立在内容资产与方法体系已经稳定的基础上，否则只会把未成型的流程复杂化。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 收尾金句 -->
+      <div class="af-quote page-quote">
+        <p>真正的 AI 经营分析，不是让模型替你写一份报告，<br>而是把你的<em>判断方法</em>沉淀成一条<em>可持续复用的生产线</em>。</p>
+      </div>
+
+      <div class="af-note">* 本页为通用方法论与能力体系展示，不涉及具体公司、品牌或经营数据。</div>
+      <button class="tool-overlay-return" onclick="this.closest('.tool-overlay').classList.remove('active');document.body.style.overflow='';">返回主页</button>
+    </div>
+  </div>
+</div>
+
 
 <script>
 (function(){
@@ -5353,6 +5847,28 @@ const state = {
   quaClose.addEventListener('click', closeQua);
   document.addEventListener('keydown', e=>{ if(e.key==='Escape' && quaOverlay.classList.contains('active')) closeQua(); });
 
+  /* ── Multi-Agent overlay ── */
+  const maOverlay = document.getElementById('multiagent-overlay');
+  const maOpen = document.getElementById('open-multiagent');
+  const maClose = document.getElementById('close-multiagent');
+  function openMA(){ maOverlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeMA(){ maOverlay.classList.remove('active'); document.body.style.overflow=''; }
+  maOpen.addEventListener('click', openMA);
+  maOpen.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openMA(); } });
+  maClose.addEventListener('click', closeMA);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && maOverlay.classList.contains('active')) closeMA(); });
+
+  /* ── AI Factory overlay ── */
+  const afOverlay = document.getElementById('aifactory-overlay');
+  const afOpen = document.getElementById('open-aifactory');
+  const afClose = document.getElementById('close-aifactory');
+  function openAF(){ afOverlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeAF(){ afOverlay.classList.remove('active'); document.body.style.overflow=''; }
+  afOpen.addEventListener('click', openAF);
+  afOpen.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openAF(); } });
+  afClose.addEventListener('click', closeAF);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && afOverlay.classList.contains('active')) closeAF(); });
+
   /* ── cross-navigation: viz ↔ calc ── */
   document.getElementById('switch-to-calc').addEventListener('click', ()=>{
     document.getElementById('viz-overlay').classList.remove('active');
@@ -5553,6 +6069,7 @@ const state = {
 <script>
 (function () {
   const CHAR_DELAY = 110;
+  const WORD_DELAY = 220;
   const START_CN   = 400;
 
   function injectChars(el, chars, startDelay, cls) {
@@ -5566,6 +6083,17 @@ const state = {
     });
   }
 
+  function injectWords(el, text, startDelay, cls) {
+    const words = text.split(' ');
+    words.forEach((word, i) => {
+      const span = document.createElement('span');
+      span.className = cls;
+      span.textContent = i === words.length - 1 ? word : word + ' ';
+      span.style.animationDelay = (startDelay + i * WORD_DELAY) + 'ms';
+      el.appendChild(span);
+    });
+  }
+
   const cnText = '洞察世界，定义方向，创造价值，沉淀认知。';
   const cnRow = document.getElementById('slogan-cn-row');
   injectChars(cnRow, [...cnText], START_CN, 'split-char');
@@ -5573,7 +6101,7 @@ const state = {
   const enText = 'Understand the World. Define Direction. Create Value. Compound Wisdom.';
   const enRow = document.getElementById('slogan-en-row');
   const START_EN = START_CN + cnText.length * CHAR_DELAY + 500;
-  injectChars(enRow, [...enText], START_EN, 'split-word');
+  injectWords(enRow, enText, START_EN, 'split-word');
 })();
 </script>
 
